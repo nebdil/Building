@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115170336) do
+ActiveRecord::Schema.define(version: 20171115174409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,4 +26,62 @@ ActiveRecord::Schema.define(version: 20171115170336) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "poststags", force: :cascade do |t|
+    t.bigint "post_id"
+    t.bigint "tag_id"
+    t.index ["post_id"], name: "index_poststags_on_post_id"
+    t.index ["tag_id"], name: "index_poststags_on_tag_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_replies_on_post_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password"
+    t.bigint "building_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_users_on_building_id"
+  end
+
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
+  add_foreign_key "posts", "users"
+  add_foreign_key "poststags", "posts"
+  add_foreign_key "poststags", "tags"
+  add_foreign_key "replies", "posts"
+  add_foreign_key "replies", "users"
+  add_foreign_key "users", "buildings"
 end
