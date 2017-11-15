@@ -5,23 +5,23 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+building_rails/.bundle
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
+building_rails/db/*.sqlite3
+building_rails/db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+building_rails/log/*
+building_rails/tmp/*
+!building_rails/log/.keep
+!building_rails/tmp/.keep
 
 .byebug_history
 
 # Ignore secrets and db files
 
-/config/secrets.yml
-/config/database.yml
+building_rails/config/secrets.yml
+building_rails/config/database.yml
 
 .DS_Store
