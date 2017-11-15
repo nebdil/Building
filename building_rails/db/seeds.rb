@@ -11,11 +11,11 @@ end
 Building.destroy_all
 
 build1 = Building.create!({
-  street_no: Faker::Address.building_number
-  street_name: Faker::Address.street_name
-  city: Faker::Address.city
-  province: Faker::Address.state
-  country: Faker::Address.country
+  street_no: Faker::Address.building_number,
+  street_name: Faker::Address.street_name,
+  city: Faker::Address.city,
+  province: Faker::Address.state,
+  country: Faker::Address.country,
   postal_code: Faker::Address.zip_code
   })
 
@@ -23,10 +23,10 @@ build1 = Building.create!({
 
 User.destroy_all
 
-10.times do |u|
+10.times do
   build1.users.create!({
-    username: Faker::RickAndMorty.character
-    email: Faker::Internet.email
+    username: Faker::Internet.user_name,
+    email: Faker::Internet.email,
     password: Faker::Internet.password
     })
 end
@@ -39,7 +39,7 @@ users_id_arr = User.select("id").to_a.map{ |user| user.id}
 
 20.times do |po|
   Post.create!({
-    content: Faker::RickAndMorty.quote
+    content: Faker::Hipster.sentence,
     user_id: users_id_arr.sample
     })
 end
@@ -86,7 +86,7 @@ Reply.destroy_all
 
 User.all.each do |u|
   u.replies.create!({
-    post_id: post_ids_arr.sample
-    content: Faker::RickAndMorty.quote
+    post_id: post_ids_arr.sample,
+    content: Faker::Hipster.sentence
     })
 end
