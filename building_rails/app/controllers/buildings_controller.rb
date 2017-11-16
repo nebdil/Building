@@ -1,6 +1,8 @@
 class BuildingsController < ApplicationController
 
   def index
+    @posts = Post.all
+    @posts.to_json
   end
 
   def create
@@ -10,6 +12,7 @@ class BuildingsController < ApplicationController
   end
 
   def show
+
   end
 
 end
