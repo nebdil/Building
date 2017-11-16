@@ -2,7 +2,7 @@ class BuildingsController < ApplicationController
 
   def index
     @posts = Post.all
-    @posts.to_json
+    render json: @posts
   end
 
   def create

@@ -9,16 +9,26 @@ import Login from './Login.jsx';
 import Register from './Register.jsx';
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {posts: []};
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3000')
+    .then(results => {
+      let resJson = results.json();
+      this.setState({posts: resJson});
+      console.log(resJson)
+    })
+
+  }
+
   render() {
+    const postS = this.state.posts
+    console.log(postS)
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Emmi'nin Yeri</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      <div> {postS} </div>
+    )
   }
 }
