@@ -25,10 +25,8 @@ export default class App extends Component {
   }
 
   render() {
-    const postS = this.state.posts
-    console.log(postS)
     return (
-      <div> {postS} </div>
+      <div><Building currentPosts = {this.state.posts}/></div>
     )
   }
 }
