@@ -16,35 +16,23 @@ import {
 } from 'react-router-dom'
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {posts: []};
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {posts: []};
+  // }
 
-  componentDidMount() {
-    return fetch('http://localhost:3000')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({ posts: responseJson })
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+  // componentDidMount() {
+  //   return fetch('http://localhost:3000')
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       this.setState({ posts: responseJson })
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
 
   render() {
-    if (currentUser) {
-      return (
-        <div>
-          <Main />
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <Login />
-        </div>
-      )
-    }
+    return <Main />
   }
 }

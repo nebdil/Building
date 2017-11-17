@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar.jsx';
+import Building from './Building.jsx'
 import {
   BrowserRouter as Router,
   Route,
@@ -11,11 +12,12 @@ export default class Main extends Component {
   render() {
     return (
       <div>
-        <Navbar />
-        <span>Write a Post</span>
-        <span>Post</span>
-        <span>Tags</span>
-        <span>Notifications</span>
+        {/* <Navbar /> */}
+        <Building />
+        <div>Write a Post</div>
+        <div>Post</div>
+        <div>Tags</div>
+        <div>Notifications</div>
       </div>
     )
   }
