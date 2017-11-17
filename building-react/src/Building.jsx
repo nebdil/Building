@@ -16,12 +16,3 @@ export default class Building extends Component {
     )
   }
 }
-
-
-{/* <div>
-  <div className="message">
-    <span className="message-username">{currentMessage.username}</span>
-    <span className="message-content">{currentMessage.content}</span>
-  </div>
-  <div className="message system"></div>
-</div> */}

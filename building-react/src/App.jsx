@@ -23,11 +23,6 @@ export default class App extends Component {
       .catch((error) => {
         console.error(error);
       });
-    //   .then(results => {
-    //   let resJson = results.json();
-    //   this.setState({posts: resJson});
-    //   console.log(resJson)
-    // })
   }
 
   render() {
@@ -40,12 +35,3 @@ export default class App extends Component {
     )
   }
 }
-
-
-// return (
-//       <main className="messages">
-//         {messagesArr.map(function (message) {
-//           return <Message currentMessage={message} key={message.id}/>
-//         })}
-//       </main>
-//     )
