@@ -1,8 +1,8 @@
 class BuildingsController < ApplicationController
 
   def index
-    @posts = Post.all
-    render json: @posts
+    # @posts = Post.all
+    # render json: @posts
   end
 
   def create
@@ -12,8 +12,8 @@ class BuildingsController < ApplicationController
   end
 
   def show
-    @posts = Post.all
-    render json: @posts
+    # @posts = Post.all
+    # render json: @posts
   end
 
 end
