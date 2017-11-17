@@ -7,6 +7,13 @@ import Like from './Like.jsx';
 import Tag from './Tag.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
+import Navbar from './Navbar.jsx';
+import Main from './Main.jsx';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
 export default class App extends Component {
   constructor(props) {
@@ -26,12 +33,18 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.state.posts.map(function(e) {
-          return <Building currentPosts = {e} key={e.id}/>
-        })}
-      </div>
-    )
+    if (currentUser) {
+      return (
+        <div>
+          <Main />
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <Login />
+        </div>
+      )
+    }
   }
 }

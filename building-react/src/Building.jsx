@@ -5,14 +5,5 @@ import Like from './Like.jsx';
 import Tag from './Tag.jsx';
 
 export default class Building extends Component {
-  render() {
-    const dilan = this.props.currentPosts.content;
-    return (
-      <div>
-        <div>
-          {dilan}
-        </div>
-      </div>
-    )
-  }
+  render() {}
 }
