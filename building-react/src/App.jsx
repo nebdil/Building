@@ -15,18 +15,37 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000')
-    .then(results => {
-      let resJson = results.json();
-      this.setState({posts: resJson});
-      console.log(resJson)
-    })
-
+    return fetch('http://localhost:3000')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({ posts: responseJson })
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    //   .then(results => {
+    //   let resJson = results.json();
+    //   this.setState({posts: resJson});
+    //   console.log(resJson)
+    // })
   }
 
   render() {
     return (
-      <div><Building currentPosts = {this.state.posts}/></div>
+      <div>
+        {this.state.posts.map(function(e) {
+          return <Building currentPosts = {e} key={e.id}/>
+        })}
+      </div>
     )
   }
 }
+
+
+// return (
+//       <main className="messages">
+//         {messagesArr.map(function (message) {
+//           return <Message currentMessage={message} key={message.id}/>
+//         })}
+//       </main>
+//     )

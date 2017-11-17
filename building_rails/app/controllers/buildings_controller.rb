@@ -12,7 +12,8 @@ class BuildingsController < ApplicationController
   end
 
   def show
-
+    @posts = Post.all
+    render json: @posts
   end
 
 end
