@@ -16,7 +16,7 @@ export default class Building extends Component {
   }
 
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/1')
+    return fetch('http://localhost:3000/buildings/5')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
@@ -30,7 +30,7 @@ export default class Building extends Component {
     return (
       <div>
         {this.state.posts.map(function(e) {
-          return <Post currentPosts = {e} key={e.id} />
+          return <Post currentPosts = {e} key = {e.id} />
         })}
       </div>
     )
