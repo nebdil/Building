@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import CreatePost from './CreatePost.jsx';
 
 export default class Main extends Component {
 
@@ -12,7 +13,7 @@ export default class Main extends Component {
     return (
       <div>
         <Navbar />
-        <span>Write a Post</span>
+        <CreatePost />
         <span>Post</span>
         <span>Tags</span>
         <span>Notifications</span>

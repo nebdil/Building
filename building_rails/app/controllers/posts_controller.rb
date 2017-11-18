@@ -1,7 +1,12 @@
 class PostsController < ApplicationController
-  def index
-  end
   def create
+    puts 'POSTS CONTROLLER IN'
+    user = User.find_by(id: 1)
+    @post = user.posts.create!(
+      content: params[:content]
+    )
+    puts params
+    puts 'POSTS CONTROLLER OUT'
   end
   def show
   end
