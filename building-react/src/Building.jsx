@@ -16,7 +16,7 @@ export default class Building extends Component {
   }
 
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/5')
+    return fetch('http://localhost:3000/buildings/1')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })

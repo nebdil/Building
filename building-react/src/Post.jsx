@@ -10,19 +10,34 @@ import {
 
 export default class Post extends Component {
   render() {
+
     const post = this.props.currentPosts.content;
     const user = this.props.currentPosts.username;
     const time = this.props.currentPosts.created_at;
     const replySize = this.props.currentPosts.reply.length;
     const likeSize = this.props.currentPosts.like.length;
+
     return (
       <div>
         <table>
-          <tr>{post}</tr>
-          <tr>{user}</tr>
-          <tr>{time}</tr>
-          <tr>{replySize} replies</tr>
-          <tr>{likeSize} likes</tr>
+          <tbody>
+            <tr>
+              <th>POST</th>
+              <th>USER</th>
+              <th>TIME</th>
+              <th>REPLY SIZE</th>
+              <th>LIKE SIZE</th>
+              <th>LIKE BUTTON</th>
+            </tr>
+            <tr>
+              <td>{post}</td>
+              <td>{user}</td>
+              <td>{time}</td>
+              <td>{replySize}</td>
+              <td>{likeSize}</td>
+              <td><Like/></td>
+            </tr>
+          </tbody>
         </table>
       </div>
     )
