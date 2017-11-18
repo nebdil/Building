@@ -9,6 +9,16 @@ import {
 } from 'react-router-dom'
 
 export default class Post extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showReply: false
+    }
+  }
+  onClick(e){
+    e.preventDefault();
+    this.setState({showReply: !this.state.showReply})
+  }
   render() {
     const post = this.props.currentPosts.content;
     const user = this.props.currentPosts.username;
@@ -16,14 +26,15 @@ export default class Post extends Component {
     const replySize = this.props.currentPosts.reply.length;
     const likeSize = this.props.currentPosts.like.length;
     return (
-      <div>
+      <div onClick={this.onClick.bind(this)}>
         <table>
           <tr>{post}</tr>
-          <tr>{user}</tr>
-          <tr>{time}</tr>
+          <tr>user: {user}</tr>
+          <tr>time: {time}</tr>
           <tr>{replySize} replies</tr>
           <tr>{likeSize} likes</tr>
         </table>
+        {this.state.showReply && < Reply / >}
       </div>
     )
   }
