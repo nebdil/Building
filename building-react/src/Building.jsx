@@ -3,6 +3,7 @@ import Post from './Post.jsx';
 import Reply from './Reply.jsx';
 import Like from './Like.jsx';
 import Tag from './Tag.jsx';
+import CreatePost from './CreatePost.jsx'
 import {
   BrowserRouter as Router,
   Route,
@@ -12,7 +13,10 @@ import {
 export default class Building extends Component {
   constructor(props) {
     super(props);
-    this.state = {posts: []};
+    this.state = {
+      currentUserId: 13,
+      posts: []
+    };
   }
 
   componentDidMount() {
@@ -28,6 +32,9 @@ export default class Building extends Component {
 
   render() {
     return (
+      <div>
+        <CreatePost currentPosts = {this.state.posts} />
+      </div>
       <div>
         {this.state.posts.map(function(e) {
           return <Post currentPosts = {e} key = {e.id} />

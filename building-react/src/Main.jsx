@@ -14,7 +14,6 @@ export default class Main extends Component {
     return (
       <div>
         <Navbar />
-        <CreatePost />
         <Building />
         <span>Post</span>
         <span>Tags</span>

@@ -2,25 +2,11 @@ import React, {Component} from 'react';
 
 export default class CreatePost extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      currentUserId: 1,
-      posts: []
-    };
-    this.setState = this.setState.bind(this)
+    super();
     this._handleNewPost = this._handleNewPost.bind(this)
     this._handleChange = this._handleChange.bind(this)
   }
-  componentDidMount() {
-    return fetch('http://localhost:3000/buildings/1')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({ posts: responseJson })
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+
   render() {
     return (
       <form onSubmit={this._handleNewPost}>
@@ -40,7 +26,10 @@ export default class CreatePost extends Component {
     fetch('/buildings/1/posts/', {
       method: 'POST',
       body: content
-    });
+    })
+    .then(() => {
+      console.log(this.props.currentPosts)
+    })
   }
 
 

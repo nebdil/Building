@@ -18,6 +18,7 @@ class BuildingsController < ApplicationController
       result[:username] = po.user.username
       result[:reply] = po.replies
       result[:like] = po.likes
+      result[:tags] = po.poststags
       result
     end
     render json: post_arr
