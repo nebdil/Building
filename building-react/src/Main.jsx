@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar.jsx';
+import Building from './Building.jsx'
 import {
   BrowserRouter as Router,
   Route,
@@ -14,6 +15,7 @@ export default class Main extends Component {
       <div>
         <Navbar />
         <CreatePost />
+        <Building />
         <span>Post</span>
         <span>Tags</span>
         <span>Notifications</span>

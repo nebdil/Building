@@ -39,11 +39,7 @@ export default class App extends Component {
   // }
 
   render() {
-    return (
-      <div>
-        <Main />
-      </div>
-    )
+    return <Main />
   }
   // _handleNewPost(e) {
   //   e.preventDefault();

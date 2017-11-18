@@ -1,8 +1,7 @@
 class BuildingsController < ApplicationController
+  require 'pp'
 
   def index
-    @posts = Post.all
-    render json: @posts
   end
 
   def create
@@ -12,8 +11,16 @@ class BuildingsController < ApplicationController
   end
 
   def show
-    @posts = Post.all
-    render json: @posts
+    @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:id]})
+    post_arr = @posts.map do |po|
+      pp po.likes
+      result = po.attributes
+      result[:username] = po.user.username
+      result[:reply] = po.replies
+      result[:like] = po.likes
+      result
+    end
+    render json: post_arr
   end
 
 end
