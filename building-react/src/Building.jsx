@@ -29,6 +29,7 @@ export default class Building extends Component {
   render() {
     return (
       <div>
+        <Tag />
         {this.state.posts.map(function(e) {
           return <Post currentPosts = {e} key = {e.id} />
         })}
