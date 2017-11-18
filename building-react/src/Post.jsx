@@ -14,6 +14,7 @@ export default class Post extends Component {
     const user = this.props.currentPosts.username;
     const time = this.props.currentPosts.created_at;
     const replySize = this.props.currentPosts.reply.length;
+    const likeSize = this.props.currentPosts.like.length;
     return (
       <div>
         <table>
@@ -21,6 +22,7 @@ export default class Post extends Component {
           <tr>{user}</tr>
           <tr>{time}</tr>
           <tr>{replySize} replies</tr>
+          <tr>{likeSize} likes</tr>
         </table>
       </div>
     )
