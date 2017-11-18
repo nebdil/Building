@@ -11,14 +11,16 @@ import {
 export default class Post extends Component {
   render() {
     const post = this.props.currentPosts.content;
-    const user = this.props.currentPosts.user_id;
+    const user = this.props.currentPosts.username;
     const time = this.props.currentPosts.created_at;
+    const replySize = this.props.currentPosts.reply.length;
     return (
       <div>
         <table>
           <tr>{post}</tr>
           <tr>{user}</tr>
           <tr>{time}</tr>
+          <tr>{replySize} replies</tr>
         </table>
       </div>
     )
