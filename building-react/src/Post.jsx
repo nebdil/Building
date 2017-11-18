@@ -25,16 +25,21 @@ export default class Post extends Component {
     const time = this.props.currentPosts.created_at;
     const replySize = this.props.currentPosts.reply.length;
     const likeSize = this.props.currentPosts.like.length;
+    const divStyle = {
+      border: "1px solid black"
+    }
     return (
       <div onClick={this.onClick.bind(this)}>
-        <table>
+        <table style={divStyle}>
           <tr>{post}</tr>
           <tr>user: {user}</tr>
           <tr>time: {time}</tr>
           <tr>{replySize} replies</tr>
           <tr>{likeSize} likes</tr>
         </table>
-        {this.state.showReply && < Reply / >}
+        {this.state.showReply && this.props.currentPosts.reply.map(function(e) {
+          return <Reply currentReplies = {e} key = {e.id}/>
+        })}
       </div>
     )
   }

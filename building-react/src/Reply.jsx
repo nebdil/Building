@@ -7,6 +7,7 @@ import {
 
 export default class Reply extends Component {
   render() {
-    return <div>I'm the reply!</div>
+    const reply = this.props.currentReplies.content
+    return <div>{reply}</div>
   }
 }

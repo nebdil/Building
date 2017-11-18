@@ -30,7 +30,7 @@ export default class Building extends Component {
     return (
       <div>
         {this.state.posts.map(function(e) {
-          return <Post currentPosts = {e} key={e.id} />
+          return <Post currentPosts = {e} key = {e.id} />
         })}
       </div>
     )
