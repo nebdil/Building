@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :likes, only: [:index, :create, :destroy]
       resources :replies, only: [:index, :new, :create, :destroy]
     end
+    resources :tags, only: [:create]
   end
 
   # REGISTER ROUTES

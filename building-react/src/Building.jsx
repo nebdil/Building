@@ -20,10 +20,11 @@ export default class Building extends Component {
   }
 
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/5')
+    return fetch('http://localhost:3000/buildings/1')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
+        // console.log(responseJson)
       })
       .catch((error) => {
         console.error(error);
@@ -52,6 +53,10 @@ export default class Building extends Component {
             return <Post currentPosts = {e} key = {e.id} />
           })}
         </div>
+        <Tag posts={this.state.posts}/>
+        {this.state.posts.map(function(e) {
+          return <Post currentPosts = {e} key = {e.id} />
+        })}
       </div>
     )
   }

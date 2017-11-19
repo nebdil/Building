@@ -8,6 +8,7 @@ export default class CreatePost extends Component {
   }
 
   render() {
+
     return (
       <form onSubmit={this._handleNewPost}>
         <label htmlFor="content">
@@ -17,6 +18,7 @@ export default class CreatePost extends Component {
         <button>Create post!</button>
       </form>
     )
+    
   }
   _handleNewPost(e) {
     e.preventDefault();

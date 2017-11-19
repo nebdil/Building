@@ -20,6 +20,7 @@ export default class Post extends Component {
     this.setState({showReply: !this.state.showReply})
   }
   render() {
+
     const post = this.props.currentPosts.content;
     const user = this.props.currentPosts.username;
     const time = this.props.currentPosts.created_at;
@@ -31,11 +32,28 @@ export default class Post extends Component {
     return (
       <div onClick={this.onClick.bind(this)}>
         <table style={divStyle}>
-          <tr>{post}</tr>
-          <tr>user: {user}</tr>
-          <tr>time: {time}</tr>
-          <tr>{replySize} replies</tr>
-          <tr>{likeSize} likes</tr>
+          <tbody>
+            <tr>
+              <th>POST</th>
+              <th>USER</th>
+              <th>TIME</th>
+              <th>REPLY SIZE</th>
+              <th>LIKE SIZE</th>
+              <th>LIKE BUTTON</th>
+              <th>TAG</th>
+            </tr>
+            <tr>
+              <td>{post}</td>
+              <td>{user}</td>
+              <td>{time}</td>
+              <td>{replySize}</td>
+              <td>{likeSize}</td>
+              <td><Like/></td>
+              {this.props.currentPosts.tags.map(function(e) {
+                return <td>{e.name}</td>
+              })}
+            </tr>
+          </tbody>
         </table>
         {this.state.showReply && this.props.currentPosts.reply.map(function(e) {
           return <Reply currentReplies = {e} key = {e.id}/>
