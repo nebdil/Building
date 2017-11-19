@@ -21,7 +21,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: 1,
+      currentUserId: 13,
       posts: []
     };
 

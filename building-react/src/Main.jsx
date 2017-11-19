@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar.jsx';
-import Building from './Building.jsx'
+import Building from './Building.jsx';
+import User from './User.jsx';
 import {
   BrowserRouter as Router,
   Route,
@@ -8,7 +9,7 @@ import {
   Switch
 } from 'react-router-dom'
 import CreatePost from './CreatePost.jsx';
-import User from './User.jsx'
+
 
 export default class Main extends Component {
 
