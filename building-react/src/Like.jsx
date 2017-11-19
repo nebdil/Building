@@ -21,7 +21,7 @@ export default class Like extends Component {
     if (!this.state.like) {
       console.log(`likes: ${this.state.like}`)
       this.setState({like: true})
-      fetch('/buildings/1/posts/3/likes', {
+      fetch('/buildings/5/posts/3/likes', {
         method: 'POST'
         //post_id will come from post jsx, when they are all in the same component, with this
       })
@@ -38,7 +38,7 @@ export default class Like extends Component {
       let post = this.state.postId
       console.log(`likes: ${this.state.like}`)
       this.setState({like: false})
-      fetch(`/buildings/1/posts/${post}/likes/${id}`, {
+      fetch(`/buildings/5/posts/${post}/likes/${id}`, {
         method: 'DELETE'
       });
     }

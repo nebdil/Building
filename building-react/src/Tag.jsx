@@ -44,7 +44,7 @@ export default class Post extends Component {
     // const content = new FormData(e.target);
     console.log(e.target)
     const content = new FormData(e.target);
-    fetch('/buildings/1/tags', {
+    fetch('/buildings/5/tags', {
       method: 'POST',
       body: content
     });
