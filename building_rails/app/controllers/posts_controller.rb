@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def create
     puts 'POSTS CONTROLLER IN'
-    user = User.find_by(id: 13)
+    user = User.find_by(id: 1)
     @post = user.posts.create!(
       content: params[:content]
     )
