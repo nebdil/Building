@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserReply from './UserReply.jsx';
+import UserPostReply from './UserPostReply.jsx';
 
 import {
   BrowserRouter as Router,
@@ -37,7 +37,7 @@ export default class UserPost extends Component {
               <th>USER</th>
               <th>TIME</th>
               <th>REPLY SIZE</th>
-              <th>LIKE SIZE</th>              
+              <th>LIKE SIZE</th>
               <th>TAG</th>
             </tr>
             <tr>
@@ -53,7 +53,7 @@ export default class UserPost extends Component {
           </tbody>
         </table>
         {this.state.showReply && this.props.currentUserPosts.reply.map(function(e) {
-          return <UserReply currentUserReplies = {e} key = {e.id}/>
+          return <UserPostReply currentUserReplies = {e} key = {e.id}/>
         })}
       </div>
     )

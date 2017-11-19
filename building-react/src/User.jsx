@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserPost from './UserPost.jsx';
+import UserReply from './UserReply.jsx';
 import {
   BrowserRouter as Router,
   Route,
@@ -34,9 +35,20 @@ export default class User extends Component {
         <Link to={'/buildings/5/posts'}>Go back</Link>
         <p>Your posts</p>
         {this.state.posts.map(function(e) {
-          return <UserPost currentUserPosts = {e} key = {e.id} />
+          if (!(e.hasOwnProperty('posts_user_replied_to'))) {
+            return <UserPost currentUserPosts = {e} key = {e.id} />
+          }
         })}
-        <p>Your commented posts</p>
+        <p>Posts you've commented</p>
+        {this.state.posts.map(function(e) {
+          if (e.hasOwnProperty('posts_user_replied_to')) {
+            return (
+              e.posts_user_replied_to.map(function(el) {
+                return <UserReply currentUserReplies = {el} key = {el.id} />
+              })
+            )
+          }
+        })}
         <p>Logout</p>
       </div>
     )
