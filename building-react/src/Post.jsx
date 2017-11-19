@@ -40,6 +40,7 @@ export default class Post extends Component {
               <th>REPLY SIZE</th>
               <th>LIKE SIZE</th>
               <th>LIKE BUTTON</th>
+              <th>TAG</th>
             </tr>
             <tr>
               <td>{post}</td>
@@ -48,6 +49,9 @@ export default class Post extends Component {
               <td>{replySize}</td>
               <td>{likeSize}</td>
               <td><Like/></td>
+              {this.props.currentPosts.tags.map(function(e) {
+                return <td>{e.name}</td>
+              })}
             </tr>
           </tbody>
         </table>

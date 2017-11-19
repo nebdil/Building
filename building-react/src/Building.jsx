@@ -20,6 +20,7 @@ export default class Building extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
+        // console.log(responseJson)
       })
       .catch((error) => {
         console.error(error);
@@ -29,7 +30,7 @@ export default class Building extends Component {
   render() {
     return (
       <div>
-        <Tag />
+        <Tag posts={this.state.posts}/>
         {this.state.posts.map(function(e) {
           return <Post currentPosts = {e} key = {e.id} />
         })}
