@@ -45,18 +45,13 @@ export default class Building extends Component {
   render() {
     return (
       <div>
-        <div>
-          <CreatePost currentPosts = {this.state.posts}/>
-        </div>
+        <CreatePost currentPosts = {this.state.posts}/>
+        <Tag posts={this.state.posts}/>
         <div>
           {this.state.posts.map(function(e) {
             return <Post currentPosts = {e} key = {e.id} />
           })}
         </div>
-        <Tag posts={this.state.posts}/>
-        {this.state.posts.map(function(e) {
-          return <Post currentPosts = {e} key = {e.id} />
-        })}
       </div>
     )
   }

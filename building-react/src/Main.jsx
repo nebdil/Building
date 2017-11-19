@@ -15,9 +15,6 @@ export default class Main extends Component {
       <div>
         <Navbar />
         <Building />
-        <span>Post</span>
-        <span>Tags</span>
-        <span>Notifications</span>
       </div>
     )
   }
