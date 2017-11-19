@@ -20,14 +20,16 @@ export default class CreatePost extends Component {
   }
   _handleNewPost(e) {
     e.preventDefault();
-    // const content = new FormData(e.target);
     console.log(e.target)
     const content = new FormData(e.target);
-    fetch('/buildings/1/posts/', {
+    fetch('/buildings/5/posts/', {
       method: 'POST',
       body: content
     })
-    .then(() => {
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      this.props.currentPosts.push(responseJson)
       console.log(this.props.currentPosts)
     })
   }

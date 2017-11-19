@@ -30,15 +30,28 @@ export default class Building extends Component {
       });
   }
 
+  componentDidUpdate() {
+    return fetch('http://localhost:3000/buildings/5')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({ posts: responseJson })
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
     return (
       <div>
-        <CreatePost currentPosts = {this.state.posts} />
-      </div>
-      <div>
-        {this.state.posts.map(function(e) {
-          return <Post currentPosts = {e} key = {e.id} />
-        })}
+        <div>
+          <CreatePost currentPosts = {this.state.posts}/>
+        </div>
+        <div>
+          {this.state.posts.map(function(e) {
+            return <Post currentPosts = {e} key = {e.id} />
+          })}
+        </div>
       </div>
     )
   }
