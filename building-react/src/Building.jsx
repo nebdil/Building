@@ -9,30 +9,18 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import CreateTag from './CreateTag.jsx';
 
 export default class Building extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: 13,
+      currentUserId: 1,
       posts: []
     };
   }
-
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/1')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({ posts: responseJson })
-        // console.log(responseJson)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  componentDidUpdate() {
-    return fetch('http://localhost:3000/buildings/5')
+    return fetch('http://localhost:3000/buildings/1/')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
@@ -41,23 +29,26 @@ export default class Building extends Component {
         console.error(error);
       });
   }
-
+  // componentDidUpdate() {
+  //   return fetch('http://localhost:3000/buildings/5')
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       this.setState({ posts: responseJson })
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
   render() {
     return (
       <div>
-        <div>
-          <CreatePost currentPosts = {this.state.posts}/>
-        </div>
-        <div>
-          {this.state.posts.map(function(e) {
-            return <Post currentPosts = {e} key = {e.id} />
-          })}
-        </div>
-        <Tag posts={this.state.posts}/>
+        <CreatePost currentPosts = {this.state.posts}/>
+        {/* <Tag posts={this.state.posts}/> */}
         {this.state.posts.map(function(e) {
           return <Post currentPosts = {e} key = {e.id} />
         })}
       </div>
     )
   }
+
 }

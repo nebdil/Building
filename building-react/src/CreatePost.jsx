@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import CreateTag from './CreateTag.jsx';
 
 export default class CreatePost extends Component {
   constructor(props) {
@@ -15,10 +16,11 @@ export default class CreatePost extends Component {
           New Post:
         </label>
         <input type="text" name="content" placeholder="Your post" onChange={this._handleChange} />
+        <CreateTag />
         <button>Create post!</button>
       </form>
     )
-    
+
   }
   _handleNewPost(e) {
     e.preventDefault();
