@@ -4,9 +4,11 @@ import Building from './Building.jsx'
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 import CreatePost from './CreatePost.jsx';
+import User from './User.jsx'
 
 export default class Main extends Component {
 
@@ -14,7 +16,10 @@ export default class Main extends Component {
     return (
       <div>
         <Navbar />
-        <Building />
+        <Switch>
+          <Route path='/buildings/5/users/13' component={User}/>
+          <Route path='/buildings/5/posts' component={Building}/>
+        </Switch>
       </div>
     )
   }

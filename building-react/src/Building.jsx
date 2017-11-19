@@ -14,23 +14,20 @@ export default class Building extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: 13,
+      currentUserId: 1,
       posts: []
     };
   }
-
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/1')
+    return fetch('http://localhost:3000/buildings/5/')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
-        // console.log(responseJson)
       })
       .catch((error) => {
         console.error(error);
       });
   }
-
   componentDidUpdate() {
     return fetch('http://localhost:3000/buildings/5')
       .then((response) => response.json())
@@ -41,18 +38,16 @@ export default class Building extends Component {
         console.error(error);
       });
   }
-
   render() {
     return (
       <div>
         <CreatePost currentPosts = {this.state.posts}/>
         <Tag posts={this.state.posts}/>
-        <div>
-          {this.state.posts.map(function(e) {
-            return <Post currentPosts = {e} key = {e.id} />
-          })}
-        </div>
+        {this.state.posts.map(function(e) {
+          return <Post currentPosts = {e} key = {e.id} />
+        })}
       </div>
     )
   }
+
 }

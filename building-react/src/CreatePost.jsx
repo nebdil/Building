@@ -18,7 +18,7 @@ export default class CreatePost extends Component {
         <button>Create post!</button>
       </form>
     )
-    
+
   }
   _handleNewPost(e) {
     e.preventDefault();
