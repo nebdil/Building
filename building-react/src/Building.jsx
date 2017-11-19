@@ -9,7 +9,6 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-import CreateTag from './CreateTag.jsx';
 
 export default class Building extends Component {
   constructor(props) {
@@ -43,7 +42,7 @@ export default class Building extends Component {
     return (
       <div>
         <CreatePost currentPosts = {this.state.posts}/>
-        {/* <Tag posts={this.state.posts}/> */}
+        <Tag posts={this.state.posts}/>
         {this.state.posts.map(function(e) {
           return <Post currentPosts = {e} key = {e.id} />
         })}

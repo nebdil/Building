@@ -7,7 +7,6 @@ import {
   Link
 } from 'react-router-dom'
 import CreatePost from './CreatePost.jsx';
-import CreateTag from './CreateTag.jsx';
 
 export default class Main extends Component {
 
@@ -16,9 +15,6 @@ export default class Main extends Component {
       <div>
         <Navbar />
         <Building />
-        <span>Post</span>
-        <span>Tags</span>
-        <span>Notifications</span>
       </div>
     )
   }

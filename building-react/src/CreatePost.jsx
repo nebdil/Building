@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import CreateTag from './CreateTag.jsx';
 
 export default class CreatePost extends Component {
   constructor(props) {
@@ -12,11 +11,14 @@ export default class CreatePost extends Component {
 
     return (
       <form onSubmit={this._handleNewPost}>
-        <label htmlFor="content">
+        <label htmlFor="post_content">
           New Post:
         </label>
-        <input type="text" name="content" placeholder="Your post" onChange={this._handleChange} />
-        <CreateTag />
+        <input type="text" name="post_content" placeholder="Your post" onChange={this._handleChange} />
+        <label htmlFor="tag_name">
+          New Tag:
+        </label>
+        <input type="text" name="tag_name" placeholder="Your tag" onChange={this._handleChange} />
         <button>Create post!</button>
       </form>
     )
