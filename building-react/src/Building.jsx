@@ -32,7 +32,7 @@ export default class Building extends Component {
   }
 
   componentDidUpdate() {
-    return fetch('http://localhost:3000/buildings/5')
+    return fetch('http://localhost:3000/buildings/1')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
@@ -45,14 +45,7 @@ export default class Building extends Component {
   render() {
     return (
       <div>
-        <div>
-          <CreatePost currentPosts = {this.state.posts}/>
-        </div>
-        <div>
-          {this.state.posts.map(function(e) {
-            return <Post currentPosts = {e} key = {e.id} />
-          })}
-        </div>
+        <CreatePost currentPosts = {this.state.posts}/>
         <Tag posts={this.state.posts}/>
         {this.state.posts.map(function(e) {
           return <Post currentPosts = {e} key = {e.id} />
