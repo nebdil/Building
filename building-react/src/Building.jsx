@@ -17,6 +17,8 @@ export default class Building extends Component {
       currentUserId: 1,
       posts: []
     };
+    this._handlePostsByTags = this._handlePostsByTags.bind(this)
+    this.state.posts.map = this.state.posts.map.bind(this)
   }
   componentDidMount() {
     return fetch('http://localhost:3000/buildings/1/')
@@ -42,12 +44,31 @@ export default class Building extends Component {
     return (
       <div>
         <CreatePost currentPosts = {this.state.posts}/>
-        <Tag posts={this.state.posts}/>
+        <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags}/>
         {this.state.posts.map(function(e) {
           return <Post currentPosts = {e} key = {e.id} />
         })}
       </div>
     )
   }
-
+  _handlePostsByTags(e) {
+    e.preventDefault();
+    let newPosts = [];
+    this.state.posts.map(function(a){
+      a.tags.map(function(i) {
+        if (i.name === e.target.value) {
+          console.log("i.name: " + i.name)
+          console.log('e.target.value: ' + e.target.value)
+          console.log('a: ' + a)
+          newPosts.push(a)
+          console.log('newPosts: ' + newPosts)
+        }
+      })
+     // if (a.tags.name === e.target.value) {
+     //   newPosts.push(e)
+     //   return newPosts
+     //  }
+    })
+    this.setState({posts: newPosts})
+  }
 }
