@@ -23,7 +23,7 @@ export default class Building extends Component {
     this.setState = this.setState.bind(this)
   }
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/5/')
+    return fetch('http://localhost:3000/buildings/1/')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
@@ -33,7 +33,7 @@ export default class Building extends Component {
       });
   }
   componentDidUpdate() {
-    return fetch('http://localhost:3000/buildings/5')
+    return fetch('http://localhost:3000/buildings/1')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })

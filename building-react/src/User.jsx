@@ -12,13 +12,13 @@ export default class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: 13,
+      currentUserId: 1,
       posts: []
     };
   }
 
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/5/users/13')
+    return fetch('http://localhost:3000/buildings/1/users/1')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
