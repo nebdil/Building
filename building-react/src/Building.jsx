@@ -14,7 +14,7 @@ export default class Building extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: 13,
+      currentUserId: 1,
       posts: []
     };
   }
