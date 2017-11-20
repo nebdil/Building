@@ -4,7 +4,8 @@ export default class Tag extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      arr: []
+      arr: [],
+      boo: true
     }
     this.setState = this.setState.bind(this)
   }
