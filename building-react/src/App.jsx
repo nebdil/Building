@@ -17,25 +17,20 @@ import {
 } from 'react-router-dom'
 import CreatePost from './CreatePost.jsx';
 
-
 export default class App extends Component {
-
-  constructor(props) {
+  constructor({ props, history }) {
     super(props);
     this.state = {
       currentUserId: 1,
       posts: []
     };
   }
-
   render() {
     return(
-      <div>
-        <Switch>
-          <Route path='/' component={Login}/>
-          <Route path='/buildings/1/posts' component={Main}/>
-        </Switch>
-      </div>
+      <Switch>
+        <Route path='/login' component={Login} handleLogin={this._handleLogin}/>
+        <Route path='/buildings/1/posts' component={Main}/>
+      </Switch>
     )
   }
 }

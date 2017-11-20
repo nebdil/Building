@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
 
   def create
     puts 'in create'
+    url_ok = {url: '/buildings/1/posts'}
 
     if user = User.authenticate_with_credentials(params[:email], params[:password])
 
@@ -12,7 +13,7 @@ class SessionsController < ApplicationController
       puts 'in if'
       puts session.inspect
 
-      render json: user
+      render json: url_ok
     else
       url_no = {url: '/login'}
       puts 'in else'
