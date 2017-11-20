@@ -12,13 +12,13 @@ export default class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: 13,
+      currentUserId: 11,
       posts: []
     };
   }
 
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/5/users/13')
+    return fetch('http://localhost:3000/buildings/1/users/1')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
@@ -32,7 +32,7 @@ export default class User extends Component {
   render() {
     return (
       <div>
-        <Link to={'/buildings/5/posts'}>Go back</Link>
+        <Link to={'/buildings/1/posts'}>Go back</Link>
         <p>Your posts</p>
         {this.state.posts.map(function(e) {
           if (!(e.hasOwnProperty('posts_user_replied_to'))) {

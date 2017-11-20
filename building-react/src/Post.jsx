@@ -22,6 +22,7 @@ export default class Post extends Component {
   render() {
 
     const post = this.props.currentPosts.content;
+    const postId = this.props.currentPosts.id;
     const user = this.props.currentPosts.username;
     const time = this.props.currentPosts.created_at;
     const replySize = this.props.currentPosts.reply.length;
@@ -48,7 +49,7 @@ export default class Post extends Component {
               <td>{time}</td>
               <td>{replySize}</td>
               <td>{likeSize}</td>
-              <td><Like/></td>
+              <td><Like postId={postId}/></td>
               {this.props.currentPosts.tags.map(function(e) {
                 return <td>{e.name}</td>
               })}

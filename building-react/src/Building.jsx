@@ -23,17 +23,7 @@ export default class Building extends Component {
     this.setState = this.setState.bind(this)
   }
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/5/')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({ posts: responseJson })
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-  componentDidUpdate() {
-    return fetch('http://localhost:3000/buildings/5')
+    return fetch('http://localhost:3000/buildings/1')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
@@ -42,6 +32,16 @@ export default class Building extends Component {
         console.error(error);
       });
   }
+  // componentDidUpdate() {
+  //   return fetch('http://localhost:3000/buildings/')
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       this.setState({ posts: responseJson, originalPosts: responseJson })
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
   render() {
     return (
       <div>

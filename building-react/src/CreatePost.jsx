@@ -28,7 +28,7 @@ export default class CreatePost extends Component {
     e.preventDefault();
     console.log(e.target)
     const content = new FormData(e.target);
-    fetch('/buildings/5/posts/', {
+    fetch('/buildings/1/posts/', {
       method: 'POST',
       body: content
     })

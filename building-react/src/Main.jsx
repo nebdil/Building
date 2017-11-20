@@ -18,8 +18,8 @@ export default class Main extends Component {
       <div>
         <Navbar />
         <Switch>
-          <Route path='/buildings/5/users/13' component={User}/>
-          <Route path='/buildings/5/posts' component={Building}/>
+          <Route path='/buildings/1/users/1' component={User}/>
+          <Route path='/buildings/1/posts' component={Building}/>
         </Switch>
       </div>
     )

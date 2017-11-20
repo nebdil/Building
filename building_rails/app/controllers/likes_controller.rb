@@ -5,7 +5,7 @@ class LikesController < ApplicationController
 
   def create
     puts 'LIKES/CREATE CONTROLLER IN'
-    currentUser = User.find_by(id: 3);
+    currentUser = User.find_by(id: 1);
     @like = currentUser.likes.create!(
       post_id: params[:post_id]
     )
