@@ -3,14 +3,13 @@ import React, {Component} from 'react';
 export default class CreatePost extends Component {
   constructor(props) {
     super(props);
-    this._handleNewPost = this._handleNewPost.bind(this)
     this._handleChange = this._handleChange.bind(this)
   }
 
   render() {
 
     return (
-      <form onSubmit={this._handleNewPost}>
+      <form onSubmit={this.props.handleNewPost}>
         <label htmlFor="post_content">
           New Post:
         </label>
@@ -24,23 +23,6 @@ export default class CreatePost extends Component {
     )
 
   }
-  _handleNewPost(e) {
-    e.preventDefault();
-    console.log(e.target)
-    const content = new FormData(e.target);
-    fetch('/buildings/1/posts/', {
-      method: 'POST',
-      body: content
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson)
-      this.props.currentPosts.push(responseJson)
-      console.log(this.props.currentPosts)
-    })
-  }
-
-
   _handleChange(e) {
     console.log('in hangle change' + e.target.value)
   }

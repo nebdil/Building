@@ -32,7 +32,7 @@ export default class App extends Component {
     return(
       <div>
         <Switch>
-          <Route path='/' component={Login}/>
+          {/* <Route path='/' component={Login}/> */}
           <Route path='/buildings/1/posts' component={Main}/>
         </Switch>
       </div>

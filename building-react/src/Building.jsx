@@ -16,11 +16,13 @@ export default class Building extends Component {
     this.state = {
       currentUserId: 1,
       posts: [],
-      originalPosts: []
+      originalPosts: [],
+      unique_tags: []
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
     this.setState = this.setState.bind(this)
+    this._handleNewPost = this._handleNewPost.bind(this)
   }
   componentDidMount() {
     return fetch('http://localhost:3000/buildings/1')
@@ -28,30 +30,46 @@ export default class Building extends Component {
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
       })
+      .then(() => {
+        let newArr = [];
+        this.state.posts.map(function(e) {
+          e.tags.map(function(a) {
+            newArr.push(a.name)
+          })
+        })
+        this.setState({unique_tags: [...new Set(newArr)]})
+      })
       .catch((error) => {
         console.error(error);
       });
   }
-  // componentDidUpdate() {
-  //   return fetch('http://localhost:3000/buildings/')
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //       this.setState({ posts: responseJson, originalPosts: responseJson })
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
   render() {
     return (
       <div>
-        <CreatePost currentPosts = {this.state.posts}/>
-        <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} />
+        <CreatePost currentPosts = {this.state.posts} handleNewPost={this._handleNewPost}/>
+        <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
         {this.state.posts.map(function(e) {
           return <Post currentPosts = {e} key = {e.id} />
         })}
       </div>
     )
+  }
+
+  _handleNewPost(e) {
+    e.preventDefault();
+    console.log(e.target)
+    const content = new FormData(e.target);
+    fetch('/buildings/1/posts/', {
+      method: 'POST',
+      body: content
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      const posts = this.state.posts.concat(responseJson)
+      const originalPosts = this.state.originalPosts.concat(responseJson)
+      this.setState({posts: posts, originalPosts: originalPosts})
+    })
   }
   _handlePostsByTags(e) {
     e.preventDefault();
