@@ -9,7 +9,6 @@ class BuildingsController < ApplicationController
   def show
     @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:id]}).order('posts.id DESC')
     post_arr = @posts.map do |po|
-      pp po.likes
       result = po.attributes
       result[:username] = po.user.username
       result[:reply] = po.replies

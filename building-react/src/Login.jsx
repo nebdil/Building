@@ -19,11 +19,11 @@ export default class Login extends Component {
         <h1>BUILDING(COMMUNITIES)</h1>
         <p>ABOUT</p>
 
-        <form>
-          <label htmlFor="username">
-            Username:
+        <form onSubmit={this._handleLogin}>
+          <label htmlFor="email">
+            Email:
           </label>
-          <input type="text" name="username" placeholder="Your username" onChange={this._handleChange} />
+          <input type="text" name="email" placeholder="Your email" onChange={this._handleChange} />
           <label htmlFor="password">
             Password:
           </label>
