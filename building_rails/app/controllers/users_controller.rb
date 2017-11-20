@@ -20,8 +20,13 @@ class UsersController < ApplicationController
       result[:tags] = po.tags
       result
     end
-    @posts_user_replied_to = @user.posts.all.joins(:replies).includes(:replies).where(replies: {user_id: params[:id]}).order('posts.id DESC')
-    reply_arr = @posts_user_replied_to.map do |pos|
+
+    @user_replies = Reply.all.find_by(user_id: params[:id])
+    @user_replies_arr = [@user_replies]
+    @posts_replied = Post.find_by(id: @user_replies[:post_id])
+    @posts_replied_arr = [@posts_replied]
+
+    reply_arr = @posts_replied_arr.map do |pos|
       result = pos.attributes
       result[:username] = pos.user.username
       result[:reply] = pos.replies
