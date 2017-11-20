@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 export default class CreatePost extends Component {
   constructor(props) {
-    super();
+    super(props);
     this._handleNewPost = this._handleNewPost.bind(this)
     this._handleChange = this._handleChange.bind(this)
   }
