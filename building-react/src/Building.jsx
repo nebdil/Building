@@ -109,10 +109,8 @@ export default class Building extends Component {
     .then((response) => response.json())
     .then((newPost) => {
       console.log(newPost)
-      // newPost.like = []
-      // newPost.tags = []
-      // newPost.reply = []
-      const posts = this.state.posts.concat(newPost)
+      const newPostArr = [newPost]
+      const posts = newPostArr.concat(this.state.posts)
       const originalPosts = this.state.originalPosts.concat(newPost)
       console.log(posts)
       console.log('setting the state for post')
