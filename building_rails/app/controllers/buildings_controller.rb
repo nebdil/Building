@@ -1,5 +1,6 @@
 class BuildingsController < ApplicationController
   require 'pp'
+  # before_action :authenticate_user
   def index
   end
   def create

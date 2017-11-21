@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  # include Knock::Authenticable
   private
 
   def current_user

@@ -36,14 +36,16 @@ user1 = build1.users.create!({
           id: 1,
           username: 'dilanimo',
           email: 'dilan@example.com',
-          password: '123'
+          password: '123',
+          password_confirmation: '123'
           })
 
 10.times do
   build1.users.create!({
     username: Faker::Internet.user_name,
     email: Faker::Internet.email,
-    password: Faker::Internet.password
+    password: '123',
+    password_confirmation: '123'
     })
 end
 

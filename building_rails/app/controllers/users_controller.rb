@@ -3,18 +3,38 @@ class UsersController < ApplicationController
   def index
   end
   def create
-    # user = User.new(user_params)
-    # if user.save
-    #   session[:user_id] = user.id
-    #   # redirect_to '/buildings/1/posts'
-    #   render json: user
-    # elsif User.find_by(email: params[:email])
-    #   flash[:notice] = "Email is taken!"
-    #   # redirect_to '/register'
-    # else
-    #   flash[:notice] = "Something went wrong while signing up"
-    #   # redirect_to '/register'
-    # end
+    url_ok = {url: '/buildings/1/posts'}
+    puts 'params'
+    puts user_params
+    user = User.new(
+      # user_params
+      {
+      username: params[:username],
+      email: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation],
+      building_id: 1
+      }
+    )
+    puts user.inspect
+
+    if user.save
+      session[:user_id] = user.id
+      # redirect_to '/buildings/1/posts'
+      render json: url_ok
+    elsif User.find_by(email: params[:email])
+      url_no = {url: '/register'}
+      # flash[:notice] = "Email is taken!"
+      # redirect_to '/register'
+      puts 'in elsif'
+      render json: url_no
+    else
+      url_no = {url: '/register'}
+      # flash[:notice] = "Something went wrong while signing up"
+      # redirect_to '/register'
+      puts 'in else'
+      render json: url_no
+    end
   end
 
   def new
@@ -53,8 +73,8 @@ class UsersController < ApplicationController
   def update
   end
 
-  # private
-  # def user_params
-  #   params.require(:user).permit(:username, :email, :password, :password_confirmation)
-  # end
+  private
+  def user_params
+    params.permit(:username, :email, :password, :password_confirmation)
+  end
 end

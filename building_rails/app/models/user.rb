@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :email, case_sensitive: false
   validates :email, presence: true
-  validates :name, presence: true
+  validates :username, presence: true
   validates :password, presence: true
   validates :password_confirmation, presence: true
 

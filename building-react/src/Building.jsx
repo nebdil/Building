@@ -48,7 +48,7 @@ export default class Building extends Component {
       <div>
         <CreatePost currentPosts = {this.state.posts} handleNewPost={this._handleNewPost}/>
         <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
-        {this.state.posts.map(function(e) {
+        {this.state.posts.map((e) => {
           return <Post currentPosts = {e} key = {e.id} />
         })}
       </div>
