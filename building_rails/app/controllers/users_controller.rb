@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     url_ok = {url: '/buildings/1/posts'}
     puts 'params'
     puts user_params
-    user = User.new(
+    @user = User.new(
       # user_params
       {
       username: params[:username],
@@ -16,11 +16,22 @@ class UsersController < ApplicationController
       building_id: 1
       }
     )
-    puts user.inspect
+    puts @user.inspect
 
-    if user.save
-      session[:user_id] = user.id
+    if @user.save
+      session[:user_id] = @user.id
       # redirect_to '/buildings/1/posts'
+      puts @user.email
+      ApplicationMailer.register_email(@user).deliver!
+
+      # mg_client = Mailgun::Client.new ENV['PRIVATE_API_KEY_MAILGUN']
+      # message_params = {:from    => ENV['FROM_EMAIL'],
+      #                   :to      => @user.email,
+      #                   :subject => 'Hello from your Building!',
+      #                   :text    => 'Thank you for registering to your Building! Now you can connect with your neighbors!'}
+      # mg_client.send_message ENV['DOMAIN'], message_params
+
+
       render json: url_ok
     elsif User.find_by(email: params[:email])
       url_no = {url: '/register'}
