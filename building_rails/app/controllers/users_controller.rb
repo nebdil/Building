@@ -25,8 +25,11 @@ class UsersController < ApplicationController
     @user_replies_arr = [@user_replies]
     @posts_replied = Post.find_by(id: @user_replies[:post_id])
     @posts_replied_arr = [@posts_replied]
+    @emmip = Post.all
+    @emmir = @emmip.joins(:replies).where(user_id: params[:id])
+    pp @emmir
 
-    reply_arr = @posts_replied_arr.map do |pos|
+    reply_arr = @emmir.map do |pos|
       result = pos.attributes
       result[:username] = pos.user.username
       result[:reply] = pos.replies
