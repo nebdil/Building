@@ -30,9 +30,9 @@ export default class Navbar extends Component {
     fetch('http://localhost:3000/logout')
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson.url)
-        console.log(this.props.propS)
-        console.log(this.props.propS.history)
+        // console.log(responseJson.url)
+        // console.log(this.props.propS)
+        // console.log(this.props.propS.history)
         this.props.propS.history.push(responseJson.url)
       })
       .catch((error) => {

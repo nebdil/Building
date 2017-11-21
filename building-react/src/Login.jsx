@@ -28,6 +28,7 @@ export default class Login extends Component {
           </label>
           <input type="text" name="password" placeholder="Your password" onChange={this._handleChange} />
           <button>Login!</button>
+          <Link to={'/register'}>Register</Link>
         </form>
       </div>
     )
@@ -43,7 +44,7 @@ export default class Login extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson.url)
+      // console.log(responseJson.url)
       // console.log(this.props)
       // console.log(this.history)
       this.props.history.push(responseJson.url)
@@ -56,6 +57,7 @@ export default class Login extends Component {
   }
   _handleChange(e) {
     // console.log('in hangle change' + e.target.value)
-    console.log(this.props)
+    console.log('in hangle change')
+    // console.log(this.props)
   }
 }

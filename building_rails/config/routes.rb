@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   # REGISTER ROUTES
 
   get '/register' => 'users#new'
+  post '/register' => 'users#create'
 
   # LOGIN ROUTES
 
