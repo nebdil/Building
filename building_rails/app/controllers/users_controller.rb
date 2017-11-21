@@ -21,14 +21,16 @@ class UsersController < ApplicationController
       result
     end
 
-    # @user_replies = Reply.all.find_by(user_id: params[:id])
-    # @user_replies_arr = [@user_replies]
-    # @posts_replied = Post.find_by(id: @user_replies[:post_id])
-    # @posts_replied_arr = [@posts_replied]
-    @rposts = Post.all
-    @rreplies = @rposts.joins(:replies).where(user_id: params[:id])
+    @rreplies = Reply.where(user_id: params[:id])
+    pp "rreplies=========>#{@rreplies}"
+    @rposts = @rreplies.to_a.map do |reply|
+      reply.post
+      pp reply.post
+    end
 
-    reply_arr = @rreplies.map do |pos|
+    pp "rposts=========>#{@rposts}"
+
+    r_post_arr = @rposts.map do |pos|
       result = pos.attributes
       result[:username] = pos.user.username
       result[:reply] = pos.replies
@@ -37,11 +39,12 @@ class UsersController < ApplicationController
       result
     end
 
-    uniq_reply_arr = reply_arr.uniq! {|i| i["id"]}
-    pp "uniq_reply_arr=========>#{uniq_reply_arr}"
+    pp "r_post_arr=========>#{r_post_arr}"
+    uniq_post_arr = r_post_arr.uniq {|i| i["id"]}
+    pp "uniq_post_arr=========>#{uniq_post_arr}"
 
 
-    post_arr.push({posts_user_replied_to: uniq_reply_arr})
+    post_arr.push({posts_user_replied_to: uniq_post_arr})
     render json: post_arr
   end
   def update
