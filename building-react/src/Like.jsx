@@ -18,15 +18,23 @@ export default class Like extends Component {
   }
   _handleLike(e) {
     console.log('in handle like')
+    alert(this.props.postId)
     if (!this.state.like) {
+      let id = this.props.postId
       console.log(`likes: ${this.state.like}`)
       this.setState({like: true})
-      fetch('/buildings/1/posts/3/likes', {
+      alert(this.state.like)
+      fetch(`/buildings/1/posts/${id}/likes`, {
         method: 'POST'
         //post_id will come from post jsx, when they are all in the same component, with this
       })
-      .then((response) => response.json())
+      .then((response) => {
+        alert(this.state.like)
+        return response.json()
+        alert('response: ' + response)
+      })
       .then((responseJson) => {
+        alert(responseJson)
         console.log(responseJson.id);
         this.setState({likeId: responseJson.id});
         this.setState({postId: responseJson.post_id});
@@ -36,6 +44,8 @@ export default class Like extends Component {
     } else {
       let id = this.state.likeId
       let post = this.state.postId
+      console.log(this.state.likeId);
+      console.log(this.state.postId);
       console.log(`likes: ${this.state.like}`)
       this.setState({like: false})
       fetch(`/buildings/1/posts/${post}/likes/${id}`, {

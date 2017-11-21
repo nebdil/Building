@@ -32,7 +32,7 @@ export default class User extends Component {
   render() {
     return (
       <div>
-        <Link to={'/buildings/5/posts'}>Go back</Link>
+        <Link to={'/buildings/1/posts'}>Go back</Link>
         <p>Your posts</p>
         {this.state.posts.map(function(e) {
           if (!(e.hasOwnProperty('posts_user_replied_to'))) {

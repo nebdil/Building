@@ -12,11 +12,18 @@ export default class Tag extends Component {
   render() {
     let newArr = this.state.arr
     this.props.posts.map(function(e){
+      if (e.tags) {
+        console.log(e.tags)
+        e.tags.map(function(a) {
+          newArr.push(a.name)
+          // console.log("a.name " + a.name)
+        })
+      }
       // console.log(e.tags)
-      e.tags.map(function(a) {
-        newArr.push(a.name)
-        // console.log("a.name " + a.name)
-      })
+      // e.tags.map(function(a) {
+      //   newArr.push(a.name)
+      //   // console.log("a.name " + a.name)
+      // })
     })
     // console.log("newArr " + newArr)
     let unique = [...new Set(newArr)];

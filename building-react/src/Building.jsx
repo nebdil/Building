@@ -21,19 +21,11 @@ export default class Building extends Component {
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
     this.setState = this.setState.bind(this)
+    this._handleReplySubmit = this._handleReplySubmit.bind(this)
+    this._handleReplyChange = this._handleReplyChange.bind(this)
   }
   componentDidMount() {
     return fetch('http://localhost:3000/buildings/1/')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({ posts: responseJson })
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-  componentDidUpdate() {
-    return fetch('http://localhost:3000/buildings/1')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
@@ -42,13 +34,16 @@ export default class Building extends Component {
         console.error(error);
       });
   }
+
   render() {
     return (
       <div>
         <CreatePost currentPosts = {this.state.posts}/>
         <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} />
-        {this.state.posts.map(function(e) {
-          return <Post currentPosts = {e} key = {e.id} />
+        {this.state.posts.map((e) => {
+          console.log('e:', e)
+          // console.log('this:', this)
+          return <Post handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentPosts = {e} key = {e.id} />
         })}
       </div>
     )
@@ -75,4 +70,33 @@ export default class Building extends Component {
       }
     }
   }
+
+  _handleReplyChange(e) {
+    console.log('in handleReplyChange:', e.target.value);
+  }
+
+  _handleReplySubmit(e) {
+    e.preventDefault();
+    console.log(e.currentTarget)
+    const content = new FormData(e.currentTarget);
+    const repliesPostId = e.currentTarget.getAttribute('data-post-id')
+    console.log(repliesPostId);
+    this.state.posts.forEach((post) => {
+      if (post.id == repliesPostId) {
+        console.log('we got a match, post:', post);
+        fetch(`http://localhost:3000/buildings/1//posts/${post.id}/replies`, {
+          method: 'POST',
+          body: content
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson)
+          const replies = post.reply.unshift(responseJson)
+          this.setState({posts: this.state.posts})
+        })
+      }
+    })
+
+  }
+
 }
