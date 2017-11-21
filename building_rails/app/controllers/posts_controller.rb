@@ -7,8 +7,17 @@ class PostsController < ApplicationController
     )
     @tag = Tag.find_or_create_by! name: params[:tag_name]
     @poststag = @post.poststags.create!(post_id: @post[:id], tag_id: @tag[:id])
-    puts params
-    render json: @post
+
+    result = @post.attributes
+    result[:username] = @post.user.username
+    result[:reply] = @post.replies
+    result[:like] = @post.likes
+    result[:tags] = @post.tags
+    result
+
+    pp result
+
+    render json: result
     puts 'POSTS CONTROLLER OUT'
   end
   def show

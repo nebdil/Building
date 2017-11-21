@@ -23,6 +23,8 @@ export default class Building extends Component {
     this.setState = this.setState.bind(this)
     this._handleReplySubmit = this._handleReplySubmit.bind(this)
     this._handleReplyChange = this._handleReplyChange.bind(this)
+    this._handleNewPost = this._handleNewPost.bind(this)
+    this._handlePostChange = this._handlePostChange.bind(this)
   }
   componentDidMount() {
     return fetch('http://localhost:3000/buildings/1/')
@@ -38,7 +40,7 @@ export default class Building extends Component {
   render() {
     return (
       <div>
-        <CreatePost currentPosts = {this.state.posts}/>
+        <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} />
         <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} />
         {this.state.posts.map((e) => {
           return <Post handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentPosts = {e} key = {e.id} />
@@ -94,6 +96,33 @@ export default class Building extends Component {
         })
       }
     })
+  }
+
+  _handleNewPost(e) {
+    e.preventDefault();
+    console.log(e.target)
+    const content = new FormData(e.target);
+    fetch('/buildings/1/posts/', {
+      method: 'POST',
+      body: content
+    })
+    .then((response) => response.json())
+    .then((newPost) => {
+      console.log(newPost)
+      // newPost.like = []
+      // newPost.tags = []
+      // newPost.reply = []
+      const posts = this.state.posts.concat(newPost)
+      const originalPosts = this.state.originalPosts.concat(newPost)
+      console.log(posts)
+      console.log('setting the state for post')
+      this.setState({posts: posts, originalPosts: this.state.originalPosts})
+      console.log('just set the state')
+    })
+  }
+
+  _handlePostChange(e) {
+    console.log('in handle change' + e.target.value)
   }
 
 }
