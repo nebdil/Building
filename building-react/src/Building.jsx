@@ -82,14 +82,14 @@ export default class Building extends Component {
     this.state.posts.forEach((post) => {
       if (post.id == repliesPostId) {
         console.log('we got a match, post:', post);
-        fetch(`http://localhost:3000/buildings/1//posts/${post.id}/replies`, {
+        fetch(`http://localhost:3000/buildings/1/posts/${post.id}/replies`, {
           method: 'POST',
           body: content
         })
         .then((response) => response.json())
         .then((responseJson) => {
           console.log(responseJson)
-          const replies = post.reply.unshift(responseJson)
+          const replies = post.reply.push(responseJson)
           this.setState({posts: this.state.posts})
         })
       }

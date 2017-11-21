@@ -63,22 +63,42 @@ export default class User extends Component {
 
   _handleReplySubmit(e) {
     e.preventDefault();
-    console.log(e.currentTarget)
+    console.log("hello", e.currentTarget)
     const content = new FormData(e.currentTarget);
     const repliesPostId = e.currentTarget.getAttribute('data-post-id')
     console.log(repliesPostId);
     this.state.posts.forEach((post) => {
+      console.log(post.id, repliesPostId)
       if (post.id == repliesPostId) {
         console.log('we got a match, post:', post);
-        fetch(`http://localhost:3000/buildings/1//posts/${post.id}/replies`, {
+        fetch(`http://localhost:3000/buildings/1/posts/${post.id}/replies`, {
           method: 'POST',
           body: content
         })
         .then((response) => response.json())
         .then((responseJson) => {
           console.log(responseJson)
-          const replies = post.reply.unshift(responseJson)
+          const replies = post.reply.push(responseJson)
           this.setState({posts: this.state.posts})
+        })
+      } else if (post.hasOwnProperty("posts_user_replied_to")) {
+        console.log("inside the posts_user_replied_to");
+        console.log(post);
+        post.posts_user_replied_to.forEach((rpost) => {
+          console.log(rpost, repliesPostId)
+          if (rpost.id == repliesPostId) {
+            console.log('we got a match, post:', post);
+            fetch(`http://localhost:3000/buildings/1/posts/${rpost.id}/replies`, {
+              method: 'POST',
+              body: content
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+              console.log(responseJson)
+              const replies = rpost.reply.push(responseJson)
+              this.setState({posts: this.state.posts})
+            })
+          }
         })
       }
     })
