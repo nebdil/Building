@@ -48,6 +48,7 @@ export default class UserReply extends Component {
               <td>{replySize}</td>
               <td>{likeSize}</td>
               {this.props.currentUserReplies.tags.map(function(e) {
+                // let unique = [...new Set()]
                 return <td>{e.name}</td>
               })}
             </tr>
