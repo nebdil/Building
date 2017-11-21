@@ -41,8 +41,6 @@ export default class Building extends Component {
         <CreatePost currentPosts = {this.state.posts}/>
         <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} />
         {this.state.posts.map((e) => {
-          console.log('e:', e)
-          // console.log('this:', this)
           return <Post handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentPosts = {e} key = {e.id} />
         })}
       </div>
@@ -96,7 +94,6 @@ export default class Building extends Component {
         })
       }
     })
-
   }
 
 }

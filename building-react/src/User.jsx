@@ -15,6 +15,9 @@ export default class User extends Component {
       currentUserId: 1,
       posts: []
     };
+    this.setState = this.setState.bind(this)
+    this._handleReplySubmit = this._handleReplySubmit.bind(this)
+    this._handleReplyChange = this._handleReplyChange.bind(this)
   }
 
   componentDidMount() {
@@ -34,17 +37,17 @@ export default class User extends Component {
       <div>
         <Link to={'/buildings/1/posts'}>Go back</Link>
         <p>Your posts</p>
-        {this.state.posts.map(function(e) {
+        {this.state.posts.map((e) => {
           if (!(e.hasOwnProperty('posts_user_replied_to'))) {
-            return <UserPost currentUserPosts = {e} key = {e.id} />
+            return <UserPost handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserPosts = {e} key = {e.id} />
           }
         })}
         <p>Posts you've commented</p>
-        {this.state.posts.map(function(e) {
+        {this.state.posts.map((e) => {
           if (e.hasOwnProperty('posts_user_replied_to')) {
             return (
-              e.posts_user_replied_to.map(function(el) {
-                return <UserReply currentUserReplies = {el} key = {el.id} />
+              e.posts_user_replied_to.map((el) => {
+                return <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {el} key = {el.id} />
               })
             )
           }
@@ -53,4 +56,32 @@ export default class User extends Component {
       </div>
     )
   }
+
+  _handleReplyChange(e) {
+    console.log('in handleReplyChange:', e.target.value);
+  }
+
+  _handleReplySubmit(e) {
+    e.preventDefault();
+    console.log(e.currentTarget)
+    const content = new FormData(e.currentTarget);
+    const repliesPostId = e.currentTarget.getAttribute('data-post-id')
+    console.log(repliesPostId);
+    this.state.posts.forEach((post) => {
+      if (post.id == repliesPostId) {
+        console.log('we got a match, post:', post);
+        fetch(`http://localhost:3000/buildings/1//posts/${post.id}/replies`, {
+          method: 'POST',
+          body: content
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson)
+          const replies = post.reply.unshift(responseJson)
+          this.setState({posts: this.state.posts})
+        })
+      }
+    })
+  }
+
 }

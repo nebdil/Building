@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserReplyReply from './UserReplyReply.jsx';
+import SendReply from './SendReply.jsx';
 
 import {
   BrowserRouter as Router,
@@ -21,7 +22,10 @@ export default class UserReply extends Component {
   render() {
 
     console.log('inside UserReply')
+    const handleReplyChange = this.props.handleReplyChange;
+    const handleReplySubmit = this.props.handleReplySubmit;
     const post = this.props.currentUserReplies.content;
+    const postId = this.props.currentUserReplies.id;
     const user = this.props.currentUserReplies.username;
     const time = this.props.currentUserReplies.created_at;
     const replySize = this.props.currentUserReplies.reply.length;
@@ -30,14 +34,14 @@ export default class UserReply extends Component {
       border: "1px solid black"
     }
     return (
-      <div onClick={this.onClick.bind(this)}>
+      <div>
         <table style={divStyle}>
           <tbody>
             <tr>
               <th>POST</th>
               <th>USER</th>
               <th>TIME</th>
-              <th>REPLY SIZE</th>
+              <th onClick={this.onClick.bind(this)}>REPLY SIZE</th>
               <th>LIKE SIZE</th>
               <th>TAG</th>
             </tr>
@@ -46,9 +50,9 @@ export default class UserReply extends Component {
               <td>{user}</td>
               <td>{time}</td>
               <td>{replySize}</td>
+              <td><SendReply postId = {postId} handleReplyChange = {handleReplyChange} handleReplySubmit = {handleReplySubmit} /></td>
               <td>{likeSize}</td>
-              {this.props.currentUserReplies.tags.map(function(e) {
-                // let unique = [...new Set()]
+              {this.props.currentUserReplies.tags.map(function(e) {                
                 return <td>{e.name}</td>
               })}
             </tr>

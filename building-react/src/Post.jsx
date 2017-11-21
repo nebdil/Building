@@ -28,7 +28,6 @@ export default class Post extends Component {
     const postId = this.props.currentPosts.id;
     const user = this.props.currentPosts.username;
     const time = this.props.currentPosts.created_at;
-    console.log(this.props.currentPosts);
     const replySize = this.props.currentPosts.reply.length;
     const likeSize = this.props.currentPosts.like.length;
     const divStyle = {
@@ -54,7 +53,6 @@ export default class Post extends Component {
               <td>{user}</td>
               <td>{time}</td>
               <td>{replySize}</td>
-              {/* add this to form */}
               <td><SendReply postId = {postId} handleReplyChange = {handleReplyChange} handleReplySubmit = {handleReplySubmit} postId={postId} /></td>
               <td>{likeSize}</td>
               <td><Like postId={postId}/></td>
