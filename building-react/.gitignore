@@ -22,3 +22,7 @@ yarn-error.log*
 
 # .env
 .env
+
+# .env
+
+/building_rails/.env
