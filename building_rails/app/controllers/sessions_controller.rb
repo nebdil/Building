@@ -23,8 +23,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-   session[:user_id] = nil
-   redirect_to '/login'
+    url_logout = {url: '/login'}
+    session[:user_id] = nil
+    puts 'in destroy'
+    render json: url_logout
   end
 
 end

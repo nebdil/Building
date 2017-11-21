@@ -27,10 +27,13 @@ export default class App extends Component {
   }
   render() {
     return(
-      <Switch>
-        <Route path='/login' component={Login} handleLogin={this._handleLogin}/>
-        <Route path='/buildings/1/posts' component={Main}/>
-      </Switch>
+      <div>
+        <Switch>
+          <Route path='/login' component={Login} />
+          <Route path='/buildings/1/posts' component={Main}/>
+        </Switch>
+      </div>
+
     )
   }
 }
