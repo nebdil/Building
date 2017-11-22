@@ -25,3 +25,5 @@ building_rails/config/secrets.yml
 building_rails/config/database.yml
 
 .DS_Store
+
+building_rails/.env

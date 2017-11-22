@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'user_token' => 'user_token#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'buildings#show'
 
@@ -16,11 +17,14 @@ Rails.application.routes.draw do
   # REGISTER ROUTES
 
   get '/register' => 'users#new'
+  post '/register' => 'users#create'
 
   # LOGIN ROUTES
 
-  post '/users' => 'sessions#new'
+  get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
+
+
 
 end

@@ -3,7 +3,51 @@ class UsersController < ApplicationController
   def index
   end
   def create
+    url_ok = {url: '/buildings/1/posts'}
+    puts 'params'
+    puts user_params
+    @user = User.new(
+      # user_params
+      {
+      username: params[:username],
+      email: params[:email],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation],
+      building_id: 1
+      }
+    )
+    puts @user.inspect
+
+    if @user.save
+      session[:user_id] = @user.id
+      # redirect_to '/buildings/1/posts'
+      puts @user.email
+      ApplicationMailer.register_email(@user).deliver!
+
+      # mg_client = Mailgun::Client.new ENV['PRIVATE_API_KEY_MAILGUN']
+      # message_params = {:from    => ENV['FROM_EMAIL'],
+      #                   :to      => @user.email,
+      #                   :subject => 'Hello from your Building!',
+      #                   :text    => 'Thank you for registering to your Building! Now you can connect with your neighbors!'}
+      # mg_client.send_message ENV['DOMAIN'], message_params
+
+
+      render json: url_ok
+    elsif User.find_by(email: params[:email])
+      url_no = {url: '/register'}
+      # flash[:notice] = "Email is taken!"
+      # redirect_to '/register'
+      puts 'in elsif'
+      render json: url_no
+    else
+      url_no = {url: '/register'}
+      # flash[:notice] = "Something went wrong while signing up"
+      # redirect_to '/register'
+      puts 'in else'
+      render json: url_no
+    end
   end
+
   def new
   end
   def edit
@@ -48,5 +92,10 @@ class UsersController < ApplicationController
     render json: post_arr
   end
   def update
+  end
+
+  private
+  def user_params
+    params.permit(:username, :email, :password, :password_confirmation)
   end
 end

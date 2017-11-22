@@ -16,7 +16,8 @@ export default class Building extends Component {
     this.state = {
       currentUserId: 1,
       posts: [],
-      originalPosts: []
+      originalPosts: [],
+      unique_tags: []
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
@@ -32,6 +33,15 @@ export default class Building extends Component {
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
       })
+      .then(() => {
+        let newArr = [];
+        this.state.posts.map(function(e) {
+          e.tags.map(function(a) {
+            newArr.push(a.name)
+          })
+        })
+        this.setState({unique_tags: [...new Set(newArr)]})
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -41,12 +51,29 @@ export default class Building extends Component {
     return (
       <div>
         <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} />
-        <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} />
+        <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
         {this.state.posts.map((e) => {
           return <Post handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentPosts = {e} key = {e.id} />
         })}
       </div>
     )
+  }
+
+  _handleNewPost(e) {
+    e.preventDefault();
+    console.log(e.target)
+    const content = new FormData(e.target);
+    fetch('/buildings/1/posts/', {
+      method: 'POST',
+      body: content
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      const posts = this.state.posts.concat(responseJson)
+      const originalPosts = this.state.originalPosts.concat(responseJson)
+      this.setState({posts: posts, originalPosts: originalPosts})
+    })
   }
   _handlePostsByTags(e) {
     e.preventDefault();
