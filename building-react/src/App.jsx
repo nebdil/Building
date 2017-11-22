@@ -7,7 +7,7 @@ import Like from './Like.jsx';
 import Tag from './Tag.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
-import Navbar from './Navbar.jsx';
+import Navtop from './Navtop.jsx';
 import Main from './Main.jsx';
 import {
   BrowserRouter as Router,
