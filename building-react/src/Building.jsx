@@ -28,20 +28,24 @@ export default class Building extends Component {
     this._handlePostChange = this._handlePostChange.bind(this)
   }
   componentDidMount() {
+    // let newArr = [];
+
     return fetch('http://localhost:3000/buildings/1/')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
       })
-      .then(() => {
-        let newArr = [];
-        this.state.posts.map(function(e) {
-          e.tags.map(function(a) {
-            newArr.push(a.name)
-          })
-        })
-        this.setState({unique_tags: [...new Set(newArr)]})
-      })
+      // .then(() => {
+      //   this.state.posts.map(function(e) {
+      //     e.tags.map(function(a) {
+      //       newArr.push(a.name)
+      //     })
+      //   })
+      // })
+      // .then(() => {
+      //   this.setState({unique_tags: [...new Set(newArr)]})
+      //   console.log(this.state.unique_tags)
+      // })
       .catch((error) => {
         console.error(error);
       });

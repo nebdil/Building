@@ -6,26 +6,26 @@ export default class Tag extends Component {
     this.state = {}
   }
   render() {
-    // let newArr = this.state.arr
-    // this.props.posts.map(function(e){
+    let newArr = []
+    this.props.posts.map(function(e){
     //   if (e.tags) {
     //     console.log(e.tags)
     //     e.tags.map(function(a) {
     //       newArr.push(a.name)
     //       // console.log("a.name " + a.name)
     //     })
-    //   }
+      // }
     //   // console.log(e.tags)
-    //   // e.tags.map(function(a) {
-    //   //   newArr.push(a.name)
+      e.tags.map(function(a) {
+        newArr.push(a.name)
     //   //   // console.log("a.name " + a.name)
-    //   // })
-    // })
+      })
+    })
     // // console.log("newArr " + newArr)
-    // let unique = [...new Set(newArr)];
+    let unique = [...new Set(newArr)];
 
     let func = this.props.handlePostsByTags
-    let unique = this.props.unique_tags
+    // let unique = this.props.unique_tags
 
       return (
         <div>

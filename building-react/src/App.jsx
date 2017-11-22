@@ -31,9 +31,9 @@ export default class App extends Component {
       <div>
         <Switch>
           <Route path='/login' component={Login} />
-          <Route path='/buildings/1/posts' component={Main}/>
+          <Route path='/buildings/1' component={Main}/>
           <Route path='/register' component={Register}/>
-          <Route path='/buildings' component={BuildingRegister}/>
+          {/* <Route path='/buildings' component={BuildingRegister}/> */}
         </Switch>
       </div>
 
