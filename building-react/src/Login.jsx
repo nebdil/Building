@@ -28,7 +28,7 @@ export default class Login extends Component {
           </label>
           <input type="text" name="password" placeholder="Your password" onChange={this._handleChange} />
           <button>Login!</button>
-          <Link to={'/register'}>Register</Link>
+          <Link to={'/buildings'}>Register</Link>
         </form>
       </div>
     )

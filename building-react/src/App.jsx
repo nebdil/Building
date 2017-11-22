@@ -16,6 +16,7 @@ import {
   Switch
 } from 'react-router-dom'
 import CreatePost from './CreatePost.jsx';
+import BuildingRegister from './BuildingRegister.jsx';
 
 export default class App extends Component {
   constructor({ props, history }) {
@@ -32,6 +33,7 @@ export default class App extends Component {
           <Route path='/login' component={Login} />
           <Route path='/buildings/1/posts' component={Main}/>
           <Route path='/register' component={Register}/>
+          <Route path='/buildings' component={BuildingRegister}/>
         </Switch>
       </div>
 
