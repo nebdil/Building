@@ -33,6 +33,11 @@ class PostsController < ApplicationController
     puts 'POSTS CONTROLLER OUT'
   end
   def show
+    puts 'in post show'
+    @post = Post.find_by(id: params[:id])
+    puts @post.inspect
+    render json: @post
+    puts 'out post show'
   end
   def update
   end

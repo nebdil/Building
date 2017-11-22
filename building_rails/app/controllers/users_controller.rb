@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def index
   end
   def create
-    url_ok = {url: '/buildings/1/posts'}
+    url_ok = {url: "/buildings/1/posts"}
     puts 'params'
     puts user_params
     @user = User.new(

@@ -4,8 +4,9 @@ import Reply from './Reply.jsx';
 import Like from './Like.jsx';
 import Tag from './Tag.jsx';
 import CreatePost from './CreatePost.jsx'
+import SendReply from './SendReply.jsx'
+
 import {
-  BrowserRouter as Router,
   Route,
   Link,
   Switch
@@ -18,7 +19,9 @@ export default class Building extends Component {
       currentUserId: 1,
       posts: [],
       originalPosts: [],
-      unique_tags: []
+      unique_tags: [],
+      showReply: false,
+      currentPost: ''
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
@@ -31,7 +34,7 @@ export default class Building extends Component {
   componentDidMount() {
     // let newArr = [];
 
-    return fetch('http://localhost:3000/buildings/1/')
+    return (fetch(`http://localhost:3000/buildings/1/`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
@@ -49,21 +52,66 @@ export default class Building extends Component {
       // })
       .catch((error) => {
         console.error(error);
-      });
+      })
+    )
   }
-
   render() {
     return (
       <div>
         <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} />
         <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
-        {this.state.posts.map((e) => {
-          return <Post handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentPosts = {e} key = {e.id} />
-        })}
+        {/* {this.state.posts.map((e) => {
+          return <Post currentUser={this.state.currentUserId} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentPosts = {e} key = {e.id} />
+        })} */}
+        <table>
+          <tbody>
+            <tr>
+              <th>POST</th>
+              <th>USER</th>
+              <th>TIME</th>
+              <th onClick={this.onClick.bind(this)}>REPLY SIZE</th>
+              <th>REPLY BUTTON</th>
+              <th>LIKE SIZE</th>
+              <th>LIKE BUTTON</th>
+              <th>TAG</th>
+            </tr>
+
+              {this.state.posts.map((e) => {
+                return(
+                  <tr>
+                    <Link to={`/buildings/1/posts/${e.id}`} posts={e}>
+                      <td>{e.content}</td>
+                    </Link>
+                    <td>{e.username}</td>
+                    <td>{e.created_at}</td>
+                    <td onClick={this.onClick.bind(this)}>{e.reply.length}</td>
+                    <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td>
+                    <td>{e.like.length}</td>
+                    <td><Like postId={e.id}/></td>
+                    {e.tags.map(function(a) {
+                      return <td>{a.name}</td>
+                    })}
+                  </tr>
+                )
+              })}
+          </tbody>
+        </table>
+        <Switch>
+          <Route path={`/buildings/1/posts/:id`} component={Post} />
+        </Switch>
+        {/* {this.state.showReply && this.state.posts.map((e) => {
+          e.reply.map(function(e) {
+          return <Reply currentReplies = {e} key = {e.id}/>
+          })
+        })} */}
       </div>
     )
   }
 
+  onClick(e){
+    e.preventDefault();
+    this.setState({showReply: !this.state.showReply})
+  }
   _handleNewPost(e) {
     e.preventDefault();
     console.log(e.target)

@@ -40,7 +40,8 @@ export default class Login extends Component {
     const data = new FormData(e.target);
     fetch('/login', {
       method: 'POST',
-      body: data
+      body: data,
+      credentials: 'same origin'
     })
     .then((response) => response.json())
     .then((responseJson) => {

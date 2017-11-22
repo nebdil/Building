@@ -5,10 +5,9 @@ class SessionsController < ApplicationController
 
   def create
     puts 'in create'
-    url_ok = {url: '/buildings/1/posts'}
-
     if user = User.authenticate_with_credentials(params[:email], params[:password])
-
+    url_ok = {url: "/buildings/#{user[:building_id]}/posts"}
+    puts url_ok
       session[:user_id] = user.id
       puts 'in if'
       puts session.inspect
