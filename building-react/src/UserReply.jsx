@@ -5,7 +5,8 @@ import SendReply from './SendReply.jsx';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 
 export default class UserReply extends Component {
@@ -52,7 +53,7 @@ export default class UserReply extends Component {
               <td>{replySize}</td>
               <td><SendReply postId = {postId} handleReplyChange = {handleReplyChange} handleReplySubmit = {handleReplySubmit} /></td>
               <td>{likeSize}</td>
-              {this.props.currentUserReplies.tags.map(function(e) {                
+              {this.props.currentUserReplies.tags.map(function(e) {
                 return <td>{e.name}</td>
               })}
             </tr>

@@ -7,7 +7,8 @@ import CreatePost from './CreatePost.jsx'
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 
 export default class Building extends Component {
@@ -33,15 +34,15 @@ export default class Building extends Component {
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
       })
-      .then(() => {
-        let newArr = [];
-        this.state.posts.map(function(e) {
-          e.tags.map(function(a) {
-            newArr.push(a.name)
-          })
-        })
-        this.setState({unique_tags: [...new Set(newArr)]})
-      })
+      // .then(() => {
+      //   let newArr = [];
+      //   this.state.posts.map(function(e) {
+      //     e.tags.map(function(a) {
+      //       newArr.push(a.name)
+      //     })
+      //   })
+      //   this.setState({unique_tags: [...new Set(newArr)]})
+      // })
       .catch((error) => {
         console.error(error);
       });

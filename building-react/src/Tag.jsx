@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom'
 
 export default class Tag extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    // this.state = {}
   }
   render() {
-    // let newArr = this.state.arr
-    // this.props.posts.map(function(e){
+    let newArr = []
+    this.props.posts.map(function(e){
     //   if (e.tags) {
     //     console.log(e.tags)
     //     e.tags.map(function(a) {
@@ -15,17 +21,17 @@ export default class Tag extends Component {
     //       // console.log("a.name " + a.name)
     //     })
     //   }
-    //   // console.log(e.tags)
-    //   // e.tags.map(function(a) {
-    //   //   newArr.push(a.name)
-    //   //   // console.log("a.name " + a.name)
-    //   // })
-    // })
-    // // console.log("newArr " + newArr)
-    // let unique = [...new Set(newArr)];
+      // console.log(e.tags)
+      e.tags.map(function(a) {
+        newArr.push(a.name)
+        // console.log("a.name " + a.name)
+      })
+    })
+    // console.log("newArr " + newArr)
+    let unique = [...new Set(newArr)];
 
     let func = this.props.handlePostsByTags
-    let unique = this.props.unique_tags
+    // let unique = this.props.unique_tags
 
       return (
         <div>
