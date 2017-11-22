@@ -47,7 +47,9 @@ export default class User extends Component {
           if (e.hasOwnProperty('posts_user_replied_to')) {
             return (
               e.posts_user_replied_to.map((el) => {
-                return <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {el} key = {el.id} />
+                if (el.user_id != this.state.currentUserId) {
+                  return <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {el} key = {el.id} />
+                }
               })
             )
           }
