@@ -4,6 +4,7 @@ class BuildingsController < ApplicationController
   def index
   end
   def create
+    url_ok = {url: '/buildings/1/posts'}
     @building = Building.new(
       {
       street_no: params[:street_no],
