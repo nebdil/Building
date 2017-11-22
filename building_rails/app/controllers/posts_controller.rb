@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user
+  
   def index
     @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:id]}).order('posts.id DESC')
     post_arr = @posts.map do |po|
