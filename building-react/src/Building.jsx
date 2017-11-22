@@ -7,7 +7,8 @@ import CreatePost from './CreatePost.jsx'
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 
 export default class Building extends Component {

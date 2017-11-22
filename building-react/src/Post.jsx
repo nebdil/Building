@@ -6,7 +6,8 @@ import SendReply from './SendReply.jsx'
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 
 export default class Post extends Component {
