@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   def create
     url_ok = {url: "/buildings/1/posts"}
     puts 'params'
-    puts user_params
     @user = User.new(
       # user_params
       {
@@ -94,8 +93,8 @@ class UsersController < ApplicationController
   def update
   end
 
-  private
-  def user_params
-    params.permit(:username, :email, :password, :password_confirmation)
-  end
+  # private
+  # def user_params
+  #   params.permit(:username, :email, :password, :password_confirmation)
+  # end
 end

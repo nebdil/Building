@@ -71,6 +71,7 @@ export default class Login extends Component {
       // console.log(this.props)
       // console.log(this.history)
       // this.props.history.push(responseJson.url)
+      this.props.history.push('/buildings/1/posts')
       // if (responseJson.url <= 6) {
       //   this.setState({loggedIn: false})
       // } else {
