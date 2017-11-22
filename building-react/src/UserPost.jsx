@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserPostReply from './UserPostReply.jsx';
 import SendReply from './SendReply.jsx';
-
+import Like from './Like.jsx';
 import {
   BrowserRouter as Router,
   Route,
@@ -42,7 +42,9 @@ export default class UserPost extends Component {
               <th>USER</th>
               <th>TIME</th>
               <th onClick={this.onClick.bind(this)}>REPLY SIZE</th>
+              <th>REPLY BUTTON</th>
               <th>LIKE SIZE</th>
+              <th>LIKE BUTTON</th>
               <th>TAG</th>
             </tr>
             <tr>
@@ -52,6 +54,7 @@ export default class UserPost extends Component {
               <td>{replySize}</td>
               <td><SendReply postId = {postId} handleReplyChange = {handleReplyChange} handleReplySubmit = {handleReplySubmit} /></td>
               <td>{likeSize}</td>
+              <td><Like postId={postId}/></td>
               {this.props.currentUserPosts.tags.map(function(e) {
                 return <td>{e.name}</td>
               })}
