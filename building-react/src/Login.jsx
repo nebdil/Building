@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import Register from './Register.jsx';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class Login extends Component {
   constructor({props, history}) {
@@ -34,7 +28,7 @@ export default class Login extends Component {
           </label>
           <input type="text" name="password" placeholder="Your password" onChange={this._handlePassword} />
           <button>Login!</button>
-          <Link to={'/buildings'}>Register</Link>
+          <Link to={'/register'}>Register</Link>
         </form>
       </div>
     )

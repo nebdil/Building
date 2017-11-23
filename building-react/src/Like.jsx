@@ -17,6 +17,7 @@ export default class Like extends Component {
 
   }
   _handleLike(e) {
+    debugger;
     console.log('in handle like')
     // alert(this.props.postId)
     if (!this.state.like) {

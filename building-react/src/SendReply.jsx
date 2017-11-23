@@ -1,10 +1,4 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
 
 export default class SendReply extends Component {
   render() {

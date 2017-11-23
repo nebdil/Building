@@ -3,7 +3,7 @@ import Navtop from './Navtop.jsx';
 import Building from './Building.jsx';
 import User from './User.jsx';
 import Login from './Login.jsx';
-import {Route, Switch, Redirect} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 export default class Main extends Component {
   constructor({props, history}) {

@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import UserPost from './UserPost.jsx';
 import UserReply from './UserReply.jsx';
 import Login from './Login.jsx';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class User extends Component {
   constructor(props) {

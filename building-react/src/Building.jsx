@@ -76,7 +76,6 @@ export default class Building extends Component {
                 <th>USER</th>
                 <th>TIME</th>
                 <th>REPLY SIZE</th>
-                <th>REPLY BUTTON</th>
                 <th>LIKE SIZE</th>
                 <th>LIKE BUTTON</th>
                 <th>TAG</th>
@@ -89,7 +88,7 @@ export default class Building extends Component {
                     <td>{e.username}</td>
                     <td>{e.created_at}</td>
                     <td>{e.reply.length}</td>
-                    <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td>
+                    {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
                     <td>{e.like.length}</td>
                     <td><Like postId={e.id}/></td>
                     {e.tags.map(function(a) {

@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import UserReplyReply from './UserReplyReply.jsx';
 import SendReply from './SendReply.jsx';
 import Like from './Like.jsx';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
 
 export default class UserReply extends Component {
   constructor() {
