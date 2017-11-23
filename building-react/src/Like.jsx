@@ -12,11 +12,7 @@ export default class Like extends Component {
     }
     this._handleLike = this._handleLike.bind(this)
   }
-
   render() {
-
-
-    // console.log('e.like from building: ' + this.props.likes)
     return(
       <div>
         <button onClick={this._handleLike}>LIKE BUTTON</button>
@@ -25,76 +21,23 @@ export default class Like extends Component {
   }
   _handleLike(e) {
     console.log('in handle like')
-    // alert(this.props.postId)
-    // if (this.state.user_id == false) {
-      let id = this.props.postId
-      // console.log(`likes: ${this.state.like}`)
-      // this.setState({like: true})
-      let data = {
-        email: localStorage.getItem('user_email'),
-        likes: this.props.likes
+    let id = this.props.postId
+    let data = {
+      email: localStorage.getItem('user_email'),
+      likes: this.props.likes
+    }
+    fetch(`/buildings/1/posts/${id}/likes`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+        'Content-Type': 'application/json'
       }
-      alert(JSON.stringify(data))
-      fetch(`/buildings/1/posts/${id}/likes`, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Authorization': `bearer ${localStorage.getItem('user_token')}`,
-          'Content-Type': 'application/json'
-        }
-        //post_id will come from post jsx, when they are all in the same component, with this
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-        this.setState({user_id: responseJson.user.id})
-        console.log(this.state.user_id)
-        // this.setState({likeId: responseJson.like.id || null});
-        // console.log(this.state.likeId);
-        // console.log(this.state.postId);
-        let arr = [];
-        this.props.likes.map((e) => {
-          console.log(e)
-          if (e.post_id === this.props.postId) {
-            arr.push(e)
-            // let length = arr.length()
-            console.log('arr: ' + arr)
-            console.log('arr.length: ' + arr.length)
-            this.props.handleLikes(arr.length)
-
-            // this.setState({likes_length: arr.length})
-            // if (arr.length > 0) {
-            //   this.setState({likes_length: arr.length})
-            //   this.props.handleLikes(this.state.likes_length)
-            // } else {
-            //   this.setState({likes_length: 0})
-            // }
-          }
-        })
-      })
-
-    // }
-    // else {
-    //   // let id = this.state.likeId
-    //   // let post = this.state.postId
-    //   // console.log(this.state.likeId);
-    //   // console.log(this.state.postId);
-    //   // alert(this.state.likeId)
-    //   let postId = this.props.postId;
-    //   let likeId = this.state.likeId;
-    //   let data = {
-    //     likeId: this.state.likeId
-    //   }
-    //   console.log(this.state.like)
-    //   this.setState({like: false})
-    //   fetch(`/buildings/1/posts/${postId}/likes/${likeId}`, {
-    //     method: 'DELETE',
-    //     body: JSON.stringify(data),
-    //     headers: {
-    //       'Authorization': `bearer ${localStorage.getItem('user_token')}`,
-    //       'Content-Type': 'application/json'
-    //     }
-    //   });
-    // }
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      // console.log(responseJson);
+      this.props.handleLikes(responseJson)
+    })
   }
 }

@@ -34,8 +34,6 @@ export default class Building extends Component {
     this._handleLikes = this._handleLikes.bind(this)
   }
   componentDidMount() {
-    // let newArr = [];
-
     return (fetch(`http://localhost:3000/buildings/1/`, {
       headers: {
         'Authorization': `bearer ${localStorage.getItem('user_token')}`
@@ -45,17 +43,6 @@ export default class Building extends Component {
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
       })
-      // .then(() => {
-      //   this.state.posts.map(function(e) {
-      //     e.tags.map(function(a) {
-      //       newArr.push(a.name)
-      //     })
-      //   })
-      // })
-      // .then(() => {
-      //   this.setState({unique_tags: [...new Set(newArr)]})
-      //   console.log(this.state.unique_tags)
-      // })
       .catch((error) => {
         console.error(error);
       })
@@ -111,9 +98,7 @@ export default class Building extends Component {
     }
   }
   _handleLikes(e) {
-    // e.preventDefault();
-    console.log('e.target: ' + e)
-    this.setState({likes_length: e})
+    this.setState({posts: e, originalPosts: e})
   }
   _handleNewPost(e) {
     e.preventDefault();
