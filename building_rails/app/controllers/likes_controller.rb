@@ -20,7 +20,7 @@ class LikesController < ApplicationController
       puts 'in if'
       if like[:user_id] == @user[:id]
         puts 'in if if'
-      like.destroy
+        destroy
       end
     else
       puts 'in else'
@@ -29,24 +29,20 @@ class LikesController < ApplicationController
       )
       puts '@like'
       puts @like.inspect
-      render json: @like
+      user_like = {user: @user, like: @like}
+      puts 'user_like'
+      puts user_like
+      render json: user_like
     end
 
     puts 'LIKES/CREATE CONTROLLER OUT'
   end
 
-  # def destroy
-  #   puts 'LIKES/DESTROY CONTROLLER IN'
-  #   puts 'params'
-  #   puts params
-  #   puts 'like.inspect'
-  #   puts like.inspect
-  #   # @like = Like.find_by(id: params[:id])
-  #   # puts '@like.inspect'
-  #   # puts @like.inspect
-  #   # @like = Like.where(:user_id => session[:user_id], :post_id => params[:post_id])
-  #   @like.delete()
-  #   puts 'LIKES/DESTROY CONTROLLER OUT'
-  # end
+  def destroy
+    puts 'LIKES/DESTROY CONTROLLER IN'
+    @like = Like.find_by(id: params[:likeId])
+    @like.delete()
+    puts 'LIKES/DESTROY CONTROLLER OUT'
+  end
 
 end

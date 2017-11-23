@@ -6,11 +6,16 @@ export default class Like extends Component {
     this.state = {
       like: false,
       likeId: '',
-      postId: ''
+      postId: '',
+      user_id: ''
     }
     this._handleLike = this._handleLike.bind(this)
   }
   render() {
+    this.props.likes.map((e) => {
+      console.log(e)
+    })
+    console.log('e.like from building: ' + this.props.likes)
     return(
       <button onClick={this._handleLike}>LIKE BUTTON</button>
     )
@@ -18,7 +23,7 @@ export default class Like extends Component {
   _handleLike(e) {
     console.log('in handle like')
     // alert(this.props.postId)
-    if (!this.state.like) {
+    if (this.state.user_id == false) {
       let id = this.props.postId
       console.log(`likes: ${this.state.like}`)
       this.setState({like: true})
@@ -36,24 +41,34 @@ export default class Like extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
-        this.setState({likeId: responseJson.id, postId: responseJson.post_id});
-        console.log(this.state.likeId);
-        console.log(this.state.postId);
+        this.setState({user_id: responseJson.user.id})
+        console.log(this.state.user_id)
+        this.setState({likeId: responseJson.like.id});
+        // console.log(this.state.likeId);
+        // console.log(this.state.postId);
       })
     }
-    // else {
-    //   let id = this.state.likeId
-    //   let post = this.state.postId
-    //   console.log(this.state.likeId);
-    //   console.log(this.state.postId);
-    //   console.log(`likes: ${this.state.like}`)
-    //   this.setState({like: false})
-    //   fetch(`/buildings/1/posts/${post}/likes/${id}`, {
-    //     method: 'DELETE',
-    //     headers: {
-    //       'Authorization': `bearer ${localStorage.getItem('user_token')}`
-    //     }
-    //   });
-    // }
+    else {
+      // let id = this.state.likeId
+      // let post = this.state.postId
+      // console.log(this.state.likeId);
+      // console.log(this.state.postId);
+      // alert(this.state.likeId)
+      let postId = this.props.postId;
+      let likeId = this.state.likeId;
+      let data = {
+        likeId: this.state.likeId
+      }
+      console.log(this.state.like)
+      this.setState({like: false})
+      fetch(`/buildings/1/posts/${postId}/likes/${likeId}`, {
+        method: 'DELETE',
+        body: JSON.stringify(data),
+        headers: {
+          'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+          'Content-Type': 'application/json'
+        }
+      });
+    }
   }
 }

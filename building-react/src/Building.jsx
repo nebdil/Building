@@ -91,7 +91,7 @@ export default class Building extends Component {
                     <td>{e.reply.length}</td>
                     {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
                     <td>{e.like.length}</td>
-                    <td><Like postId={e.id}/></td>
+                    <td><Like postId={e.id} likes={e.like}/></td>
                     {e.tags.map(function(a) {
                       return <td>{a.name}</td>
                     })}
