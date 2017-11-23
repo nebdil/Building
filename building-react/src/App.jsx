@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, Redirect} from 'react-router-dom'
 import Login from './Login.jsx';
 import Register from './Register.jsx';
 import Navtop from './Navtop.jsx';
@@ -10,8 +10,8 @@ export default class App extends Component {
   constructor({ props, history }) {
     super(props);
     this.state = {
-      currentUserId: 1,
-      posts: []
+      // currentUserId: 1,
+      // posts: []
     };
   }
   render() {
@@ -19,7 +19,7 @@ export default class App extends Component {
       <div>
         <Switch>
           <Route path='/login' component={Login} />
-          <Route path='/buildings/1' component={Main}/>
+          <Route path='/buildings/1/' component={Main}/>
           <Route path='/register' component={Register}/>
           <Route path='/buildings' component={BuildingRegister}/>
         </Switch>

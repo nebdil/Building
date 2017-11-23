@@ -15,11 +15,11 @@ class PostsController < ApplicationController
   end
   def create
     puts 'POSTS CONTROLLER IN'
-    user = User.find_by(id: 1)
+    user = User.find_by(email: params[:user_email])
     @post = user.posts.create!(
-      content: params[:post_content]
+      content: params[:post][:content]
     )
-    @tag = Tag.find_or_create_by! name: params[:tag_name]
+    @tag = Tag.find_or_create_by! name: params[:tag]
     @poststag = @post.poststags.create!(post_id: @post[:id], tag_id: @tag[:id])
 
     result = @post.attributes

@@ -7,8 +7,7 @@ export default class Like extends Component {
       like: false,
       likeId: '',
       postId: '',
-      user_id: '',
-      likes_length: this.props.likes.length
+      user_id: ''
     }
     this._handleLike = this._handleLike.bind(this)
   }

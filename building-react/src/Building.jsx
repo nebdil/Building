@@ -17,14 +17,15 @@ export default class Building extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: 1,
       posts: [],
       originalPosts: [],
       unique_tags: [],
       showReply: false,
       currentPost: '',
       user_token: localStorage.getItem('user_token'),
-      user_email: localStorage.getItem('user_email')
+      user_email: localStorage.getItem('user_email'),
+      createContent: '',
+      createTag: ''
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
@@ -32,6 +33,8 @@ export default class Building extends Component {
     this._handleNewPost = this._handleNewPost.bind(this)
     this._handlePostChange = this._handlePostChange.bind(this)
     this._handleLikes = this._handleLikes.bind(this)
+    this._handleContent = this._handleContent.bind(this)
+    this._handleTag = this._handleTag.bind(this)
   }
   componentDidMount() {
     return (fetch(`http://localhost:3000/buildings/1/`, {
@@ -54,9 +57,10 @@ export default class Building extends Component {
         <Login />
       )
     } else {
+      // console.log('this.state.posts: ' + this.state.posts)
       return (
         <div>
-          <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} />
+          <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
           <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
           <table>
             <tbody>
@@ -91,7 +95,7 @@ export default class Building extends Component {
             </tbody>
           </table>
           <Switch>
-            <Route path={`/buildings/1/posts/:id`} component={Post} />
+            <Route path={`/buildings/:id/posts/:id`} component={Post} />
           </Switch>
         </div>
       )
@@ -100,22 +104,22 @@ export default class Building extends Component {
   _handleLikes(e) {
     this.setState({posts: e, originalPosts: e})
   }
-  _handleNewPost(e) {
-    e.preventDefault();
-    console.log(e.target)
-    const content = new FormData(e.target);
-    fetch('/buildings/1/posts/', {
-      method: 'POST',
-      body: content
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson)
-      const posts = this.state.posts.concat(responseJson)
-      const originalPosts = this.state.originalPosts.concat(responseJson)
-      this.setState({posts: posts, originalPosts: originalPosts})
-    })
-  }
+  // _handleNewPost(e) {
+  //   e.preventDefault();
+  //   console.log(e.target)
+  //   const content = new FormData(e.target);
+  //   fetch('/buildings/1/posts/', {
+  //     method: 'POST',
+  //     body: content
+  //   })
+  //   .then((response) => response.json())
+  //   .then((responseJson) => {
+  //     console.log(responseJson)
+  //     const posts = this.state.posts.concat(responseJson)
+  //     const originalPosts = this.state.originalPosts.concat(responseJson)
+  //     this.setState({posts: posts, originalPosts: originalPosts})
+  //   })
+  // }
   _handlePostsByTags(e) {
     e.preventDefault();
     let newPosts = [];
@@ -138,15 +142,32 @@ export default class Building extends Component {
       }
     }
   }
+  _handleContent(e) {
+    e.preventDefault();
+    this.setState({createContent: e.target.value})
+    console.log(this.state.createContent)
+  }
+  _handleTag(e) {
+    e.preventDefault();
+    this.setState({createTag: e.target.value})
+    console.log(this.state.createTag)
+  }
   _handleNewPost(e) {
     e.preventDefault();
-    console.log(e.target)
-    const content = new FormData(e.target);
+    console.log('e.target: ' + e.target)
+    // const content = {form: new FormData(e.target), user_email: localStorage.getItem('user_email')};
+    const content = {
+      content: this.state.createContent,
+      tag: this.state.createTag,
+      user_email: localStorage.getItem('user_email')
+    }
+    console.log(content)
     fetch('/buildings/1/posts/', {
       method: 'POST',
-      body: content,
+      body: JSON.stringify(content),
       headers: {
-        'Authorization': `bearer ${localStorage.getItem('user_token')}`
+        'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+        'Content-Type': 'application/json'
       }
     })
     .then((response) => response.json())
