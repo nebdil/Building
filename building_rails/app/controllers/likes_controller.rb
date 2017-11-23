@@ -9,14 +9,17 @@ class LikesController < ApplicationController
     user = User.find_by(id: [session[:user_id]])
     puts session.inspect
     puts user.inspect
-    if user
+
+    like = Like.where(post_id: params[:post_id], user_id: session[:user_id])
+
+    if like
+      like.delete()
+    else
       @like = user.likes.create!(
         post_id: params[:post_id]
       )
       puts @like
       render json: @like
-    else
-      puts 'no user'
     end
     puts 'LIKES/CREATE CONTROLLER OUT'
   end
