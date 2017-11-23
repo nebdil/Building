@@ -31,6 +31,7 @@ export default class Building extends Component {
     this.setState = this.setState.bind(this)
     this._handleNewPost = this._handleNewPost.bind(this)
     this._handlePostChange = this._handlePostChange.bind(this)
+    this._handleLikes = this._handleLikes.bind(this)
   }
   componentDidMount() {
     // let newArr = [];
@@ -91,7 +92,9 @@ export default class Building extends Component {
                     <td>{e.reply.length}</td>
                     {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
                     <td>{e.like.length}</td>
-                    <td><Like postId={e.id} likes={e.like}/></td>
+                    <td>
+                      <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/>
+                    </td>
                     {e.tags.map(function(a) {
                       return <td>{a.name}</td>
                     })}
@@ -106,6 +109,11 @@ export default class Building extends Component {
         </div>
       )
     }
+  }
+  _handleLikes(e) {
+    // e.preventDefault();
+    console.log('e.target: ' + e)
+    this.setState({likes_length: e})
   }
   _handleNewPost(e) {
     e.preventDefault();
@@ -171,5 +179,4 @@ export default class Building extends Component {
   _handlePostChange(e) {
     console.log('in handle change' + e.target.value)
   }
-
 }

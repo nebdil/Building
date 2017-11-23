@@ -7,17 +7,20 @@ export default class Like extends Component {
       like: false,
       likeId: '',
       postId: '',
-      user_id: ''
+      user_id: '',
+      likes_length: this.props.likes.length
     }
     this._handleLike = this._handleLike.bind(this)
   }
+
   render() {
-    this.props.likes.map((e) => {
-      console.log(e)
-    })
-    console.log('e.like from building: ' + this.props.likes)
+
+
+    // console.log('e.like from building: ' + this.props.likes)
     return(
-      <button onClick={this._handleLike}>LIKE BUTTON</button>
+      <div>
+        <button onClick={this._handleLike}>LIKE BUTTON</button>
+      </div>
     )
   }
   _handleLike(e) {
@@ -25,8 +28,8 @@ export default class Like extends Component {
     // alert(this.props.postId)
     // if (this.state.user_id == false) {
       let id = this.props.postId
-      console.log(`likes: ${this.state.like}`)
-      this.setState({like: true})
+      // console.log(`likes: ${this.state.like}`)
+      // this.setState({like: true})
       let data = {
         email: localStorage.getItem('user_email'),
         likes: this.props.likes
@@ -49,7 +52,27 @@ export default class Like extends Component {
         // this.setState({likeId: responseJson.like.id || null});
         // console.log(this.state.likeId);
         // console.log(this.state.postId);
+        let arr = [];
+        this.props.likes.map((e) => {
+          console.log(e)
+          if (e.post_id === this.props.postId) {
+            arr.push(e)
+            // let length = arr.length()
+            console.log('arr: ' + arr)
+            console.log('arr.length: ' + arr.length)
+            this.props.handleLikes(arr.length)
+
+            // this.setState({likes_length: arr.length})
+            // if (arr.length > 0) {
+            //   this.setState({likes_length: arr.length})
+            //   this.props.handleLikes(this.state.likes_length)
+            // } else {
+            //   this.setState({likes_length: 0})
+            // }
+          }
+        })
       })
+
     // }
     // else {
     //   // let id = this.state.likeId

@@ -5,7 +5,7 @@ class LikesController < ApplicationController
   end
 
   def create
-    puts 'LIKES/CREATE CONTROLLER IN'
+    puts 'LIKES/CREATE/DESTROY CONTROLLER IN'
     @user = User.find_by_email(params[:email])
     puts '@user.inspect'
     puts @user.inspect
@@ -21,23 +21,23 @@ class LikesController < ApplicationController
       if like[:user_id] == @user[:id]
         puts 'in if if'
         like.destroy
-        user_like = {user: @user}
-        render json: user_like
+        user_no_like = {user: @user}
+        render json: user_no_like
       end
     else
       puts 'in else'
       @like = @user.likes.create!(
         post_id: params[:post_id]
       )
-      puts '@like'
-      puts @like.inspect
+      # puts '@like'
+      # puts @like.inspect
       user_like = {user: @user, like: @like}
-      puts 'user_like'
-      puts user_like
+      # puts 'user_like'
+      # puts user_like
       render json: user_like
     end
 
-    puts 'LIKES/CREATE CONTROLLER OUT'
+    puts 'LIKES/CREATE/DESTROY CONTROLLER OUT'
   end
 
   # def destroy
