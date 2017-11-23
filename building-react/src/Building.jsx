@@ -23,7 +23,8 @@ export default class Building extends Component {
       unique_tags: [],
       showReply: false,
       currentPost: '',
-      user_token: localStorage.getItem('user_token')
+      user_token: localStorage.getItem('user_token'),
+      user_email: localStorage.getItem('user_email')
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)

@@ -6,30 +6,47 @@ class LikesController < ApplicationController
 
   def create
     puts 'LIKES/CREATE CONTROLLER IN'
-    user = User.find_by(id: [session[:user_id]])
-    puts session.inspect
-    puts user.inspect
+    @user = User.find_by_email(params[:email])
+    puts '@user.inspect'
+    puts @user.inspect
 
-    like = Like.where(post_id: params[:post_id], user_id: session[:user_id])
+    puts 'params[:post_id]'
+    puts params[:post_id]
+    puts '@user[:id]'
+    puts @user[:id]
 
+    like = Like.find_by(post_id: params[:post_id])
     if like
-      like.delete()
+      puts 'in if'
+      if like[:user_id] == @user[:id]
+        puts 'in if if'
+      like.destroy
+      end
     else
-      @like = user.likes.create!(
+      puts 'in else'
+      @like = @user.likes.create!(
         post_id: params[:post_id]
       )
-      puts @like
+      puts '@like'
+      puts @like.inspect
       render json: @like
     end
+
     puts 'LIKES/CREATE CONTROLLER OUT'
   end
 
-  def destroy
-    puts 'LIKES/DESTROY CONTROLLER IN'
-    @like = Like.find_by(id: params[:id])
-    # @like = Like.where(:user_id => session[:user_id], :post_id => params[:post_id])
-    @like.delete()
-    puts 'LIKES/DESTROY CONTROLLER OUT'
-  end
+  # def destroy
+  #   puts 'LIKES/DESTROY CONTROLLER IN'
+  #   puts 'params'
+  #   puts params
+  #   puts 'like.inspect'
+  #   puts like.inspect
+  #   # @like = Like.find_by(id: params[:id])
+  #   # puts '@like.inspect'
+  #   # puts @like.inspect
+  #   # @like = Like.where(:user_id => session[:user_id], :post_id => params[:post_id])
+  #   @like.delete()
+  #   puts 'LIKES/DESTROY CONTROLLER OUT'
+  # end
 
 end

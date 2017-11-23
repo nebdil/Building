@@ -60,8 +60,12 @@ export default class Login extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson)
+      debugger;
       localStorage.setItem('user_token', responseJson.jwt);
-      console.log(localStorage.getItem('user_token'))
+      localStorage.setItem('user_email', obj.auth.email);
+      // console.log(localStorage.getItem('user_token'))
+      // console.log(localStorage)
+      // console.log(localStorage.getItem('user_email'))
       // console.log(this.props)
       // console.log(this.history)
       // this.props.history.push(responseJson.url)
