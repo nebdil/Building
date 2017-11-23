@@ -197,7 +197,7 @@
   display: block;
 }
 
-.login-container {
+.login-container, .register-container {
   display: block;
   margin: 5% auto;
   height: 300px;

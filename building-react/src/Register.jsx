@@ -72,23 +72,23 @@ export default class Register extends Component {
                 </div>
               </div>
               <div id="screen">
-                <div className="login-container">
+                <div className="register-container">
                   <form onSubmit={this._handleRegister}>
                     <label htmlFor="email">
                     </label>
-                    <input type="text" name="email" placeholder="Your email" onChange={this._handleEmail} />
+                    <input type="text" name="email" placeholder="email" onChange={this._handleEmail} />
 
                     <label htmlFor="username">
                     </label>
-                    <input type="text" name="username" placeholder="Your username" onChange={this._handleUsername} />
+                    <input type="text" name="username" placeholder="username" onChange={this._handleUsername} />
 
                     <label htmlFor="password">
                     </label>
-                    <input type="text" name="password" placeholder="Your password" onChange={this._handlePassword} />
+                    <input type="text" name="password" placeholder="password" onChange={this._handlePassword} />
 
                     <label htmlFor="password_confirmation">
                     </label>
-                    <input type="text" name="password_confirmation" placeholder="Your password again" onChange={this._handlePasswordConfirmation} />
+                    <input type="text" name="password_confirmation" placeholder="confirm password" onChange={this._handlePasswordConfirmation} />
                     <button>Register</button>
                     <hr />
                     <Link to={'/login'}>Login</Link>
