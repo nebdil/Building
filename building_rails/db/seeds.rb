@@ -20,12 +20,7 @@ puts "destroyed all"
 
 build1 = Building.create!({
   id: 1,
-  street_no: Faker::Address.building_number,
-  street_name: Faker::Address.street_name,
-  city: Faker::Address.city,
-  province: Faker::Address.state,
-  country: Faker::Address.country,
-  postal_code: Faker::Address.zip_code
+  address: '3601 Rue Sainte Famille, Montréal, QC H2X 2L6, Canada'
   })
 
 # USERS

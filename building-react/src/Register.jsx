@@ -1,36 +1,29 @@
 import React, { Component } from 'react';
+import BuildingRegister from './BuildingRegister.jsx'
 import { Grid, Row, Col } from 'react-bootstrap'
-
+import {
+  Link
+} from 'react-router-dom'
 export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // street_no: '',
-      // street_name: '',
-      // city: '',
-      // province: '',
-      // postal_code: '',
-      // country: '',
       username: '',
       email: '',
       password: '',
       password_confirmation: '',
-      url: ''
+      url: '',
+      address: ''
     }
     this._handleChange = this._handleChange.bind(this)
-    // this._handleStreetNo = this._handleStreetNo.bind(this)
-    // this._handleStreetName = this._handleStreetName.bind(this)
-    // this._handleCity = this._handleCity.bind(this)
-    // this._handleProvince = this._handleProvince.bind(this)
-    // this._handleCountry = this._handleCountry.bind(this)
-    // this._handlePostalCode = this._handlePostalCode.bind(this)
     this._handleRegister = this._handleRegister.bind(this)
-    this.setState = this.setState.bind(this)
+    // this.setState = this.setState.bind(this)
     this._handleEmail = this._handleEmail.bind(this)
     this._handleUsername = this._handleUsername.bind(this)
     this._handlePassword = this._handlePassword.bind(this)
     this._handlePasswordConfirmation = this._handlePasswordConfirmation.bind(this)
     this._handleAnimation = this._handleAnimation.bind(this)
+    this.initAutocomplete = this.initAutocomplete.bind(this)
   }
 
   componentDidMount() {
@@ -68,7 +61,7 @@ export default class Register extends Component {
               </div>
               <div id="screen">
                 <div className="register-container">
-                  <form onSubmit={this._handleRegister}>
+                  <form className="register-form" onSubmit={this._handleRegister}>
                     <label htmlFor="email">
                     </label>
                     <input type="text" name="email" placeholder="email" onChange={this._handleEmail} />
@@ -84,6 +77,7 @@ export default class Register extends Component {
                     <label htmlFor="password_confirmation">
                     </label>
                     <input type="text" name="password_confirmation" placeholder="confirm password" onChange={this._handlePasswordConfirmation} />
+                    <BuildingRegister initAutocomplete={this.initAutocomplete}/>
                     <button>Register</button>
                     <hr />
                     <Link to={'/login'}>Login</Link>
@@ -93,63 +87,25 @@ export default class Register extends Component {
             </Col>
           </Row>
         </Grid>
-        {/* <form>
-          <label htmlFor="street_no">
-            Street Number:
-          </label>
-          <input type="text" name="street_no" placeholder="Street Number" onChange={this._handleStreetNo} />
-          <label htmlFor="street_name">
-            Street Name:
-          </label>
-          <input type="text" name="street_name" placeholder="Street Name" onChange={this._handleStreetName} />
-          <label htmlFor="city">
-            City:
-          </label>
-          <input type="text" name="city" placeholder="City" onChange={this._handleCity} />
-          <label htmlFor="province">
-            Province:
-          </label>
-          <input type="text" name="province" placeholder="Province" onChange={this._handleProvince} />
-          <label htmlFor="country">
-            Country:
-          </label>
-          <input type="text" name="country" placeholder="Country" onChange={this._handleCountry} />
-          <label htmlFor="postal_code">
-            Postal Code:
-          </label>
-          <input type="text" name="postal_code" placeholder="Postal Code" onChange={this._handlePostalCode} />
-          <button>Send Building!</button>
-        </form> */}
-
-        {/* <form onSubmit={this._handleRegister}>
-          <label htmlFor="email">
-            Email:
-          </label>
-          <input type="text" name="email" placeholder="Your email" onChange={this._handleEmail} />
-
-          <label htmlFor="username">
-            Username:
-          </label>
-          <input type="text" name="username" placeholder="Your username" onChange={this._handleUsername} />
-
-          <label htmlFor="password">
-            Password:
-          </label>
-          <input type="text" name="password" placeholder="Your password" onChange={this._handlePassword} />
-
-          <label htmlFor="password_confirmation">
-            Password Confirmation:
-          </label>
-          <input type="text" name="password_confirmation" placeholder="Your password again" onChange={this._handlePasswordConfirmation} />
-          <button>Register!</button>
-        </form> */}
-        {/* {if (flash[:notice]) {
-          <div>{flash[:notice]}</div>
-        }} */}
       </div>
     )
   }
   _handleRegister(e) {
+    e.preventDefault()
+    fetch('/buildings', {
+      method: 'POST',
+      body: this.state.address,
+      headers: {
+      'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log('rispons ceycon', responseJson);
+    })
+
+    //PICKUP FROM HERE!!!!!!!!!!!!!!!!!!
+
     const obj = {
       email: this.state.email,
       username: this.state.username,
@@ -163,7 +119,6 @@ export default class Register extends Component {
       }
     }
     console.log(obj)
-    e.preventDefault()
     console.log('REGISTER REGISTER REGISTER')
     console.log(e.target)
     // const data = new FormData(e.target);
@@ -200,6 +155,7 @@ export default class Register extends Component {
 
 
   }
+
   _handleChange(e) {
     console.log('in hangle change' + e.target.value)
     // console.log('in hangle change')
@@ -221,34 +177,25 @@ export default class Register extends Component {
     console.log(e.target.value)
     this.setState({password_confirmation: e.target.value})
   }
-  // _handleStreetNo(e) {
-  //   console.log(e.target.value)
-  //   this.setState({street_no: e.target.value.replace(/\s/g, '').toLowerCase()})
-  // }
-  // _handleStreetName(e) {
-  //   console.log(e.target.value)
-  //   this.setState({street_name: e.target.value.replace(/\s/g, '').toLowerCase()})
-  // }
-  // _handleCity(e) {
-  //   console.log(e.target.value)
-  //   this.setState({city: e.target.value.replace(/\s/g, '').toLowerCase()})
-  // }
-  // _handleProvince(e) {
-  //   console.log(e.target.value)
-  //   this.setState({province: e.target.value.replace(/\s/g, '').toLowerCase()})
-  // }
-  // _handleCountry(e) {
-  //   console.log(e.target.value)
-  //   this.setState({country: e.target.value.replace(/\s/g, '').toLowerCase()})
-  // }
-  // _handlePostalCode(e) {
-  //   console.log(e.target.value.replace(/\s/g, '').toLowerCase())
-  //   this.setState({postal_code: e.target.value.replace(/\s/g, '').toLowerCase()})
-  // }
+
   _handleAnimation() {
     Array.from(document.getElementsByClassName("start")).forEach((e) => {
       console.log(e)
       e.classList.remove("start")
     })
+  }
+
+  initAutocomplete() {
+    const that = this
+    const input = document.getElementById('pac-input');
+    const searchBox = new window.google.maps.places.SearchBox(input);
+    searchBox.addListener('places_changed', function() {
+      const places = searchBox.getPlaces()
+      if (places.length == 0) {
+        return;
+      }
+      that.setState({address: places[0].formatted_address});
+      console.log(that.state.address);
+    });
   }
 }

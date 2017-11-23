@@ -25,29 +25,11 @@ export default class Login extends Component {
 
   render() {
     return(
-{/* <div>
-  <h1>BUILDING(COMMUNITIES)</h1>
-  <p>ABOUT</p>
-  <form onSubmit={this._handleLogin}>
-    <label htmlFor="email">
-      Email:
-    </label>
-    <input type="text" name="email" placeholder="Your email" onChange={this._handleEmail} />
-    <label htmlFor="password">
-      Password:
-    </label>
-    <input type="text" name="password" placeholder="Your password" onChange={this._handlePassword} />
-    <button>Login!</button>
-    <Link to={'/register'}>Register</Link>
-  </form>
-</div> */}
       <Grid>
         <Row className="show-grid">
           <Col md={8}>
             <div className="background-image">
-
             </div>
-
           </Col>
           <Col md={4}>
             <div className="login-div">
@@ -88,8 +70,11 @@ export default class Login extends Component {
           </Col>
         </Row>
       </Grid>
+
     )
   }
+
+
   _handleLogin(e) {
     e.preventDefault()
     console.log('======================')
