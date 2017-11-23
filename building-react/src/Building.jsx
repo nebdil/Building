@@ -68,7 +68,7 @@ export default class Building extends Component {
       return (
         <div>
           <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} />
-          <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
+          <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
           <table>
             <tbody>
               <tr>
