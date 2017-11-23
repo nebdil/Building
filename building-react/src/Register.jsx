@@ -91,22 +91,8 @@ export default class Register extends Component {
     )
   }
   _handleRegister(e) {
-    e.preventDefault()
-    fetch('/buildings', {
-      method: 'POST',
-      body: this.state.address,
-      headers: {
-      'Content-Type': 'application/json'
-      }
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log('rispons ceycon', responseJson);
-    })
-
-    //PICKUP FROM HERE!!!!!!!!!!!!!!!!!!
-
-    const obj = {
+    let data = {
+      address: this.state.address,
       email: this.state.email,
       username: this.state.username,
       password: this.state.password,
@@ -118,16 +104,13 @@ export default class Register extends Component {
         password: this.state.password
       }
     }
-    console.log(obj)
-    console.log('REGISTER REGISTER REGISTER')
-    console.log(e.target)
-    // const data = new FormData(e.target);
-    // console.log('data: ' + data)
-    fetch('/register', {
+    e.preventDefault()
+    console.log('in handle register')
+    console.log(data)
+    fetch('/buildings', {
       method: 'POST',
-      body: JSON.stringify(obj),
+      body: JSON.stringify(data),
       headers: {
-      // 'Accept': 'application/json',
       'Content-Type': 'application/json'
       }
     })
@@ -149,17 +132,13 @@ export default class Register extends Component {
         console.log(responseJson)
         localStorage.setItem('user_token', responseJson.jwt);
         console.log(localStorage.getItem('user_token'))
+        console.log(this.state.url)
         this.props.history.push(this.state.url)
       })
     })
-
-
   }
-
   _handleChange(e) {
     console.log('in hangle change' + e.target.value)
-    // console.log('in hangle change')
-    // console.log(this.props)
   }
   _handleEmail(e) {
     console.log(e.target.value)
@@ -177,14 +156,12 @@ export default class Register extends Component {
     console.log(e.target.value)
     this.setState({password_confirmation: e.target.value})
   }
-
   _handleAnimation() {
     Array.from(document.getElementsByClassName("start")).forEach((e) => {
       console.log(e)
       e.classList.remove("start")
     })
   }
-
   initAutocomplete() {
     const that = this
     const input = document.getElementById('pac-input');

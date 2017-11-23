@@ -6,26 +6,19 @@ class BuildingsController < ApplicationController
   def index
   end
   def create
-    @building = Building.new(
-      {
-      street_no: params[:street_no],
-      street_name: params[:street_name],
-      city: params[:city],
-      province: params[:province],
-      country: params[:country],
-      postal_code: params[:postal_code]
-      }
-    )
+    puts params
+    @building = Building.find_or_initialize_by(address: params[:address])
     puts @building.inspect
-
     if @building.save
       url_ok = {url: "/buildings/#{@building[:id]}/posts"}
       puts 'in if'
+      @building.users.create!({
+          username: params[:username],
+          email: params[:email],
+          password: params[:password],
+          password_confirmation: params[:password_confirmation]
+        })
       render json: url_ok
-    elsif Building.find_by()
-      url_no = {url: '/register'}
-      puts 'in elsif'
-      render json: url_no
     else
       url_no = {url: '/register'}
       puts 'in else'
