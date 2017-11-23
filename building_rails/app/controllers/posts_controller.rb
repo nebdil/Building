@@ -46,7 +46,6 @@ class PostsController < ApplicationController
     result[:reply] = @post.replies
     result[:like] = @post.likes
     result[:tags] = @post.tags
-    result[:users_liked] = 
     result
 
     puts result.inspect

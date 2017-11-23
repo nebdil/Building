@@ -5,6 +5,7 @@ import Like from './Like.jsx';
 import Tag from './Tag.jsx';
 import CreatePost from './CreatePost.jsx'
 import SendReply from './SendReply.jsx'
+import Login from './Login.jsx'
 
 import {
   Route,
@@ -21,20 +22,23 @@ export default class Building extends Component {
       originalPosts: [],
       unique_tags: [],
       showReply: false,
-      currentPost: ''
+      currentPost: '',
+      user_token: localStorage.getItem('user_token')
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
     this.setState = this.setState.bind(this)
-    this._handleReplySubmit = this._handleReplySubmit.bind(this)
-    this._handleReplyChange = this._handleReplyChange.bind(this)
     this._handleNewPost = this._handleNewPost.bind(this)
     this._handlePostChange = this._handlePostChange.bind(this)
   }
   componentDidMount() {
     // let newArr = [];
 
-    return (fetch(`http://localhost:3000/buildings/1/`)
+    return (fetch(`http://localhost:3000/buildings/1/`, {
+      headers: {
+        'Authorization': `bearer ${localStorage.getItem('user_token')}`
+      }
+    })
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
@@ -56,35 +60,35 @@ export default class Building extends Component {
     )
   }
   render() {
-    return (
-      <div>
-        <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} />
-        <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
-        {/* {this.state.posts.map((e) => {
-          return <Post currentUser={this.state.currentUserId} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentPosts = {e} key = {e.id} />
-        })} */}
-        <table>
-          <tbody>
-            <tr>
-              <th>POST</th>
-              <th>USER</th>
-              <th>TIME</th>
-              <th onClick={this.onClick.bind(this)}>REPLY SIZE</th>
-              <th>REPLY BUTTON</th>
-              <th>LIKE SIZE</th>
-              <th>LIKE BUTTON</th>
-              <th>TAG</th>
-            </tr>
+    if (this.state.user_token === 'null') {
+      return (
+        <Login />
+      )
+    } else {
+      return (
+        <div>
+          <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} />
+          <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
+          <table>
+            <tbody>
+              <tr>
+                <th>POST</th>
+                <th>USER</th>
+                <th>TIME</th>
+                <th>REPLY SIZE</th>
+                <th>REPLY BUTTON</th>
+                <th>LIKE SIZE</th>
+                <th>LIKE BUTTON</th>
+                <th>TAG</th>
+              </tr>
 
               {this.state.posts.map((e) => {
                 return(
                   <tr>
-                    <Link to={`/buildings/1/posts/${e.id}`} posts={e}>
-                      <td>{e.content}</td>
-                    </Link>
+                    <td><Link to={`/buildings/1/posts/${e.id}`} posts={e}>{e.content}</Link></td>
                     <td>{e.username}</td>
                     <td>{e.created_at}</td>
-                    <td onClick={this.onClick.bind(this)}>{e.reply.length}</td>
+                    <td>{e.reply.length}</td>
                     <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td>
                     <td>{e.like.length}</td>
                     <td><Like postId={e.id}/></td>
@@ -94,23 +98,14 @@ export default class Building extends Component {
                   </tr>
                 )
               })}
-          </tbody>
-        </table>
-        <Switch>
-          <Route path={`/buildings/1/posts/:id`} component={Post} />
-        </Switch>
-        {/* {this.state.showReply && this.state.posts.map((e) => {
-          e.reply.map(function(e) {
-          return <Reply currentReplies = {e} key = {e.id}/>
-          })
-        })} */}
-      </div>
-    )
-  }
-
-  onClick(e){
-    e.preventDefault();
-    this.setState({showReply: !this.state.showReply})
+            </tbody>
+          </table>
+          <Switch>
+            <Route path={`/buildings/1/posts/:id`} component={Post} />
+          </Switch>
+        </div>
+      )
+    }
   }
   _handleNewPost(e) {
     e.preventDefault();
@@ -150,41 +145,16 @@ export default class Building extends Component {
       }
     }
   }
-
-  _handleReplyChange(e) {
-    console.log('in handleReplyChange:', e.target.value);
-  }
-
-  _handleReplySubmit(e) {
-    e.preventDefault();
-    console.log(e.currentTarget)
-    const content = new FormData(e.currentTarget);
-    const repliesPostId = e.currentTarget.getAttribute('data-post-id')
-    console.log(repliesPostId);
-    this.state.posts.forEach((post) => {
-      if (post.id == repliesPostId) {
-        console.log('we got a match, post:', post);
-        fetch(`http://localhost:3000/buildings/1/posts/${post.id}/replies`, {
-          method: 'POST',
-          body: content
-        })
-        .then((response) => response.json())
-        .then((responseJson) => {
-          console.log(responseJson)
-          const replies = post.reply.push(responseJson)
-          this.setState({posts: this.state.posts})
-        })
-      }
-    })
-  }
-
   _handleNewPost(e) {
     e.preventDefault();
     console.log(e.target)
     const content = new FormData(e.target);
     fetch('/buildings/1/posts/', {
       method: 'POST',
-      body: content
+      body: content,
+      headers: {
+        'Authorization': `bearer ${localStorage.getItem('user_token')}`
+      }
     })
     .then((response) => response.json())
     .then((newPost) => {
@@ -198,7 +168,6 @@ export default class Building extends Component {
       console.log('just set the state')
     })
   }
-
   _handlePostChange(e) {
     console.log('in handle change' + e.target.value)
   }

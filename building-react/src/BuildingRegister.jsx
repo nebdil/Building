@@ -141,7 +141,8 @@ export default class BuildingRegister extends Component {
       body: JSON.stringify(obj),
       headers: {
       // 'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `bearer ${localStorage.getItem('user_token')}`
       }
     })
     .then((response) => response.json())

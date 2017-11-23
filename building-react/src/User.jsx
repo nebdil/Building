@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UserPost from './UserPost.jsx';
 import UserReply from './UserReply.jsx';
+import Login from './Login.jsx';
 import {
   BrowserRouter as Router,
   Route,
@@ -13,7 +14,8 @@ export default class User extends Component {
     super(props);
     this.state = {
       currentUserId: 1,
-      posts: []
+      posts: [],
+      user_token: localStorage.getItem('user_token')
     };
     this.setState = this.setState.bind(this)
     this._handleReplySubmit = this._handleReplySubmit.bind(this)
@@ -21,7 +23,12 @@ export default class User extends Component {
   }
 
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/1/users/1')
+    return fetch('http://localhost:3000/buildings/1/users/1',
+  {
+    headers: {
+      'Authorization': `bearer ${localStorage.getItem('user_token')}`
+    }
+  })
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
@@ -33,6 +40,11 @@ export default class User extends Component {
 
 
   render() {
+    if (this.state.user_token === 'null') {
+      return (
+        <Login />
+      )
+    } else {
     return (
       <div>
         <Link to={'/buildings/1/posts'}>Go back</Link>
@@ -55,7 +67,7 @@ export default class User extends Component {
         <p>Logout</p>
       </div>
     )
-  }
+  }}
 
   _handleReplyChange(e) {
     console.log('in handleReplyChange:', e.target.value);
@@ -73,7 +85,10 @@ export default class User extends Component {
         console.log('we got a match, post:', post);
         fetch(`http://localhost:3000/buildings/1/posts/${post.id}/replies`, {
           method: 'POST',
-          body: content
+          body: content,
+          headers: {
+            'Authorization': `bearer ${localStorage.getItem('user_token')}`
+          }
         })
         .then((response) => response.json())
         .then((responseJson) => {
@@ -90,7 +105,10 @@ export default class User extends Component {
             console.log('we got a match, post:', post);
             fetch(`http://localhost:3000/buildings/1/posts/${rpost.id}/replies`, {
               method: 'POST',
-              body: content
+              body: content,
+              headers: {
+                'Authorization': `bearer ${localStorage.getItem('user_token')}`
+              }
             })
             .then((response) => response.json())
             .then((responseJson) => {

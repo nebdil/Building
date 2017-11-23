@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 
 export default class Login extends Component {
-  constructor(props) {
+  constructor({props, history}) {
     super(props);
     this.state = {
       email: '',

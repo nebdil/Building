@@ -26,7 +26,9 @@ export default class Like extends Component {
       // alert(this.state.like)
       fetch(`/buildings/1/posts/${id}/likes`, {
         method: 'POST',
-        credentials: 'include'
+        headers: {
+          'Authorization': `bearer ${localStorage.getItem('user_token')}`
+        }
         //post_id will come from post jsx, when they are all in the same component, with this
       })
       .then((response) => response.json)
@@ -47,7 +49,9 @@ export default class Like extends Component {
       this.setState({like: false})
       fetch(`/buildings/1/posts/${post}/likes/${id}`, {
         method: 'DELETE',
-        credentials: 'include'
+        headers: {
+          'Authorization': `bearer ${localStorage.getItem('user_token')}`
+        }
       });
     }
   }

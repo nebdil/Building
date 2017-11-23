@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom'
 import Dialog from './Dialog'
+import SendReply from './SendReply.jsx'
+import Like from './Like.jsx'
 
 // Client-side model
 // import Resource from '../models/resource'
@@ -13,16 +15,29 @@ export default class Post extends Component {
     this.state = {
       postId: (this.props.match.params.id || null),
       post: {},
-      show: false,
+      show: true,
       redirect: ''
     }
+    this._handleReplySubmit = this._handleReplySubmit.bind(this)
+    this._handleReplyChange = this._handleReplyChange.bind(this)
   }
 
   componentDidMount() {
-    return(fetch(`http://localhost:3000/buildings/1/posts/${this.state.postId}`)
+    return(fetch(`http://localhost:3000/buildings/1/posts/${this.state.postId}`, {
+      headers: {
+        'Authorization': `bearer ${localStorage.getItem('user_token')}`
+      }
+    })
     .then((response) => response.json())
     .then((responseJson) => {
-      this.setState({post: responseJson})
+      return this.setState({post: responseJson})
+    })
+    .then(() => {
+      this.state.post.tags.map((e) => {
+        let arr = []
+        arr.push(e.name)
+        this.setState({tags: arr})
+      })
     })
     // .then(alert('this.state.post: ' + this.state.post))
     // .then(alert('this.state.postId: ' + this.state.postId))
@@ -39,21 +54,57 @@ export default class Post extends Component {
     return (
       <div>
         {
-          this.state.postId &&
+          this.state.postId && this.state.post.reply &&
           <Dialog
             show={this.state.show}
             onHide={this._hide}
-            title={this.state.post.user_id}>
+            title={this.state.post.username}
+            footer={this.state.tags}>
+            <p>content:</p>
             <p>
              <strong>{this.state.post.content}</strong>.
             </p>
-            {/* <p>
-              It costs <strong>${this.state.post.price}</strong> and there are <strong>{this.state.post.quantity}</strong> units in stock.
-            </p> */}
+            <p>{this.state.post.created_at}</p>
+            {this.state.post.reply.map((e) => {
+              return <p>{e.content}</p>
+            })}
+            <SendReply postId = {this.state.postId} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={this.state.postId} />
+            <p>Like count:</p>
+            <p>{this.state.post.like.length}</p>
+            <Like postId={this.state.postId}/>
+
           </Dialog>
         }
       </div>
     )
+  }
+  _handleReplyChange(e) {
+    console.log('in handleReplyChange:', e.target.value);
+  }
+  _handleReplySubmit(e) {
+    e.preventDefault();
+    console.log(e.currentTarget)
+    const content = new FormData(e.currentTarget);
+    const repliesPostId = e.currentTarget.getAttribute('data-post-id')
+    console.log(repliesPostId);
+    // this.state.posts.forEach((post) => {
+      if (this.state.postId == repliesPostId) {
+        console.log('we got a match, post:', this.state.postId);
+        fetch(`http://localhost:3000/buildings/1/posts/${this.state.postId}/replies`, {
+          method: 'POST',
+          body: content,
+          headers: {
+            'Authorization': `bearer ${localStorage.getItem('user_token')}`
+          }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson)
+          const replies = this.state.post.reply.push(responseJson)
+          this.setState({post: this.state.post})
+        })
+      }
+    // })
   }
 }
 
