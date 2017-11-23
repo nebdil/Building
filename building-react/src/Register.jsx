@@ -20,7 +20,8 @@ export default class Register extends Component {
       username: '',
       email: '',
       password: '',
-      password_confirmation: ''
+      password_confirmation: '',
+      url: ''
     }
     this._handleChange = this._handleChange.bind(this)
     // this._handleStreetNo = this._handleStreetNo.bind(this)
@@ -104,6 +105,12 @@ export default class Register extends Component {
       password: this.state.password,
       password_confirmation: this.state.password_confirmation
     }
+    const obj1 = {
+      auth: {
+        email: this.state.email,
+        password: this.state.password
+      }
+    }
     console.log(obj)
     e.preventDefault()
     console.log('REGISTER REGISTER REGISTER')
@@ -116,13 +123,31 @@ export default class Register extends Component {
       headers: {
       // 'Accept': 'application/json',
       'Content-Type': 'application/json'
-    }
+      }
     })
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson)
-      this.props.history.push(responseJson.url)
+      this.setState({url: responseJson.url})
     })
+    .then(() => {
+      fetch('/user_token', {
+        method: 'POST',
+        body: JSON.stringify(obj1),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        localStorage.setItem('user_token', responseJson.jwt);
+        console.log(localStorage.getItem('user_token'))
+        this.props.history.push(this.state.url)
+      })
+    })
+
+
   }
   _handleChange(e) {
     console.log('in hangle change' + e.target.value)

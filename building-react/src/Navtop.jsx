@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
-import { Navbar, Nav, NavItem } from 'react-bootstrap'
-
+import {Link} from 'react-router-dom'
+import {Navbar, Nav, NavItem} from 'react-bootstrap'
 
 export default class Navtop extends Component {
   constructor(props) {
@@ -48,16 +42,20 @@ export default class Navtop extends Component {
     e.preventDefault()
     console.log('LOGOUT LOGOUT LOGOUT')
     console.log(e.target)
-    fetch('http://localhost:3000/logout')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        // console.log(responseJson.url)
-        // console.log(this.props.propS)
-        // console.log(this.props.propS.history)
-        this.props.propS.history.push(responseJson.url)
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // fetch('http://localhost:3000/logout')
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     // console.log(responseJson.url)
+    //     // console.log(this.props.propS)
+    //     // console.log(this.props.propS.history)
+    //     this.props.propS.history.push(responseJson.url)
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+    console.log(localStorage.getItem('user_token'))
+    localStorage.setItem('user_token', null)
+    console.log(localStorage.getItem('user_token'))
+    this.props.propS.history.push('/login')
   }
 }

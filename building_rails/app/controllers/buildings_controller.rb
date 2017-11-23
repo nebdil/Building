@@ -1,4 +1,6 @@
 class BuildingsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:create], raise: false
+
   require 'pp'
   # before_action :authenticate_user
   def index
@@ -17,6 +19,7 @@ class BuildingsController < ApplicationController
     puts @building.inspect
 
     if @building.save
+      url_ok = {url: "/buildings/#{@building[:id]}/posts"}
       puts 'in if'
       render json: url_ok
     elsif Building.find_by()
@@ -39,6 +42,7 @@ class BuildingsController < ApplicationController
       result[:reply] = po.replies
       result[:like] = po.likes
       result[:tags] = po.tags
+      result[:building] = params[:id]
       result
     end
     render json: post_arr

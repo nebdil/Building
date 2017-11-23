@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
+skip_before_action :authenticate_user!, only: [:create], raise: false
   require 'pp'
   def index
   end
   def create
-    url_ok = {url: '/buildings/1/posts'}
+    url_ok = {url: "/buildings/1/posts"}
     puts 'params'
-    puts user_params
     @user = User.new(
       # user_params
       {
@@ -94,8 +94,8 @@ class UsersController < ApplicationController
   def update
   end
 
-  private
-  def user_params
-    params.permit(:username, :email, :password, :password_confirmation)
-  end
+  # private
+  # def user_params
+  #   params.permit(:username, :email, :password, :password_confirmation)
+  # end
 end
