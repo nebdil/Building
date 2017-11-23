@@ -5,28 +5,71 @@ class LikesController < ApplicationController
   end
 
   def create
-    puts 'LIKES/CREATE CONTROLLER IN'
-    user = User.find_by(id: [session[:user_id]])
-    puts session.inspect
-    puts user.inspect
-    if user
-      @like = user.likes.create!(
+    puts 'LIKES/CREATE/DESTROY CONTROLLER IN'
+    @user = User.find_by_email(params[:email])
+    puts '@user.inspect'
+    puts @user.inspect
+
+    puts 'params[:post_id]'
+    puts params[:post_id]
+    puts '@user[:id]'
+    puts @user[:id]
+
+    like = Like.find_by(post_id: params[:post_id])
+    if like
+      puts 'in if'
+      if like[:user_id] == @user[:id]
+        puts 'in if if'
+        like.destroy
+        # user_no_like = {user: @user}
+        # render json: user_no_like
+        @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:building_id]}).order('posts.id DESC')
+        post_arr = @posts.map do |po|
+          result = po.attributes
+          result[:username] = po.user.username
+          result[:reply] = po.replies
+          result[:like] = po.likes
+          result[:tags] = po.tags
+          result[:building] = params[:building_id]
+          result
+        end
+        render json: post_arr
+      end
+    else
+      puts 'in else'
+      @like = @user.likes.create!(
         post_id: params[:post_id]
       )
-      puts @like
-      render json: @like
-    else
-      puts 'no user'
+      # puts '@like'
+      # puts @like.inspect
+      # user_like = {user: @user, like: @like}
+      # puts 'user_like'
+      # puts user_like
+      # render json: user_like
+      @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:building_id]}).order('posts.id DESC')
+      post_arr = @posts.map do |po|
+        result = po.attributes
+        result[:username] = po.user.username
+        result[:reply] = po.replies
+        result[:like] = po.likes
+        result[:tags] = po.tags
+        result[:building] = params[:building_id]
+        result
+        end
+        puts 'post_arr'
+        puts post_arr
+      render json: post_arr
     end
-    puts 'LIKES/CREATE CONTROLLER OUT'
-  end
 
-  def destroy
-    puts 'LIKES/DESTROY CONTROLLER IN'
-    @like = Like.find_by(id: params[:id])
-    # @like = Like.where(:user_id => session[:user_id], :post_id => params[:post_id])
-    @like.delete()
-    puts 'LIKES/DESTROY CONTROLLER OUT'
+    puts 'LIKES/CREATE/DESTROY CONTROLLER OUT'
   end
-
 end
+
+  # def destroy
+  #   puts params[:likes]
+  #   puts params
+  #   puts 'LIKES/DESTROY CONTROLLER IN'
+  #   @like = Like.find_by(id: params[:likeId])
+  #   @like.delete()
+  #   puts 'LIKES/DESTROY CONTROLLER OUT'
+  # end

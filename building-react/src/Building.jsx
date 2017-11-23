@@ -23,17 +23,17 @@ export default class Building extends Component {
       unique_tags: [],
       showReply: false,
       currentPost: '',
-      user_token: localStorage.getItem('user_token')
+      user_token: localStorage.getItem('user_token'),
+      user_email: localStorage.getItem('user_email')
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
     this.setState = this.setState.bind(this)
     this._handleNewPost = this._handleNewPost.bind(this)
     this._handlePostChange = this._handlePostChange.bind(this)
+    this._handleLikes = this._handleLikes.bind(this)
   }
   componentDidMount() {
-    // let newArr = [];
-
     return (fetch(`http://localhost:3000/buildings/1/`, {
       headers: {
         'Authorization': `bearer ${localStorage.getItem('user_token')}`
@@ -43,17 +43,6 @@ export default class Building extends Component {
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
       })
-      // .then(() => {
-      //   this.state.posts.map(function(e) {
-      //     e.tags.map(function(a) {
-      //       newArr.push(a.name)
-      //     })
-      //   })
-      // })
-      // .then(() => {
-      //   this.setState({unique_tags: [...new Set(newArr)]})
-      //   console.log(this.state.unique_tags)
-      // })
       .catch((error) => {
         console.error(error);
       })
@@ -90,7 +79,9 @@ export default class Building extends Component {
                     <td>{e.reply.length}</td>
                     {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
                     <td>{e.like.length}</td>
-                    <td><Like postId={e.id}/></td>
+                    <td>
+                      <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/>
+                    </td>
                     {e.tags.map(function(a) {
                       return <td>{a.name}</td>
                     })}
@@ -105,6 +96,9 @@ export default class Building extends Component {
         </div>
       )
     }
+  }
+  _handleLikes(e) {
+    this.setState({posts: e, originalPosts: e})
   }
   _handleNewPost(e) {
     e.preventDefault();
@@ -170,5 +164,4 @@ export default class Building extends Component {
   _handlePostChange(e) {
     console.log('in handle change' + e.target.value)
   }
-
 }

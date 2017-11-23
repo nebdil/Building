@@ -131,6 +131,7 @@ export default class Register extends Component {
       .then((responseJson) => {
         console.log(responseJson)
         localStorage.setItem('user_token', responseJson.jwt);
+        localStorage.setItem('user_email', obj1.auth.email);
         console.log(localStorage.getItem('user_token'))
         console.log(this.state.url)
         this.props.history.push(this.state.url)
