@@ -53,3 +53,165 @@
   min-height: 3px;
   background-color: orange;
 }
+
+/* Landing Page Animation */
+
+.intro-text-wrapper {
+  align-items:center;
+  min-height: 100px;
+}
+
+.intro-text-container h1 {
+  font-family: Helvetica;
+  letter-spacing: -0.025em;
+  margin: 0 auto;
+  display: block;
+  height: 50px;
+  font-size: 24px;
+}
+
+.intro-text-container {
+  padding-left: 24px;
+}
+
+
+.intro-text-1, .intro-text-2, .intro-text-3, .intro-text-4 {
+  transition: 1.5s ease;
+  display: inline-block;
+}
+
+@keyframes waveHand {
+  0% {
+     transform: rotate(7deg);
+  }
+  50% {
+     transform: rotate(-7deg);
+  }
+  100% {
+     transform: rotate(7deg);
+  }
+}
+
+.intro-text-1 {
+  animation-name: waveHand;
+  animation-iteration-count: infinite;
+  animation-duration: 1.3s;
+  animation-timing-function: ease;
+  transform-origin: 90% 80%;
+  opacity:  1;
+}
+.intro-text-1.start {
+  opacity: 0;
+}
+
+.intro-text-2 {
+  width: auto;
+  opacity: 1;
+  transition-delay: 1.5s;
+  margin-left: 12px;
+  max-width: 60px;
+}
+
+.intro-text-2.start {
+  width: 0;
+  opacity: 0;
+  max-width: 1px;
+}
+
+.intro-text-3 {
+  opacity: 1;
+  transition-delay: 3.25s;
+}
+
+.intro-text-3.start {
+  opacity: 0;
+}
+
+.intro-text-4 {
+  max-width: 150px;
+  opacity: 1;
+  transition: ease 2s;
+  transition-delay: 3.5s;
+  white-space:nowrap;
+  transform: translateX(0px);
+  margin-left: 8px;
+}
+
+.intro-text-4.start {
+  max-width: 1px;
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+.start {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Landing Page Animation Over */
+
+/* For the log-in and register page */
+
+.background-image {
+  background: url("logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin-top: 100px;
+}
+
+.login-div {
+  margin-top: 150px;
+}
+
+.intro-text-container {
+  margin-top: 150px;
+}
+
+#screen input, #screen button {
+  background: rgba(50,50,50,0.25);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 12px 12px;
+  font-size: 20px;
+  color: #333;
+  z-index: 1000;
+  display: inline-block;
+  height: 40px;
+  width: 300px;
+  border-radius: 6px;
+  color: #f9f9f9;
+  -webkit-transition: 0.6s ease;
+  border: none;
+  outline: none;
+  margin: 20px 0 0;
+}
+
+#screen button {
+  background: rgba(0,0,0,0.55);
+  width: 300px;
+  height: 60px;
+}
+
+#screen {
+  position: relative;
+  display: block;
+}
+
+.login-container {
+  display: block;
+  margin: 5% auto;
+  height: 300px;
+  width: 320px;
+}
+
+.login-form > a {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+}
+
+.login-form {
+  width: 300px;
+}
+
+/* For the log-in and register page */
