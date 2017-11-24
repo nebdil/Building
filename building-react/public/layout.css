@@ -303,9 +303,9 @@
 }
 
 .tag-list button {
-  display: block;
+  display: inline-block;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 10px;
   margin-top: 10px;
   border-width: 1px;
   border-radius: 30px;
@@ -366,4 +366,55 @@
   color: white;
 }
 
-/* Send post and send tag buttons over */
+/* End of Send post and send tag buttons */
+
+/* Post styling */
+
+/*.panel-default {
+  border-radius: 5px;
+}*/
+
+.panel-default {
+  min-width: 560px;
+  max-width: 560px;
+}
+
+.panel-heading {
+  border-bottom: 0;
+}
+
+.panel-body {
+  min-height: 70px;
+}
+
+.panel-footer {
+  background-color: #fff7f0
+}
+
+.panel-default > .panel-heading {
+  background-color: white;
+}
+
+.panel-default:hover > .panel-heading {
+  color: coral;
+}
+
+.panel-default > .panel-heading > .panel-title > .col-md-4 {
+  text-align: right;
+}
+
+.panel > .panel-footer > .row .tag-div {
+  border: 1px solid coral;
+  display: inline;
+  padding: 3px 7px 3px 7px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border-width: 1px;
+  border-radius: 30px;
+  border-color: coral;
+  background-color: #fff7f0;
+  color: coral;
+}
+
+/* End of post styling */

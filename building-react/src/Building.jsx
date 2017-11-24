@@ -79,7 +79,7 @@ export default class Building extends Component {
                       );
                       const foot = (
                         <Row>
-                          <Col md={4}>{e.tags.map((a) => {return a.name})}</Col>
+                          <Col md={4}><div className="tag-div">{e.tags.map((a) => {return a.name})}</div></Col>
                           <Col md={4}>{e.reply.length}</Col>
                           <Col md={4}>
                             <Row>
