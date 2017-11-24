@@ -21,7 +21,7 @@ const Dialog = (props) => (
       <Modal.Footer>
         {props.footer}
       </Modal.Footer>
-    }
+     }
   </Modal>
 )
 

@@ -6,6 +6,7 @@ import Tag from './Tag.jsx';
 import CreatePost from './CreatePost.jsx'
 import SendReply from './SendReply.jsx'
 import Login from './Login.jsx'
+import { Panel, Row, Col } from 'react-bootstrap'
 
 import {
   Route,
@@ -36,6 +37,9 @@ export default class Building extends Component {
     this._handleContent = this._handleContent.bind(this)
     this._handleTag = this._handleTag.bind(this)
   }
+  // const title = (
+  //   <h3>{}</h3>
+  // );
   componentDidMount() {
     return (fetch(`http://localhost:3000/buildings/1/`, {
       headers: {
@@ -64,32 +68,30 @@ export default class Building extends Component {
           <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
           <table>
             <tbody>
-              <tr>
-                <th>POST</th>
-                <th>USER</th>
-                <th>TIME</th>
-                <th>REPLY SIZE</th>
-                <th>LIKE SIZE</th>
-                <th>LIKE BUTTON</th>
-                <th>TAG</th>
-              </tr>
-
               {this.state.posts.map((e) => {
+                const head = (
+                  <Row>
+                    <Col xs={12} md={8}>{e.username}</Col>
+                    <Col xs={6} md={4}>{e.created_at}</Col>
+                  </Row>
+                );
+                const foot = (
+                  <Row>
+                    <Col xs={6} md={4}>{e.tags.map((a) => {return a.name})}</Col>
+                    <Col xs={6} md={4}>{e.reply.length}</Col>
+                    <Col xs={6} md={4}>
+                      <Row>
+                        <Col md={6} mdPull={6}><Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/></Col>
+                        <Col md={6} mdPull={6}>{e.like.length}</Col>
+                      </Row>
+                    </Col>
+                  </Row>
+                );
                 return(
-                  <tr>
-                    <td><Link to={`/buildings/1/posts/${e.id}`} posts={e}>{e.content}</Link></td>
-                    <td>{e.username}</td>
-                    <td>{e.created_at}</td>
-                    <td>{e.reply.length}</td>
+                  <Panel header={head} footer={foot}>
+                    <Link to={`/buildings/1/posts/${e.id}`} posts={e}>{e.content}</Link>
                     {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
-                    <td>{e.like.length}</td>
-                    <td>
-                      <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/>
-                    </td>
-                    {e.tags.map(function(a) {
-                      return <td>{a.name}</td>
-                    })}
-                  </tr>
+                  </Panel>
                 )
               })}
             </tbody>
