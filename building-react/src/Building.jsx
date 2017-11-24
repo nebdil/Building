@@ -37,6 +37,7 @@ export default class Building extends Component {
     this._handleLikes = this._handleLikes.bind(this)
     this._handleContent = this._handleContent.bind(this)
     this._handleTag = this._handleTag.bind(this)
+    // this._handleLikesFromPosts = this._handleLikesFromPosts.bind(this)
   }
   // const title = (
   //   <h3>{}</h3>
@@ -90,7 +91,7 @@ export default class Building extends Component {
                 );
                 return(
                   <Panel header={head} footer={foot}>
-                    <Link to={`/buildings/1/posts/${e.id}`} posts={e}>{e.content}</Link>
+                    <Link to={`/buildings/1/posts/${e.id}`} posts={e} >{e.content}</Link>
                     {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
                   </Panel>
                 )
@@ -98,7 +99,8 @@ export default class Building extends Component {
             </tbody>
           </table>
           <Switch>
-            <Route path={`/buildings/:id/posts/:id`} component={Post} />
+            {/* <Route path={`/buildings/:id/posts/:id`} handleLikes={this._handleLikes} component={Post} /> */}
+            <Route path={`/buildings/:id/posts/:id`} render={(props) => ( <Post handleLikes={this._handleLikes}/> )} />
           </Switch>
         </div>
       )
@@ -107,6 +109,9 @@ export default class Building extends Component {
   _handleLikes(e) {
     this.setState({posts: e, originalPosts: e})
   }
+  // _handleLikesFromPosts(e) {
+  //   this.setState({posts: e, originalPosts: e})
+  // }
   // _handleNewPost(e) {
   //   e.preventDefault();
   //   console.log(e.target)

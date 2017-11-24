@@ -73,7 +73,7 @@ export default class Post extends Component {
                 {this.state.post.like.length}
               </Col>
               <Col>
-                <Like postId={this.state.postId}/>
+                <Like postId={this.state.postId} likes={this.state.post.like} handleLikes={this.props.handleLikes}/>
               </Col>
             </Row>
           </Col>
