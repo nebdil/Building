@@ -6,9 +6,13 @@ import Tag from './Tag.jsx';
 import CreatePost from './CreatePost.jsx'
 import SendReply from './SendReply.jsx'
 import Login from './Login.jsx'
+<<<<<<< HEAD
 import { Panel, Row, Col } from 'react-bootstrap'
 import moment from 'moment'
 
+=======
+import { Grid, Row, Col } from 'react-bootstrap'
+>>>>>>> style/building_layout
 import {
   Route,
   Link,
@@ -65,41 +69,49 @@ export default class Building extends Component {
       // console.log('this.state.posts: ' + this.state.posts)
       return (
         <div>
-          <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
-          <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
-          <table>
-            <tbody>
-              {this.state.posts.map((e) => {
-                const head = (
-                  <Row>
-                    <Col md={8}>{e.username}</Col>
-                    <Col md={4}>{moment(e.created_at).startOf('second').fromNow()}</Col>
-                  </Row>
-                );
-                const foot = (
-                  <Row>
-                    <Col md={4}>{e.tags.map((a) => {return a.name})}</Col>
-                    <Col md={4}>{e.reply.length}</Col>
-                    <Col md={4}>
-                      <Row>
-                        <Col md={6}><Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/></Col>
-                        <Col md={6}>{e.like.length}</Col>
-                      </Row>
-                    </Col>
-                  </Row>
-                );
-                return(
-                  <Panel header={head} footer={foot}>
-                    <Link to={`/buildings/1/posts/${e.id}`} posts={e}>{e.content}</Link>
-                    {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
-                  </Panel>
-                )
-              })}
-            </tbody>
-          </table>
-          <Switch>
-            <Route path={`/buildings/:id/posts/:id`} component={Post} />
-          </Switch>
+          <Grid>
+            <Row>
+              <Col md={8}>
+                <table>
+                  <tbody>
+                    {this.state.posts.map((e) => {
+                      const head = (
+                        <Row>
+                          <Col md={8}>{e.username}</Col>
+                          <Col md={4}>{moment(e.created_at).startOf('second').fromNow()}</Col>
+                        </Row>
+                      );
+                      const foot = (
+                        <Row>
+                          <Col md={4}>{e.tags.map((a) => {return a.name})}</Col>
+                          <Col md={4}>{e.reply.length}</Col>
+                          <Col md={4}>
+                            <Row>
+                              <Col md={6}><Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/></Col>
+                              <Col md={6}>{e.like.length}</Col>
+                            </Row>
+                          </Col>
+                        </Row>
+                      );
+                      return(
+                        <Panel header={head} footer={foot}>
+                          <Link to={`/buildings/1/posts/${e.id}`} posts={e}>{e.content}</Link>
+                          {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
+                        </Panel>
+                      )
+                    })}
+                  </tbody>
+                </table>
+                <Switch>
+                  <Route path={`/buildings/:id/posts/:id`} component={Post} />
+                </Switch>
+              </Col>
+              <Col md={4}>
+                <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
+                <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
+              </Col>
+            </Row>
+          </Grid>
         </div>
       )
     }

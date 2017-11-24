@@ -293,3 +293,77 @@
 }
 
 /* End of Google Places Api */
+
+/* Tag buttons */
+
+.tag-list ul {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+}
+
+.tag-list button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border-width: 1px;
+  border-radius: 30px;
+  border-color: coral;
+  color: coral;
+}
+
+/* Tag buttons over */
+
+/* Send post and send tag buttons */
+
+.send-post input, .send-post button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.send-post .post-container {
+  border: 2px solid coral;
+  border-radius: 10px;
+  padding: 5px 5px;
+  color: coral;
+  background-color: #fff7f0;
+  width: 100%;
+  max-width: 100%;
+  height: 100px;
+}
+
+.send-post .post-container::placeholder{
+  color: coral;
+}
+
+.send-post .post-container {
+  resize: none;
+}
+
+.send-post .tag-container {
+  border-radius: 30px;
+  border: 2px solid coral;
+  text-align: center;
+  color: coral;
+  background-color: #fff7f0;
+}
+
+.send-post .tag-container::placeholder{
+  color: coral;
+}
+
+.send-post button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border-width: 1px;
+  border-radius: 30px;
+  border-color: coral;
+  background-color: coral;
+  color: white;
+}
+
+/* Send post and send tag buttons over */
