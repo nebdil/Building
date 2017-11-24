@@ -37,11 +37,8 @@ export default class Building extends Component {
     this._handleContent = this._handleContent.bind(this)
     this._handleTag = this._handleTag.bind(this)
   }
-  // const title = (
-  //   <h3>{}</h3>
-  // );
   componentDidMount() {
-    return (fetch(`http://localhost:3000/buildings/:id/`, {
+    return (fetch(`http://localhost:3000/${this.props.match.url}`, {
       headers: {
         'Authorization': `bearer ${localStorage.getItem('user_token')}`
       }
@@ -49,6 +46,9 @@ export default class Building extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson, originalPosts: responseJson })
+        console.log("responseJson: " + responseJson)
+        console.log(this.props.match)
+        console.log(this.props.match.url)
       })
       .catch((error) => {
         console.error(error);
@@ -61,9 +61,6 @@ export default class Building extends Component {
         <Login />
       )
     } else {
-      // console.log('this.state.posts: ' + this.state.posts)
-      console.log(this.props.match)
-
       return (
         <div>
           <Grid>
@@ -84,7 +81,7 @@ export default class Building extends Component {
                           <Col md={4}>{e.reply.length}</Col>
                           <Col md={4}>
                             <Row>
-                              <Col md={6}><Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/></Col>
+                              <Col md={6}><Like postId={e.id} likes={e.like} handleLikes={this._handleLikes} propS={this.props}/></Col>
                               <Col md={6}>{e.like.length}</Col>
                             </Row>
                           </Col>
@@ -92,7 +89,7 @@ export default class Building extends Component {
                       );
                       return(
                         <Panel header={head} footer={foot}>
-                          <Link to={`/buildings/1/posts/${e.id}`} posts={e}>{e.content}</Link>
+                          <Link to={`${this.props.match.url}/${e.id}`} posts={e}>{e.content}</Link>
                           {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
                         </Panel>
                       )
@@ -100,7 +97,7 @@ export default class Building extends Component {
                   </tbody>
                 </table>
                 <Switch>
-                  <Route path={`/buildings/:id/posts/:id`} component={Post} />
+                  <Route path={`/buildings/:building_id/posts/:id`} component={Post} />
                 </Switch>
               </Col>
               <Col md={4}>
@@ -116,22 +113,6 @@ export default class Building extends Component {
   _handleLikes(e) {
     this.setState({posts: e, originalPosts: e})
   }
-  // _handleNewPost(e) {
-  //   e.preventDefault();
-  //   console.log(e.target)
-  //   const content = new FormData(e.target);
-  //   fetch('/buildings/1/posts/', {
-  //     method: 'POST',
-  //     body: content
-  //   })
-  //   .then((response) => response.json())
-  //   .then((responseJson) => {
-  //     console.log(responseJson)
-  //     const posts = this.state.posts.concat(responseJson)
-  //     const originalPosts = this.state.originalPosts.concat(responseJson)
-  //     this.setState({posts: posts, originalPosts: originalPosts})
-  //   })
-  // }
   _handlePostsByTags(e) {
     e.preventDefault();
     let newPosts = [];
@@ -174,7 +155,7 @@ export default class Building extends Component {
       user_email: localStorage.getItem('user_email')
     }
     console.log(content)
-    fetch('/buildings/1/posts/', {
+    fetch(`${this.props.match.url}/`, {
       method: 'POST',
       body: JSON.stringify(content),
       headers: {

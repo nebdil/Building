@@ -5,13 +5,19 @@ class RepliesController < ApplicationController
   end
   def create
     puts 'POSTS CONTROLLER IN'
-    post = Post.find_by(id: params[:post_id])
-    @reply = post.replies.create!(
-      content: params[:post_content],
-      user_id: 1
-    )
     puts params
-    render json: @reply
+    post = Post.find_by(id: params[:post_id])
+    user = User.find_by(email: params[:user_email])
+    @reply = post.replies.create!(
+      content: params[:reply],
+      user_id: user[:id],
+      username: user[:username]
+    )
+    reply = {
+      reply: @reply,
+      user: user[:username]
+    }
+    render json: reply
     puts 'POSTS CONTROLLER OUT'
   end
   def new

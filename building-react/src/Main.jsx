@@ -22,8 +22,7 @@ export default class Main extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ buildings: responseJson })
-        console.log(responseJson)
-        console.log(this.props.match.params)
+        // console.log(responseJson)
       })
       .catch((error) => {
         console.error(error);
@@ -40,8 +39,8 @@ export default class Main extends Component {
         <div>
           <Navtop propS={this.props}/>
             <Switch>
-              <Route path='/buildings/:id/users/1' component={User}/>
-              <Route path='/buildings/:id/posts' component={Building}/>
+              <Route path='/buildings/:building_id/users/:id' component={User}/>
+              <Route path='/buildings/:building_id/posts' component={Building}/>
             </Switch>
         </div>
       )

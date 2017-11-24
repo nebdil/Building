@@ -9,11 +9,13 @@ export default class Navtop extends Component {
   }
 
   render() {
+    console.log('in navbar: ')
+    console.log(this.props.propS.match.params)
     return (
       <Navbar id="navbar">
         <Nav>
           <div class="menu-item" id="left-most-nav">
-            <NavItem><Link to={'/buildings/1/users/1'}>My Profile</Link></NavItem>
+            <NavItem><Link to={`/buildings/1/users/1`}>My Profile</Link></NavItem>
             <div class="color-div"></div>
           </div>
         </Nav>
@@ -24,7 +26,7 @@ export default class Navtop extends Component {
         </Navbar.Brand>
         <Nav>
           <div class="menu-item" id="second-right-most-nav">
-            <NavItem><p>Signed in as 1 - in 3601</p></NavItem>
+            <NavItem><p>Signed in as {localStorage.getItem('user_email')} - in 3601</p></NavItem>
             <div class="color-div"></div>
           </div>
         </Nav>
@@ -33,7 +35,6 @@ export default class Navtop extends Component {
             <NavItem onClick={this._handleLogout}><Link to={'/logout'}>Log Out</Link></NavItem>
             <div class="color-div"></div>
           </div>
-
         </Nav>
       </Navbar>
     )
@@ -53,9 +54,11 @@ export default class Navtop extends Component {
     //   .catch((error) => {
     //     console.error(error);
     //   });
-    console.log(localStorage.getItem('user_token'))
+    // console.log(localStorage.getItem('user_token'))
     localStorage.setItem('user_token', null)
-    console.log(localStorage.getItem('user_token'))
+    localStorage.setItem('user_email', null)
+    localStorage.setItem('user_username', null)
+    // console.log(localStorage.getItem('user_token'))
     this.props.propS.history.push('/login')
   }
 }

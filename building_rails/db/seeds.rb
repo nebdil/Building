@@ -107,6 +107,7 @@ end
 User.all.each do |u|
   u.replies.create!({
     post_id: post_ids_arr.sample,
-    content: Faker::Hipster.sentence
+    content: Faker::Hipster.sentence,
+    username: 'deneme'
     })
 end

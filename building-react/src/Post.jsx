@@ -12,14 +12,18 @@ export default class Post extends Component {
     this.state = {
       postId: (this.props.match.params.id || null),
       show: true,
-      redirect: ''
+      redirect: '',
+      reply: ''
     }
     this._handleReplySubmit = this._handleReplySubmit.bind(this)
     this._handleReplyChange = this._handleReplyChange.bind(this)
+    this._handleUsername = this._handleUsername.bind(this)
   }
 
   componentDidMount() {
-    return(fetch(`http://localhost:3000/buildings/1/posts/${this.state.postId}`, {
+    console.log('in post: ')
+    console.log(this.props.match)
+    return(fetch(`http://localhost:3000${this.props.match.url}`, {
       headers: {
         'Authorization': `bearer ${localStorage.getItem('user_token')}`
       }
@@ -39,7 +43,7 @@ export default class Post extends Component {
   }
 
   _hide = () => {
-    this.setState({show: false, redirect: '/buildings/1/posts'})
+    this.setState({show: false, redirect: `/buildings/${this.props.match.params.building_id}/posts`})
   }
 
   render() {
@@ -65,7 +69,7 @@ export default class Post extends Component {
       const foot = (
         <Row>
           <Col md={9}>
-            <SendReply postId = {this.state.postId} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={this.state.postId} />
+            <SendReply postId = {this.state.postId} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} handleUsername={this._handleUsername} postId={this.state.postId} />
           </Col>
           <Col md={3}>
             <Row>
@@ -73,7 +77,7 @@ export default class Post extends Component {
                 {this.state.post.like.length}
               </Col>
               <Col>
-                <Like postId={this.state.postId}/>
+                <Like postId={this.state.postId} propS={this.props}/>
               </Col>
             </Row>
           </Col>
@@ -91,7 +95,7 @@ export default class Post extends Component {
               {this.state.post.reply.map((e) => {return (
                 <ListGroup fill>
                   <ListGroupItem>
-                     {this.state.post.reply_user}: {e.content}
+                     {e.username}: {e.content} ({moment(e.created_at).startOf('second').fromNow()})
                   </ListGroupItem>
                 </ListGroup>
               )})}
@@ -107,26 +111,35 @@ export default class Post extends Component {
   }
   _handleReplyChange(e) {
     console.log('in handleReplyChange:', e.target.value);
+    this.setState({reply: e.target.value})
+  }
+  _handleUsername(e) {
+    alert('in _handleUsername: ', e)
   }
   _handleReplySubmit(e) {
     e.preventDefault();
-    console.log(e.currentTarget)
-    const content = new FormData(e.currentTarget);
+    // console.log(e.currentTarget)
+    // const content = new FormData(e.currentTarget);
+    const obj = {
+      reply: this.state.reply,
+      user_email: localStorage.getItem('user_email')
+    }
     const repliesPostId = e.currentTarget.getAttribute('data-post-id')
-    console.log(repliesPostId);
+    // console.log(repliesPostId);
       if (this.state.postId == repliesPostId) {
-        console.log('we got a match, post:', this.state.postId);
-        fetch(`http://localhost:3000/buildings/1/posts/${this.state.postId}/replies`, {
+        // console.log('we got a match, post:', this.state.postId);
+        fetch(`http://localhost:3000${this.props.match.url}/replies`, {
           method: 'POST',
-          body: content,
+          body: JSON.stringify(obj),
           headers: {
-            'Authorization': `bearer ${localStorage.getItem('user_token')}`
+            'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+            'Content-Type': 'application/json'
           }
         })
         .then((response) => response.json())
         .then((responseJson) => {
-          console.log(responseJson)
-          const replies = this.state.post.reply.push(responseJson)
+          // console.log(responseJson)
+          const replies = this.state.post.reply.push(responseJson.reply)
           this.setState({post: this.state.post})
         })
       }

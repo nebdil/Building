@@ -101,7 +101,8 @@ export default class Register extends Component {
     const obj1 = {
       auth: {
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        username: this.state.username
       }
     }
     e.preventDefault()
@@ -132,7 +133,8 @@ export default class Register extends Component {
         console.log(responseJson)
         localStorage.setItem('user_token', responseJson.jwt);
         localStorage.setItem('user_email', obj1.auth.email);
-        console.log(localStorage.getItem('user_token'))
+        localStorage.setItem('user_username', obj1.auth.username);
+        console.log(localStorage.getItem('user_username'))
         console.log(this.state.url)
         this.props.history.push(this.state.url)
       })

@@ -9,10 +9,11 @@ export default class SendReply extends Component {
 
     return (
       <form onSubmit={handleSubmit} data-post-id = {this.props.postId} id = "post-id">
+
         <Row>
           <Col>
             <FormGroup bsSize="small">
-              <FormControl type="text" name="post_content" placeholder="Your reply" onChange={handleChange} />
+              <FormControl type="text" name="post_content" placeholder="Your reply" onChange={handleChange}/>
             </FormGroup>
           </Col>
           <Col>

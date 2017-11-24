@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:id]}).order('posts.id DESC')
+    @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:building_id]}).order('posts.id DESC')
     post_arr = @posts.map do |po|
       result = po.attributes
       result[:username] = po.user.username
@@ -46,9 +46,6 @@ class PostsController < ApplicationController
     result[:reply] = @post.replies
     result[:like] = @post.likes
     result[:tags] = @post.tags
-    @post.replies.each do |e|
-      result[:reply_user] = e.user.username
-    end
     result
 
     puts result.inspect

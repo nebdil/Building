@@ -79,7 +79,8 @@ export default class Login extends Component {
     e.preventDefault()
     console.log('======================')
     console.log(e.target)
-    const data = new FormData(e.target);
+    console.log(localStorage.getItem('user_username'))
+    // const data = new FormData(e.target);
     // console.log(data.keys())
     // for (let key in data.keys()) {
     //   console.log(key)
@@ -91,7 +92,7 @@ export default class Login extends Component {
         password: this.state.password
       }
     }
-    console.log(data["email"])
+    // console.log(data["email"])
     fetch('/user_token', {
       method: 'POST',
       body: JSON.stringify(obj),
@@ -101,8 +102,7 @@ export default class Login extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
-      debugger;
+      console.log('responseJson in login: ' + responseJson)
       localStorage.setItem('user_token', responseJson.jwt);
       localStorage.setItem('user_email', obj.auth.email);
       // console.log(localStorage.getItem('user_token'))

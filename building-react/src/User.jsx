@@ -8,7 +8,6 @@ export default class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUserId: 1,
       posts: [],
       user_token: localStorage.getItem('user_token')
     };
@@ -18,7 +17,7 @@ export default class User extends Component {
   }
 
   componentDidMount() {
-    return fetch('http://localhost:3000/buildings/1/users/1',
+    return fetch(`http://localhost:3000${this.props.match.url}`,
   {
     headers: {
       'Authorization': `bearer ${localStorage.getItem('user_token')}`
@@ -27,6 +26,8 @@ export default class User extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ posts: responseJson })
+        console.log('in user')
+        console.log(this.props.match)
       })
       .catch((error) => {
         console.error(error);
@@ -42,7 +43,7 @@ export default class User extends Component {
     } else {
     return (
       <div>
-        <Link to={'/buildings/1/posts'}>Go back</Link>
+        <Link to={`/buildings/${this.props.match.params.building_id}/posts`}>Go back</Link>
         <p>Your posts</p>
         {this.state.posts.map((e) => {
           if (!(e.hasOwnProperty('posts_user_replied_to'))) {
@@ -54,7 +55,7 @@ export default class User extends Component {
           if (e.hasOwnProperty('posts_user_replied_to')) {
             return (
               e.posts_user_replied_to.map((el) => {
-                if (el.user_id != this.state.currentUserId) {
+                if (el.user_id != this.props.match.params.id) {
                   return <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {el} key = {el.id} />
                 }
               })
@@ -80,7 +81,7 @@ export default class User extends Component {
       console.log(post.id, repliesPostId)
       if (post.id == repliesPostId) {
         console.log('we got a match, post:', post);
-        fetch(`http://localhost:3000/buildings/1/posts/${post.id}/replies`, {
+        fetch(`http://localhost:3000/buildings/${this.props.match.params.building_id}/posts/${post.id}/replies`, {
           method: 'POST',
           body: content,
           headers: {
@@ -100,7 +101,7 @@ export default class User extends Component {
           console.log(rpost, repliesPostId)
           if (rpost.id == repliesPostId) {
             console.log('we got a match, post:', post);
-            fetch(`http://localhost:3000/buildings/1/posts/${rpost.id}/replies`, {
+            fetch(`http://localhost:3000/buildings/${this.props.match.params.building_id}/posts/${rpost.id}/replies`, {
               method: 'POST',
               body: content,
               headers: {

@@ -13,6 +13,8 @@ export default class Like extends Component {
     this._handleLike = this._handleLike.bind(this)
   }
   render() {
+    // console.log('in like: ')
+    // console.log(this.props.propS.match)
     return(
       <div>
         {/* <button onClick={this._handleLike}>LIKE BUTTON</button> */}
@@ -23,13 +25,13 @@ export default class Like extends Component {
     )
   }
   _handleLike(e) {
-    console.log('in handle like')
+    // console.log('in handle like')
     let id = this.props.postId
     let data = {
       email: localStorage.getItem('user_email'),
       likes: this.props.likes
     }
-    fetch(`/buildings/1/posts/${id}/likes`, {
+    fetch(`/buildings/${this.props.propS.match.params.building_id}/posts/${id}/likes`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
