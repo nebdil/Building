@@ -4,6 +4,8 @@ class BuildingsController < ApplicationController
   require 'pp'
   # before_action :authenticate_user
   def index
+    @buildings = Building.all
+    render json: @buildings
   end
   def create
     puts params

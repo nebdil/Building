@@ -6,13 +6,8 @@ import Tag from './Tag.jsx';
 import CreatePost from './CreatePost.jsx'
 import SendReply from './SendReply.jsx'
 import Login from './Login.jsx'
-<<<<<<< HEAD
-import { Panel, Row, Col } from 'react-bootstrap'
+import { Panel, Row, Col, Grid } from 'react-bootstrap'
 import moment from 'moment'
-
-=======
-import { Grid, Row, Col } from 'react-bootstrap'
->>>>>>> style/building_layout
 import {
   Route,
   Link,
@@ -46,7 +41,7 @@ export default class Building extends Component {
   //   <h3>{}</h3>
   // );
   componentDidMount() {
-    return (fetch(`http://localhost:3000/buildings/1/`, {
+    return (fetch(`http://localhost:3000/buildings/:id/`, {
       headers: {
         'Authorization': `bearer ${localStorage.getItem('user_token')}`
       }
@@ -67,6 +62,8 @@ export default class Building extends Component {
       )
     } else {
       // console.log('this.state.posts: ' + this.state.posts)
+      console.log(this.props.match)
+
       return (
         <div>
           <Grid>

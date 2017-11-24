@@ -9,10 +9,27 @@ export default class Main extends Component {
   constructor({props, history}) {
     super(props);
     this.state = {
-      user_token: localStorage.getItem('user_token')
+      user_token: localStorage.getItem('user_token'),
+      buildings: []
     }
   }
-
+  componentDidMount() {
+    return (fetch(`http://localhost:3000/buildings/`, {
+      headers: {
+        'Authorization': `bearer ${localStorage.getItem('user_token')}`
+      }
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({ buildings: responseJson })
+        console.log(responseJson)
+        console.log(this.props.match.params)
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+    )
+  }
   render() {
     if (this.state.user_token === 'null') {
       return (
@@ -23,8 +40,8 @@ export default class Main extends Component {
         <div>
           <Navtop propS={this.props}/>
             <Switch>
-              <Route path='/buildings/1/users/1' component={User}/>
-              <Route path='/buildings/1/posts' component={Building}/>
+              <Route path='/buildings/:id/users/1' component={User}/>
+              <Route path='/buildings/:id/posts' component={Building}/>
             </Switch>
         </div>
       )
