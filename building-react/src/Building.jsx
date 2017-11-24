@@ -6,7 +6,7 @@ import Tag from './Tag.jsx';
 import CreatePost from './CreatePost.jsx'
 import SendReply from './SendReply.jsx'
 import Login from './Login.jsx'
-
+import { Grid, Row, Col } from 'react-bootstrap'
 import {
   Route,
   Link,
@@ -60,43 +60,51 @@ export default class Building extends Component {
       // console.log('this.state.posts: ' + this.state.posts)
       return (
         <div>
-          <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
-          <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
-          <table>
-            <tbody>
-              <tr>
-                <th>POST</th>
-                <th>USER</th>
-                <th>TIME</th>
-                <th>REPLY SIZE</th>
-                <th>LIKE SIZE</th>
-                <th>LIKE BUTTON</th>
-                <th>TAG</th>
-              </tr>
+          <Grid>
+            <Row>
+              <Col md={8}>
+                <table>
+                  <tbody>
+                    <tr>
+                      <th>POST</th>
+                      <th>USER</th>
+                      <th>TIME</th>
+                      <th>REPLY SIZE</th>
+                      <th>LIKE SIZE</th>
+                      <th>LIKE BUTTON</th>
+                      <th>TAG</th>
+                    </tr>
 
-              {this.state.posts.map((e) => {
-                return(
-                  <tr>
-                    <td><Link to={`/buildings/1/posts/${e.id}`} posts={e}>{e.content}</Link></td>
-                    <td>{e.username}</td>
-                    <td>{e.created_at}</td>
-                    <td>{e.reply.length}</td>
-                    {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
-                    <td>{e.like.length}</td>
-                    <td>
-                      <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/>
-                    </td>
-                    {e.tags.map(function(a) {
-                      return <td>{a.name}</td>
+                    {this.state.posts.map((e) => {
+                      return(
+                        <tr>
+                          <td><Link to={`/buildings/1/posts/${e.id}`} posts={e}>{e.content}</Link></td>
+                          <td>{e.username}</td>
+                          <td>{e.created_at}</td>
+                          <td>{e.reply.length}</td>
+                          {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
+                          <td>{e.like.length}</td>
+                          <td>
+                            <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/>
+                          </td>
+                          {e.tags.map(function(a) {
+                            return <td>{a.name}</td>
+                          })}
+                        </tr>
+                      )
                     })}
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-          <Switch>
-            <Route path={`/buildings/:id/posts/:id`} component={Post} />
-          </Switch>
+                  </tbody>
+                </table>
+                <Switch>
+                  <Route path={`/buildings/:id/posts/:id`} component={Post} />
+                </Switch>
+              </Col>
+              <Col md={4}>
+                <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
+                <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
+              </Col>
+            </Row>
+          </Grid>
         </div>
       )
     }

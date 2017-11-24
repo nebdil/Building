@@ -28,7 +28,7 @@ export default class Tag extends Component {
     // let unique = this.props.unique_tags
 
       return (
-        <div>
+        <div className="tag-list">
           <ul>
             {unique.map(function(e){
               return <button onClick={func} value={e}>{e}</button>
