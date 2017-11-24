@@ -61,7 +61,7 @@ export default class Building extends Component {
       return (
         <div>
           <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
-          <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} unique_tags={this.state.unique_tags}/>
+          <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
           <table>
             <tbody>
               <tr>
@@ -175,10 +175,10 @@ export default class Building extends Component {
       console.log(newPost)
       const newPostArr = [newPost]
       const posts = newPostArr.concat(this.state.posts)
-      const originalPosts = this.state.originalPosts.concat(newPost)
+      // const originalPosts = this.state.originalPosts.concat(newPost)
       console.log(posts)
       console.log('setting the state for post')
-      this.setState({posts: posts, originalPosts: this.state.originalPosts})
+      this.setState({posts: posts, originalPosts: posts})
       console.log('just set the state')
     })
   }

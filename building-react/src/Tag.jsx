@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Tag extends Component {
   constructor(props) {
     super(props);
-    // this.state = {}
+    this.state = {}
   }
   render() {
     let newArr = []
@@ -16,7 +16,7 @@ export default class Tag extends Component {
     //     })
       // }
     //   // console.log(e.tags)
-      e.tags.map(function(a) {
+      e.tags.forEach(function(a) {
         newArr.push(a.name)
     //   //   // console.log("a.name " + a.name)
       })
