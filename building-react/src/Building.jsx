@@ -6,13 +6,9 @@ import Tag from './Tag.jsx';
 import CreatePost from './CreatePost.jsx'
 import SendReply from './SendReply.jsx'
 import Login from './Login.jsx'
-<<<<<<< HEAD
-import { Panel, Row, Col } from 'react-bootstrap'
+import { Grid, Panel, Row, Col } from 'react-bootstrap'
 import moment from 'moment'
 
-=======
-import { Grid, Row, Col } from 'react-bootstrap'
->>>>>>> style/building_layout
 import {
   Route,
   Link,
