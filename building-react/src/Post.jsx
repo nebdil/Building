@@ -3,7 +3,8 @@ import {Redirect} from 'react-router-dom'
 import Dialog from './Dialog'
 import SendReply from './SendReply.jsx'
 import Like from './Like.jsx'
-import { Panel, Row, Col } from 'react-bootstrap'
+import { Panel, Row, Col, ListGroup, ListGroupItem, ButtonToolbar, Button} from 'react-bootstrap'
+import moment from 'moment'
 
 export default class Post extends Component {
   constructor(props) {
@@ -45,18 +46,35 @@ export default class Post extends Component {
     if (this.state.redirect) return <Redirect to={this.state.redirect} />
     if (this.state.post) {
       const title = (
-          <Row>
-            <Col xs={12} md={8}>{this.state.post.username}</Col>
-            <Col xs={6} md={4}>{this.state.post.created_at}</Col>
-          </Row>
+        <div>
+          <Col md={9}>
+            {this.state.post.username}: {this.state.post.content}
+          </Col>
+          <Col mdOffset md={3}>
+            <Row>
+              <ButtonToolbar>
+                <Button bsSize="xsmall">{this.state.tags}</Button>
+              </ButtonToolbar>
+            </Row>
+            <Row>
+              {moment(this.state.post.created_at).startOf('second').fromNow()}
+            </Row>
+          </Col>
+        </div>
         );
       const foot = (
         <Row>
-          <Col xs={12} md={8}>{this.state.tags}</Col>
-          <Col xs={6} md={4}>
+          <Col md={9}>
+            <SendReply postId = {this.state.postId} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={this.state.postId} />
+          </Col>
+          <Col md={3}>
             <Row>
-              <Col md={6} mdPull={6}><Like postId={this.state.postId}/></Col>
-              <Col md={6} mdPull={6}>{this.state.post.like.length}</Col>
+              <Col>
+                {this.state.post.like.length}
+              </Col>
+              <Col>
+                <Like postId={this.state.postId}/>
+              </Col>
             </Row>
           </Col>
         </Row>
@@ -70,13 +88,13 @@ export default class Post extends Component {
               onHide={this._hide}
               title={title}
               footer={foot}>
-              <p>
-               <strong>{this.state.post.content}</strong>.
-              </p>
-              {this.state.post.reply.map((e) => {
-                return <p>{e.content}</p>
-              })}
-              <SendReply postId = {this.state.postId} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={this.state.postId} />
+              {this.state.post.reply.map((e) => {return (
+                <ListGroup fill>
+                  <ListGroupItem>
+                     {this.state.post.reply_user}: {e.content}
+                  </ListGroupItem>
+                </ListGroup>
+              )})}
             </Dialog>
           }
         </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ButtonToolbar, Button } from 'react-bootstrap'
 
 export default class Like extends Component {
   constructor(props) {
@@ -14,7 +15,10 @@ export default class Like extends Component {
   render() {
     return(
       <div>
-        <button onClick={this._handleLike}>LIKE BUTTON</button>
+        {/* <button onClick={this._handleLike}>LIKE BUTTON</button> */}
+        <ButtonToolbar>
+          <Button bsSize="xsmall" type="submit" onClick={this._handleLike}>Like</Button>
+        </ButtonToolbar>
       </div>
     )
   }

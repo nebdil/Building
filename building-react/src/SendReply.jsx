@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormGroup, FormControl, ButtonToolbar, Button, Row, Col } from 'react-bootstrap'
 
 export default class SendReply extends Component {
   render() {
@@ -8,13 +9,19 @@ export default class SendReply extends Component {
 
     return (
       <form onSubmit={handleSubmit} data-post-id = {this.props.postId} id = "post-id">
-        <label htmlFor="post_content">
-          New Reply:
-        </label>
-        <input type="text" name="post_content" placeholder="Your reply" onChange={handleChange} />
-        <input type="submit" value="Create reply!" />
+        <Row>
+          <Col>
+            <FormGroup bsSize="small">
+              <FormControl type="text" name="post_content" placeholder="Your reply" onChange={handleChange} />
+            </FormGroup>
+          </Col>
+          <Col>
+            <ButtonToolbar>
+              <Button bsSize="xsmall" type="submit">Reply</Button>
+            </ButtonToolbar>
+          </Col>
+        </Row>
       </form>
     )
-
   }
 }

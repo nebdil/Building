@@ -7,6 +7,7 @@ import CreatePost from './CreatePost.jsx'
 import SendReply from './SendReply.jsx'
 import Login from './Login.jsx'
 import { Panel, Row, Col } from 'react-bootstrap'
+import moment from 'moment'
 
 import {
   Route,
@@ -71,18 +72,18 @@ export default class Building extends Component {
               {this.state.posts.map((e) => {
                 const head = (
                   <Row>
-                    <Col xs={12} md={8}>{e.username}</Col>
-                    <Col xs={6} md={4}>{e.created_at}</Col>
+                    <Col md={8}>{e.username}</Col>
+                    <Col md={4}>{moment(e.created_at).startOf('second').fromNow()}</Col>
                   </Row>
                 );
                 const foot = (
                   <Row>
-                    <Col xs={6} md={4}>{e.tags.map((a) => {return a.name})}</Col>
-                    <Col xs={6} md={4}>{e.reply.length}</Col>
-                    <Col xs={6} md={4}>
+                    <Col md={4}>{e.tags.map((a) => {return a.name})}</Col>
+                    <Col md={4}>{e.reply.length}</Col>
+                    <Col md={4}>
                       <Row>
-                        <Col md={6} mdPull={6}><Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/></Col>
-                        <Col md={6} mdPull={6}>{e.like.length}</Col>
+                        <Col md={6}><Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/></Col>
+                        <Col md={6}>{e.like.length}</Col>
                       </Row>
                     </Col>
                   </Row>

@@ -46,6 +46,9 @@ class PostsController < ApplicationController
     result[:reply] = @post.replies
     result[:like] = @post.likes
     result[:tags] = @post.tags
+    @post.replies.each do |e|
+      result[:reply_user] = e.user.username
+    end
     result
 
     puts result.inspect
