@@ -28,8 +28,39 @@ export default class Like extends Component {
   _handleLike(e) {
     console.log('in handle like')
     console.log(this.props.propS)
+    console.log(this.props.propS.path)
 
-    if (this.props.propS.match.params.id) {
+    if (this.props.propS.path ==
+"/buildings/:building_id/users/:id") {
+      let data = {
+        email: localStorage.getItem('user_email')
+      }
+      fetch(`/buildings/${this.props.propS.params.building_id}/posts/${this.props.postId}/likes`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log('FINALLY RECEIVING')
+        console.log(responseJson);
+        // console.log(this.props.propS.handleLikes)
+        responseJson.map((e) => {
+          console.log(e.id)
+          console.log(this.props.propS.params.id)
+          if (e.id == this.props.propS.params.id) {
+            console.log('in new map')
+            console.log(e)
+            // this.props.handleLikeChange(e)
+          }
+        })
+        this.props.handleLikes(responseJson)
+      })
+    }
+    else if (this.props.propS.match.params.id) {
       let data = {
         email: localStorage.getItem('user_email')
       }
@@ -57,7 +88,7 @@ export default class Like extends Component {
         })
         this.props.handleLikes(responseJson)
       })
-    } else {
+    }  else {
       let id = this.props.postId
       let data = {
         email: localStorage.getItem('user_email'),

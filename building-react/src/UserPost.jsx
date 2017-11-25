@@ -56,7 +56,7 @@ export default class UserPost extends Component {
         <Col md={4}>
           <Row>
             <Col md={6}>
-              <Like postId={postId}/>
+              <Like postId={postId} propS={this.props.propS} handleLikes={this.props.handleLikes}/>
             </Col>
             <Col md={6}>
               {likeSize}

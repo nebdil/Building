@@ -42,17 +42,16 @@ export default class Post extends Component {
     })
     )
   }
-  // if(this.props.match.path == "/buildings/:building_id/posts/:id") {
     _hide = () => {
-      // console.log('in if')
-      this.setState({show: false, redirect: `/buildings/${this.props.match.params.building_id}/posts`})
+      // if(this.props.match.path == "/buildings/:building_id/posts/:id") {
+      //   console.log('in if')
+        this.setState({show: false, redirect: `/buildings/${this.props.match.params.building_id}/posts`})
+      // }
+    //   else {
+    //       this.setState({show: false, redirect: `/buildings/${this.props.propS.params.building_id}/users/${this.props.propS.params.id}`})
+    // }
     }
-  // } else {
-  //   _hide = () => {
-  //     console.log('in if')
-  //     this.setState({show: false, redirect: `/buildings/${this.props.propS.params.building_id}/users/${this.props.propS.params.id}`})
-  //   }
-  // }
+
 
 
   render() {

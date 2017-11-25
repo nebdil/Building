@@ -50,7 +50,7 @@ export default class UserReply extends Component {
         <Col md={4}>{replySize}</Col>
         <Col md={4}>
           <Row>
-            <Col md={6}><Like postId={postId}/></Col>
+            <Col md={6}><Like postId={postId} propS={this.props.propS} handleLikes={this.props.handleLikes}/></Col>
             <Col md={6}>{likeSize}</Col>
           </Row>
         </Col>
