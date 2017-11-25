@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import {Navbar, Nav, NavItem} from 'react-bootstrap'
+import {Navbar, Nav, NavItem, Grid, Row, Col} from 'react-bootstrap'
 
 export default class Navtop extends Component {
   constructor(props) {
@@ -13,29 +13,41 @@ export default class Navtop extends Component {
     console.log(this.props.propS.match.params)
     return (
       <Navbar id="navbar">
-        <Nav>
-          <div class="menu-item" id="left-most-nav">
-            <NavItem><Link to={`/buildings/${this.props.propS.match.params.building_id}/users/${localStorage.getItem('user_id')}`}>My Profile</Link></NavItem>
-            <div class="color-div"></div>
-          </div>
-        </Nav>
-        <Navbar.Brand>
-          <div id="logo">
-            <a href="#">Static Building Logo</a>
-          </div>
-        </Navbar.Brand>
-        <Nav>
-          <div class="menu-item" id="second-right-most-nav">
-            <NavItem><p>Signed in as {localStorage.getItem('user_username')} - in {localStorage.getItem('building_address')}</p></NavItem>
-            <div class="color-div"></div>
-          </div>
-        </Nav>
-        <Nav>
-          <div class="menu-item" id="right-most-nav">
-            <NavItem onClick={this._handleLogout}><Link to={'/logout'}>Log Out</Link></NavItem>
-            <div class="color-div"></div>
-          </div>
-        </Nav>
+        <Grid>
+          <Row>
+            <Col md={3}>
+              <Navbar.Brand>
+                <div id="logo">
+                  <Link to={'#'}><img src={"/building-coral.png"} alt="building" width="30"/><p>BUILDING</p></Link>
+                </div>
+              </Navbar.Brand>
+            </Col>
+            <Col md={3}>
+              <Nav>
+                <div class="menu-item">
+                  <NavItem><p>Signed in as {localStorage.getItem('user_username')} - in {localStorage.getItem('building_address')}</p></NavItem>
+                  <div class="color-div"></div>
+                </div>
+              </Nav>
+            </Col>
+            <Col md={3}>
+              <Nav>
+                <div class="menu-item">
+                  <NavItem><Link to={`/buildings/${this.props.propS.match.params.building_id}/users/${localStorage.getItem('user_id')}`}>My Profile</Link></NavItem>
+                  <div class="color-div"></div>
+                </div>
+              </Nav>
+            </Col>
+            <Col md={3}>
+              <Nav>
+                <div class="menu-item" id="right-most-nav">
+                  <NavItem onClick={this._handleLogout}><Link to={'/logout'}>Log Out</Link></NavItem>
+                  <div class="color-div"></div>
+                </div>
+              </Nav>
+            </Col>
+          </Row>
+        </Grid>
       </Navbar>
     )
   }

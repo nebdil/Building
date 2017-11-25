@@ -69,24 +69,40 @@ export default class Building extends Component {
           <Grid>
             <Row>
               <Col md={8}>
+                <h2>Posts in Your Building</h2>
                 <table>
                   <tbody>
                     {this.state.posts.map((e) => {
                       const head = (
                         <Row>
-                          <Col md={8}>{e.username}</Col>
+                          <Col className="user-name" md={8}>{e.username}</Col>
                           <Col md={4}>{moment(e.created_at).startOf('second').fromNow()}</Col>
                         </Row>
                       );
                       const foot = (
                         <Row>
-                          <Col md={4}>{e.tags.map((a) => {return a.name})}</Col>
-                          <Col md={4}>{e.reply.length}</Col>
+                          <Col md={4} id="tag-div"><div className="tag-div">{e.tags.map((a) => {return a.name})}</div></Col>
+                          <Col md={4}>
+                            {/* <div className="reply-div">
+                              <Link to={`/buildings/1/posts/${e.id}`} posts={e}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
+                              {e.reply.length}
+                            </div> */}
+                          </Col>
                           <Col md={4}>
                             <Row>
-                              <Col md={6}><Like postId={e.id} likes={e.like} handleLikes={this._handleLikes} propS={this.props}/></Col>
-                              <Col md={6}>{e.like.length}</Col>
+                              <Col className="reply" md={6}>
+                                <div className="reply-div">
+                                  <Link to={`${this.props.match.url}/${e.id}`} posts={e}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
+                                  <p>{e.reply.length}</p>
+                                </div>
+                              </Col>
+                              <Col className="peace" md={6}>
+                                <div className="peace-group">
+                                  <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes} likeLength={e.like.length} propS={this.props}/>
+                                </div>
+                              </Col>
                             </Row>
+                              {/* {e.like.length} */}
                           </Col>
                         </Row>
                       );
@@ -113,7 +129,9 @@ export default class Building extends Component {
                 </Switch>
               </Col>
               <Col md={4}>
+                <h3>Send a Message</h3>
                 <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
+                <h3>Filter Posts by Tags</h3>
                 <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
               </Col>
             </Row>

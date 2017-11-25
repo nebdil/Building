@@ -19,7 +19,8 @@ export default class Like extends Component {
       <div>
         {/* <button onClick={this._handleLike}>LIKE BUTTON</button> */}
         <ButtonToolbar>
-          <Button bsSize="xsmall" type="submit" onClick={this._handleLike}>Like</Button>
+          <Button id="peace-div" bsSize="xsmall" type="submit" onClick={this._handleLike}><i class="fa fa-hand-peace-o" aria-hidden="true"></i></Button>
+          <p>{this.props.likeLength}</p>
         </ButtonToolbar>
       </div>
     )

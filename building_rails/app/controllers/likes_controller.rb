@@ -18,6 +18,7 @@ class LikesController < ApplicationController
     like = Like.find_by(post_id: params[:post_id])
     if like
       puts 'in if'
+      puts like[:user_id]
       if like[:user_id] == @user[:id]
         puts 'in if if'
         like.destroy
@@ -33,6 +34,7 @@ class LikesController < ApplicationController
           result[:building] = params[:building_id]
           result
         end
+        puts post_arr
         render json: post_arr
       else
         @like = @user.likes.create!(
