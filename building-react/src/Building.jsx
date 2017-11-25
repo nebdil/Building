@@ -128,7 +128,7 @@ export default class Building extends Component {
                   {/* <Route path={`/buildings/:building_id/posts/:id`} handleLikes={this._handleLikes} component={Post} /> */}
                 </Switch>
               </Col>
-              <Col md={4}>
+              <Col className="fixed" md={4}>
                 <h3>Send a Message</h3>
                 <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
                 <h3>Filter Posts by Tags</h3>

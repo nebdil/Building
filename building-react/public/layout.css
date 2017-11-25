@@ -491,3 +491,11 @@ h2, h3 {
 }
 
 /* End of post styling */
+
+/* start of BUILDING RIGHT COLUMN POSITIONING*/
+.fixed {
+  position: fixed;
+  right: 50px;
+  top: 73px;
+}
+/* end of BUILDING RIGHT COLUMN POSITIONING*/
