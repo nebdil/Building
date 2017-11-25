@@ -68,7 +68,7 @@ export default class Building extends Component {
           <Grid>
             <Row>
               <Col md={8}>
-                <h2>Posts In Your Building</h2>
+                <h2>Posts in Your Building</h2>
                 <table>
                   <tbody>
                     {this.state.posts.map((e) => {
@@ -121,7 +121,7 @@ export default class Building extends Component {
               <Col md={4}>
                 <h3>Send a Message</h3>
                 <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
-                <h3>Tags</h3>
+                <h3>Filter Posts by Tags</h3>
                 <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
               </Col>
             </Row>
