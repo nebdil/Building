@@ -68,7 +68,7 @@ export default class Building extends Component {
           <Navtop propS={this.props}/>
           <Grid>
             <Row>
-              <Col md={8}>
+              <Col md={8} className="all-posts">
                 <h2>Posts in Your Building</h2>
                 <table>
                   <tbody>
