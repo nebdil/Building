@@ -62,18 +62,19 @@ export default class Building extends Component {
         <Login />
       )
     } else {
-      // console.log('this.state.posts: ' + this.state.posts)
+      console.log('this.state.posts: ' + this.state.posts)
       return (
         <div>
           <Grid>
             <Row>
               <Col md={8}>
+                <h2>Posts In Your Building</h2>
                 <table>
                   <tbody>
                     {this.state.posts.map((e) => {
                       const head = (
                         <Row>
-                          <Col md={8}>{e.username}</Col>
+                          <Col className="user-name" md={8}>{e.username}</Col>
                           <Col md={4}>{moment(e.created_at).startOf('second').fromNow()}</Col>
                         </Row>
                       );
@@ -88,13 +89,13 @@ export default class Building extends Component {
                           </Col>
                           <Col md={4}>
                             <Row>
-                              <Col md={6}>
+                              <Col className="reply" md={6}>
                                 <div className="reply-div">
                                   <Link to={`/buildings/1/posts/${e.id}`} posts={e}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
                                   <p>{e.reply.length}</p>
                                 </div>
                               </Col>
-                              <Col md={6}>
+                              <Col className="peace" md={6}>
                                 <div className="peace-group">
                                   <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes} likeLength={e.like.length}/>
                                 </div>
@@ -118,7 +119,9 @@ export default class Building extends Component {
                 </Switch>
               </Col>
               <Col md={4}>
+                <h3>Send a Message</h3>
                 <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
+                <h3>Tags</h3>
                 <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
               </Col>
             </Row>
@@ -128,6 +131,8 @@ export default class Building extends Component {
     }
   }
   _handleLikes(e) {
+    console.log('e')
+    console.log(e)
     this.setState({posts: e, originalPosts: e})
   }
   // _handleNewPost(e) {

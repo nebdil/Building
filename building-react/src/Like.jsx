@@ -38,9 +38,13 @@ export default class Like extends Component {
         'Content-Type': 'application/json'
       }
     })
-    .then((response) => response.json())
+    .then((response) => {
+      console.log('in like response')
+      console.log(response)
+      response.json()
+    })
     .then((responseJson) => {
-      // console.log(responseJson);
+      console.log(responseJson);
       this.props.handleLikes(responseJson)
     })
   }
