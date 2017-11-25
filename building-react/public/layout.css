@@ -516,8 +516,35 @@ h2, h3 {
   width: 250px;
 }
 /* end of NAVTOP POSITIONING & transparency*/
+
 /* start of tag*/
 .selected {
   background-color: coral;
   color: white !important;
 }
+/* end of tag*/
+
+/*start of animation*/
+.Hero {
+  width: 100%;
+  text-align: center;
+}
+
+.Buildings {
+  max-width: 800px;
+  visibility: hidden;
+  overflow: visible;
+}
+/* end of animation */
+
+/* start of about page */
+.jumbotron {
+  height: 250px;
+  padding-top: 25px;
+  background-color: #FCBC57;
+  margin-bottom: 0;
+}
+ .login-btn {
+   background-color: #2E7EAA;
+ }
+ /* end of about page */
