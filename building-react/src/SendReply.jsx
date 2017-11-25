@@ -9,7 +9,6 @@ export default class SendReply extends Component {
 
     return (
       <form onSubmit={handleSubmit} data-post-id = {this.props.postId} id = "post-id">
-
         <Row>
           <Col>
             <FormGroup bsSize="small">

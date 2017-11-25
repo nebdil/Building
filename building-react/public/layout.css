@@ -476,7 +476,7 @@ h2, h3 {
   text-align: right;
 }
 
-.panel > .panel-footer > .row .tag-div {
+.panel > .panel-footer > .row .tag-div, #mdl-header .tag-div {
   border: 1px solid coral;
   display: inline;
   padding: 3px 7px 3px 7px;
@@ -512,3 +512,76 @@ h2, h3 {
   margin-top: 73px;
 }
 /* end of NAVTOP POSITIONING*/
+
+/*beginning of MODAL STYLING*/
+.modal-time {
+  width: 28%;
+}
+
+.modal-time p {
+  float: right;
+}
+
+.user-name p {
+  width: 100px;
+}
+
+#mdl-header .tag-div {
+  font-weight: normal;
+  font-size: 12px;
+}
+
+#mdl-header .peace-group p {
+  top: 3px;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+#mdl-header .peace {
+  right: 16px;
+}
+
+#comment-time {
+  float: right;
+}
+
+#send-reply input {
+  margin-left: auto;
+  margin-right: auto;
+  width: 94%;
+  border: 1px solid coral;
+  border-radius: 10px;
+  padding: 5px 5px;
+  color: coral;
+  background-color: #fff7f0;
+}
+
+#send-reply button {
+  float: right;
+  margin-right: 18px;
+  display: inline-block;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: coral;
+  color: coral;
+  background-color: #fff7f0;
+}
+
+.form-control::-moz-placeholder {
+  color: coral;
+}
+.form-control:-ms-input-placeholder {
+  color: coral;
+}
+.form-control::-webkit-input-placeholder {
+  color: coral;
+}
+
+.modal-first-row {
+  margin-bottom: 12px;
+}
+
+.modal-cntnt {
+  font-weight: normal;
+  margin-bottom: 32px;
+}

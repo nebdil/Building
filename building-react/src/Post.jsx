@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import Dialog from './Dialog'
 import SendReply from './SendReply.jsx'
 import Like from './Like.jsx'
-import { Panel, Row, Col, ListGroup, ListGroupItem, ButtonToolbar, Button} from 'react-bootstrap'
+import { Panel, Row, Col, ListGroup, ListGroupItem, ButtonToolbar, Button, Grid} from 'react-bootstrap'
 import moment from 'moment'
 
 export default class Post extends Component {
@@ -58,36 +58,38 @@ export default class Post extends Component {
     if (this.state.redirect) return <Redirect to={this.state.redirect} />
     if (this.state.post) {
       const title = (
-        <div>
-          <Col md={9}>
-            {this.state.post.username}: {this.state.post.content}
-          </Col>
-          <Col mdOffset md={3}>
-            <Row>
-              <ButtonToolbar>
-                <Button bsSize="xsmall">{this.state.tags}</Button>
-              </ButtonToolbar>
-            </Row>
-            <Row>
-              {moment(this.state.post.created_at).startOf('second').fromNow()}
-            </Row>
-          </Col>
+        <div id="mdl-header">
+          <Row className="modal-first-row">
+            <Col className="user-name" md={8}>
+              <p>{this.state.post.username}</p>
+            </Col>
+            <Col className="modal-time" md={4}>
+              <p>{moment(this.state.post.created_at).startOf('second').fromNow()}</p>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="modal-cntnt" md={12}>
+              {this.state.post.content}
+            </Col>
+          </Row>
+          <Row>
+            <Col md={4} id="tag-div"><div className="tag-div">{this.state.tags}</div></Col>
+            <Col md={4}></Col>
+            <Col md={4}>
+              <Col md={6}></Col>
+              <Col className="peace" md={6}>
+                <div className="peace-group">
+                  <Like postId={this.state.post.id} likes={this.state.post.like} handleLikes={this.props.handleLikes} handleLikeChange={this._handleLikeChange} likeLength={this.state.post.like.length} propS={this.props}/>
+                </div>
+              </Col>
+            </Col>
+          </Row>
         </div>
         );
       const foot = (
         <Row>
-          <Col md={9}>
+          <Col id="send-reply" md={12}>
             <SendReply postId = {this.state.postId} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} handleUsername={this._handleUsername} postId={this.state.postId} />
-          </Col>
-          <Col md={3}>
-            <Row>
-              <Col>
-                {this.state.post.like.length}
-              </Col>
-              <Col>
-                <Like postId={this.state.postId} propS={this.props} handleLikes={this.props.handleLikes} handleLikeChange={this._handleLikeChange}/>
-              </Col>
-            </Row>
           </Col>
         </Row>
       );
@@ -103,7 +105,11 @@ export default class Post extends Component {
               {this.state.post.reply.map((e) => {return (
                 <ListGroup fill>
                   <ListGroupItem>
-                     {e.username}: {e.content} ({moment(e.created_at).startOf('second').fromNow()})
+                    <Row>
+                      <Col md={8}><p>{e.username}</p></Col>
+                      <Col md={4}><p id="comment-time">{moment(e.created_at).startOf('second').fromNow()}</p></Col>
+                    </Row>
+                    <p>{e.content}</p>
                   </ListGroupItem>
                 </ListGroup>
               )})}
