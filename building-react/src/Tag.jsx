@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 export default class Tag extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      selected: ''
+    }
   }
   render() {
     let newArr = []
@@ -27,15 +29,17 @@ export default class Tag extends Component {
     let func = this.props.handlePostsByTags
     // let unique = this.props.unique_tags
 
-      return (
-        <div className="tag-list">
-          <ul>
-            {unique.map(function(e){
-              return <button onClick={func} value={e}>{e}</button>
-            })}
-          </ul>
-        </div>
-      )
-    }
+    let btnClass = this.props.btnClass
 
+
+    return (
+      <div className="tag-list">
+        <ul>
+          {unique.map(function(e){
+            return <button onClick={func} className={btnClass} value={e}>{e}</button>
+          })}
+        </ul>
+      </div>
+    )
+  }
 }

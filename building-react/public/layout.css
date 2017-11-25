@@ -500,18 +500,61 @@ h2, h3 {
 }
 /* end of BUILDING RIGHT COLUMN POSITIONING*/
 
-/* start of NAVTOP POSITIONING*/
+/* start of NAVTOP POSITIONING & transparency*/
 #navbar {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   z-index: 1000;
+  background: linear-gradient(to bottom, rgba(255,255,255, 1), rgba(255,255,255, 0.85));
 }
 .all-posts {
   margin-top: 73px;
 }
-/* end of NAVTOP POSITIONING*/
+.address{
+  width: 250px;
+}
+/* end of NAVTOP POSITIONING & transparency*/
+
+/* start of tag*/
+.selected {
+  background-color: coral;
+  color: white !important;
+}
+/* end of tag*/
+
+/*start of animation*/
+.Hero {
+  width: 100%;
+  text-align: center;
+}
+
+.Buildings {
+  max-width: 800px;
+  visibility: hidden;
+  overflow: visible;
+}
+/* end of animation */
+
+/* start of about page */
+.jumbotron {
+  height: 250px;
+  padding-top: 25px;
+  background-color: #FCBC57;
+  margin-bottom: 0;
+  color: #2C4B56;
+}
+ .login-btn {
+   background-color: #2E7EAA;
+   margin-right: 10px;
+   margin-left: 10px;
+ }
+ .header {
+   font-size: 40px;
+   padding-bottom: 10px;
+ }
+ /* end of about page */
 
 /*beginning of MODAL STYLING*/
 .modal-time {

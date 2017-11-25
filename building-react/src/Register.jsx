@@ -23,9 +23,11 @@ export default class Register extends Component {
     this._handlePasswordConfirmation = this._handlePasswordConfirmation.bind(this)
     this._handleAnimation = this._handleAnimation.bind(this)
     this.initAutocomplete = this.initAutocomplete.bind(this)
+    this.forceUpdate = this.forceUpdate.bind(this)
   }
 
   componentDidMount() {
+    console.log('in omponent did mount')
     window.addEventListener('load', this._handleAnimation);
   }
 
@@ -46,13 +48,13 @@ export default class Register extends Component {
                         👋
                       </span>
                       <span className="intro-text-2 start">
-                        Hi
+                        Hi,
                       </span>
                       <span className="intro-text-3 start">
-                        ,
+                        interact with your neighbors
                       </span>
                       <span className="intro-text-4 start">
-                        welcome to Building!
+                        by registering below...
                       </span>
                     </h1>
                   </div>
@@ -71,7 +73,7 @@ export default class Register extends Component {
 
                     <label htmlFor="password">
                     </label>
-                    <input type="text" name="password" placeholder="password" onChange={this._handlePassword} />
+                    <input type="password" name="password" placeholder="password" onChange={this._handlePassword} />
 
                     <label htmlFor="password_confirmation">
                     </label>

@@ -23,7 +23,7 @@ export default class Navtop extends Component {
             <Col md={3}>
               <Nav>
                 <div class="menu-item">
-                  <NavItem>
+                  <NavItem className="address">
                     <Link to={`/buildings/${this.props.propS.match.params.building_id}/posts`}>
                       <p>{localStorage.getItem('building_address').split(',').slice(0, 2).join(',')}</p>
                     </Link>

@@ -5,6 +5,7 @@ import Register from './Register.jsx';
 import Navtop from './Navtop.jsx';
 import Main from './Main.jsx';
 import BuildingRegister from './BuildingRegister.jsx';
+import Animation from './Animation.jsx';
 
 export default class App extends Component {
   constructor({ props, history }) {
@@ -18,6 +19,7 @@ export default class App extends Component {
     return(
       <div>
         <Switch>
+          <Route exact path='/' component={Animation} />
           <Route path='/login' component={Login} />
           <Route path='/buildings/' component={Main}/>
           <Route path='/register' component={Register}/>
