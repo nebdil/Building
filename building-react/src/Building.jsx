@@ -79,13 +79,28 @@ export default class Building extends Component {
                       );
                       const foot = (
                         <Row>
-                          <Col md={4}><div className="tag-div">{e.tags.map((a) => {return a.name})}</div></Col>
-                          <Col md={4}>{e.reply.length}</Col>
+                          <Col md={4} id="tag-div"><div className="tag-div">{e.tags.map((a) => {return a.name})}</div></Col>
+                          <Col md={4}>
+                            {/* <div className="reply-div">
+                              <Link to={`/buildings/1/posts/${e.id}`} posts={e}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
+                              {e.reply.length}
+                            </div> */}
+                          </Col>
                           <Col md={4}>
                             <Row>
-                              <Col md={6}><Like postId={e.id} likes={e.like} handleLikes={this._handleLikes}/></Col>
-                              <Col md={6}>{e.like.length}</Col>
+                              <Col md={6}>
+                                <div className="reply-div">
+                                  <Link to={`/buildings/1/posts/${e.id}`} posts={e}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
+                                  <p>{e.reply.length}</p>
+                                </div>
+                              </Col>
+                              <Col md={6}>
+                                <div className="peace-group">
+                                  <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes} likeLength={e.like.length}/>
+                                </div>
+                              </Col>
                             </Row>
+                              {/* {e.like.length} */}
                           </Col>
                         </Row>
                       );

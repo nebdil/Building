@@ -374,6 +374,47 @@
   border-radius: 5px;
 }*/
 
+#tag-div {
+  padding-top: 4px;
+}
+
+.reply-div {
+  float: right;
+}
+
+.reply-div > a i {
+  font-size: 24px;
+  color: coral;
+}
+
+.reply-div > a {
+  padding-right: 5px;
+}
+
+.reply-div > p {
+  display: inline;
+}
+
+.peace-group {
+  float: right;
+}
+
+#peace-div {
+  border: none;
+  background-color: transparent;
+  margin-right: 0px;
+  float: none;
+}
+
+#peace-div > i {
+  font-size: 24px;
+  color: coral;
+}
+
+.peace-group p {
+  display: inline;
+}
+
 .panel-default {
   min-width: 560px;
   max-width: 560px;
@@ -385,6 +426,11 @@
 
 .panel-body {
   min-height: 70px;
+}
+
+.panel-body > a, .panel-body > a:hover {
+  color: black;
+  text-decoration: none;
 }
 
 .panel-footer {
