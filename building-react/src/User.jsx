@@ -53,37 +53,42 @@ export default class User extends Component {
       <div>
         <Navtop propS={this.props}/>
         {/* <Link to={`/buildings/${this.props.match.params.building_id}/posts`}>Go back</Link> */}
-        <Grid>
-          <Row>
-            <Col md={6}>
-              <h3>Your posts</h3>
-              {this.state.posts.map((e) => {
-                if (!(e.hasOwnProperty('posts_user_replied_to'))) {
-                  return (
-                    <UserPost handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserPosts = {e} key = {e.id} propS={this.props.match} handleLikes={this._handleLikes}/>
-                  )
+        <div className="all-posts">
+          <Grid>
+            <Row>
+              <Col md={6}>
+                <h3>Your posts</h3>
+                {
+                  this.state.posts.map((e) => {
+                    if (!(e.hasOwnProperty('posts_user_replied_to'))) {
+                      return (
+                        <UserPost handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserPosts = {e} key = {e.id} propS={this.props.match} handleLikes={this._handleLikes}/>
+                      )
+                    }
+                  })
                 }
-              })}
-            </Col>
-            <Col md={6}>
-              <h3>Posts You've Commented on</h3>
-              {this.state.posts.map((e) => {
-                if (e.hasOwnProperty('posts_user_replied_to')) {
-                  return (
-                    e.posts_user_replied_to.map((el) => {
-                      if (el.user_id != this.props.match.params.id) {
-                        return (
-                          <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {el} key = {el.id} propS={this.props.match} handleLikes={this._handleLikes}/>
-                        )
-                        }
-                      }
-                    )
-                  )
+              </Col>
+              <Col md={6}>
+                <h3>Posts You've Commented on</h3>
+                {
+                  this.state.posts.map((e) => {
+                    if (e.hasOwnProperty('posts_user_replied_to')) {
+                      return (
+                        e.posts_user_replied_to.map((el) => {
+                          if (el.user_id != this.props.match.params.id) {
+                            return (
+                              <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {el} key = {el.id} propS={this.props.match} handleLikes={this._handleLikes}/>
+                            )
+                          }
+                        })
+                      )
+                    }
+                  })
                 }
-              })}
-            </Col>
-          </Row>
-        </Grid>
+              </Col>
+            </Row>
+          </Grid>
+        </div>
       </div>
     )
   }}
