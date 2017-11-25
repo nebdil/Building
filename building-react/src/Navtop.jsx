@@ -9,7 +9,6 @@ export default class Navtop extends Component {
   render() {
     console.log('in navbar: ')
     console.log(this.props.propS.match.params)
-    // const arr =
     return (
       <Navbar id="navbar">
         <Grid>
@@ -17,14 +16,18 @@ export default class Navtop extends Component {
             <Col md={3}>
               <Navbar.Brand>
                 <div id="logo">
-                  <Link to={'#'}><img src={"/building-coral.png"} alt="building" width="30"/><p>BUILDING</p></Link>
+                  <Link to={`/buildings/${this.props.propS.match.params.building_id}/posts`}><img src={"/building-coral.png"} alt="building" width="30"/><p>BUILDING</p></Link>
                 </div>
               </Navbar.Brand>
             </Col>
             <Col md={3}>
               <Nav>
                 <div class="menu-item">
-                  <NavItem><p>{localStorage.getItem('building_address').split(',').slice(0, 2).join(',')}</p></NavItem>
+                  <NavItem>
+                    <Link to={`/buildings/${this.props.propS.match.params.building_id}/posts`}>
+                      <p>{localStorage.getItem('building_address').split(',').slice(0, 2).join(',')}</p>
+                    </Link>
+                  </NavItem>
                   <div class="color-div"></div>
                 </div>
               </Nav>
