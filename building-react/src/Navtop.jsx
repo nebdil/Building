@@ -25,7 +25,7 @@ export default class Navtop extends Component {
             <Col md={3}>
               <Nav>
                 <div class="menu-item">
-                  <NavItem><p>Signed in as {localStorage.getItem('user_username')} - in {localStorage.getItem('building_address')}</p></NavItem>
+                  <NavItem><p>{localStorage.getItem('building_address')}</p></NavItem>
                   <div class="color-div"></div>
                 </div>
               </Nav>
@@ -33,7 +33,7 @@ export default class Navtop extends Component {
             <Col md={3}>
               <Nav>
                 <div class="menu-item">
-                  <NavItem><Link to={`/buildings/${this.props.propS.match.params.building_id}/users/${localStorage.getItem('user_id')}`}>My Profile</Link></NavItem>
+                  <NavItem><Link to={`/buildings/${this.props.propS.match.params.building_id}/users/${localStorage.getItem('user_id')}`}>{localStorage.getItem('user_username')}</Link></NavItem>
                   <div class="color-div"></div>
                 </div>
               </Nav>

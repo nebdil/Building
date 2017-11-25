@@ -33,9 +33,10 @@ export default class UserPost extends Component {
     const time = this.props.currentUserPosts.created_at;
     const replySize = this.props.currentUserPosts.reply.length;
     const likeSize = this.props.currentUserPosts.like.length;
+    const like = this.props.currentUserPosts.like;
     const head = (
         <Row>
-          <Col md={8}>
+          <Col className="user-name" md={8}>
             {user}
             {/* {user}: {post} */}
           </Col>
@@ -46,20 +47,25 @@ export default class UserPost extends Component {
     );
     const foot = (
       <Row>
-        <Col md={4}>
-          {this.props.currentUserPosts.tags.map((a) =>
-                    {return a.name})}
+        <Col md={4} id="tag-div">
+          <div className="tag-div">
+            {this.props.currentUserPosts.tags.map((a) =>
+                      {return a.name})}
+          </div>
         </Col>
-        <Col md={4}>
-          {replySize}
-        </Col>
+        <Col md={4}></Col>
         <Col md={4}>
           <Row>
-            <Col md={6}>
-              <Like postId={postId}/>
+            <Col className="reply" md={6}>
+              <div className="reply-div">
+                <Link to={`#`}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
+                <p>{replySize}</p>
+              </div>
             </Col>
-            <Col md={6}>
-              {likeSize}
+            <Col className="peace" md={6}>
+              <div className="peace-group">
+                <Like postId={postId} likes={like} likeLength={likeSize} propS={this.props}/>
+              </div>
             </Col>
           </Row>
         </Col>
