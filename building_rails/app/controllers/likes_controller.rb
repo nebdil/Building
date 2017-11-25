@@ -34,6 +34,29 @@ class LikesController < ApplicationController
           result
         end
         render json: post_arr
+      else
+        @like = @user.likes.create!(
+          post_id: params[:post_id]
+        )
+        # puts '@like'
+        # puts @like.inspect
+        # user_like = {user: @user, like: @like}
+        # puts 'user_like'
+        # puts user_like
+        # render json: user_like
+        @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:building_id]}).order('posts.id DESC')
+        post_arr = @posts.map do |po|
+          result = po.attributes
+          result[:username] = po.user.username
+          result[:reply] = po.replies
+          result[:like] = po.likes
+          result[:tags] = po.tags
+          result[:building] = params[:building_id]
+          result
+          end
+          puts 'post_arr'
+          puts post_arr
+        render json: post_arr
       end
     else
       puts 'in else'

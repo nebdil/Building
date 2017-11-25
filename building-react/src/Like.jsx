@@ -25,24 +25,56 @@ export default class Like extends Component {
     )
   }
   _handleLike(e) {
-    // console.log('in handle like')
-    let id = this.props.postId
-    let data = {
-      email: localStorage.getItem('user_email'),
-      likes: this.props.likes
-    }
-    fetch(`/buildings/${this.props.propS.match.params.building_id}/posts/${id}/likes`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Authorization': `bearer ${localStorage.getItem('user_token')}`,
-        'Content-Type': 'application/json'
+    console.log('in handle like')
+    console.log(this.props.propS)
+
+    if (this.props.propS.match.params.id) {
+      let data = {
+        email: localStorage.getItem('user_email')
       }
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      // console.log(responseJson);
-      this.props.handleLikes(responseJson)
-    })
+      fetch(`/buildings/${this.props.propS.match.params.building_id}/posts/${this.props.propS.match.params.id}/likes`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log('FINALLY RECEIVING')
+        console.log(responseJson);
+        // console.log(this.props.propS.handleLikes)
+        responseJson.map((e) => {
+          console.log(e.id)
+          console.log(this.props.propS.match.params.id)
+          if (e.id == this.props.propS.match.params.id) {
+            console.log('in new map')
+            console.log(e)
+            this.props.handleLikeChange(e)
+          }
+        })
+        this.props.handleLikes(responseJson)
+      })
+    } else {
+      let id = this.props.postId
+      let data = {
+        email: localStorage.getItem('user_email'),
+        likes: this.props.likes
+      }
+      fetch(`/buildings/${this.props.propS.match.params.building_id}/posts/${id}/likes`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // console.log(responseJson);
+        this.props.handleLikes(responseJson)
+      })
+    }
   }
 }

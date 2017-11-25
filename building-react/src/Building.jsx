@@ -37,6 +37,7 @@ export default class Building extends Component {
     this._handleLikes = this._handleLikes.bind(this)
     this._handleContent = this._handleContent.bind(this)
     this._handleTag = this._handleTag.bind(this)
+    // this._handleRoute = this._handleRoute.bind(this)
   }
   componentDidMount() {
     return (fetch(`http://localhost:3000/${this.props.match.url}`, {
@@ -91,6 +92,8 @@ export default class Building extends Component {
                       );
                       return(
                         <Panel header={head} footer={foot}>
+                          {/* <a href=`${this.props.match.url}/${e}`>{e.content}</a> */}
+
                           <Link to={`${this.props.match.url}/${e.id}`} posts={e}>{e.content}</Link>
                           {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
                         </Panel>
@@ -99,7 +102,14 @@ export default class Building extends Component {
                   </tbody>
                 </table>
                 <Switch>
-                  <Route path={`/buildings/:building_id/posts/:id`} component={Post} />
+                  <Route path={`/buildings/:building_id/posts/:id`} render={(props) =>
+                    {return(
+                      <Post {...props} handleLikes={this._handleLikes}/>
+                    )}}
+                  />
+                  {/* <Post handleLikes={this._handleLikes}/> */}
+
+                  {/* <Route path={`/buildings/:building_id/posts/:id`} handleLikes={this._handleLikes} component={Post} /> */}
                 </Switch>
               </Col>
               <Col md={4}>
@@ -112,7 +122,11 @@ export default class Building extends Component {
       )
     }
   }
+  // _handleRoute(e) {
+  //   this.props.history.push()
+  // }
   _handleLikes(e) {
+    console.log('in handle likes')
     this.setState({posts: e, originalPosts: e})
   }
   _handlePostsByTags(e) {

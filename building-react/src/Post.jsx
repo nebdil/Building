@@ -18,6 +18,7 @@ export default class Post extends Component {
     this._handleReplySubmit = this._handleReplySubmit.bind(this)
     this._handleReplyChange = this._handleReplyChange.bind(this)
     this._handleUsername = this._handleUsername.bind(this)
+    this._handleLikeChange = this._handleLikeChange.bind(this)
   }
 
   componentDidMount() {
@@ -77,7 +78,7 @@ export default class Post extends Component {
                 {this.state.post.like.length}
               </Col>
               <Col>
-                <Like postId={this.state.postId} propS={this.props}/>
+                <Like postId={this.state.postId} propS={this.props} handleLikes={this.props.handleLikes} handleLikeChange={this._handleLikeChange}/>
               </Col>
             </Row>
           </Col>
@@ -108,6 +109,9 @@ export default class Post extends Component {
         <p>Loading</p>
       )
     }
+  }
+  _handleLikeChange(e) {
+    this.setState({post: e})
   }
   _handleReplyChange(e) {
     console.log('in handleReplyChange:', e.target.value);

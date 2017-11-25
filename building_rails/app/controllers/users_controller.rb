@@ -25,12 +25,12 @@ skip_before_action :authenticate_user!, only: [:create], raise: false
   #   #   puts @user.email
   #   #   ApplicationMailer.register_email(@user).deliver!
   #   #
-  #   #   # mg_client = Mailgun::Client.new ENV['PRIVATE_API_KEY_MAILGUN']
-  #   #   # message_params = {:from    => ENV['FROM_EMAIL'],
+  #   #   # mg_client = Mailgun::Client.new ENV["PRIVATE_API_KEY_MAILGUN"]
+  #   #   # message_params = {:from    => ENV["FROM_EMAIL"],
   #   #   #                   :to      => @user.email,
   #   #   #                   :subject => 'Hello from your Building!',
   #   #   #                   :text    => 'Thank you for registering to your Building! Now you can connect with your neighbors!'}
-  #   #   # mg_client.send_message ENV['DOMAIN'], message_params
+  #   #   # mg_client.send_message ENV["DOMAIN"], message_params
   #   #
   #   #
   #   #   render json: url_ok
