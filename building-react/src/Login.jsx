@@ -78,8 +78,8 @@ export default class Login extends Component {
   _handleLogin(e) {
     e.preventDefault()
     console.log('======================')
-    console.log(e.target)
-    console.log(localStorage.getItem('user_username'))
+    // console.log(e.target)
+    // console.log(localStorage.getItem('user_username'))
     // const data = new FormData(e.target);
     // console.log(data.keys())
     // for (let key in data.keys()) {
@@ -92,8 +92,9 @@ export default class Login extends Component {
         password: this.state.password
       }
     }
+    console.log(obj.auth.email)
     // console.log(data["email"])
-    fetch('/user_token', {
+    fetch('/login', {
       method: 'POST',
       body: JSON.stringify(obj),
       headers: {
@@ -102,21 +103,44 @@ export default class Login extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log('responseJson in login: ' + responseJson)
-      localStorage.setItem('user_token', responseJson.jwt);
-      localStorage.setItem('user_email', obj.auth.email);
-      // console.log(localStorage.getItem('user_token'))
-      // console.log(localStorage)
+      console.log('responseJson in login posting to login: ')
+      console.log(responseJson)
+      localStorage.setItem('user_username', responseJson.user.username);
+      localStorage.setItem('user_email', responseJson.user.email);
+      localStorage.setItem('building_id', responseJson.building.id);
+      localStorage.setItem('building_address', responseJson.building.address);
+      localStorage.setItem('user_id', responseJson.user.id);
+      // console.log(localStorage.getItem('user_id'))
+      // console.log(localStorage.getItem('building_id'))
+      // console.log(localStorage.getItem('building_address'))
+      // console.log(localStorage.getItem('user_username'))
       // console.log(localStorage.getItem('user_email'))
-      // console.log(this.props)
-      // console.log(this.history)
-      // this.props.history.push(responseJson.url)
-      this.props.history.push('/buildings/1/posts')
-      // if (responseJson.url <= 6) {
-      //   this.setState({loggedIn: false})
-      // } else {
-      //   this.setState({loggedIn: true})
-      // }
+    })
+    .then(() => {
+      fetch('/user_token', {
+        method: 'POST',
+        body: JSON.stringify(obj),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log('responseJson in login posting to user token: ' + responseJson)
+        localStorage.setItem('user_token', responseJson.jwt);
+        // console.log(localStorage.getItem('user_token'))
+        // console.log(localStorage)
+        // console.log(localStorage.getItem('user_email'))
+        // console.log(this.props)
+        // console.log(this.history)
+        // this.props.history.push(responseJson.url)
+        this.props.history.push(`/buildings/${localStorage.getItem('building_id')}/posts`)
+        // if (responseJson.url <= 6) {
+        //   this.setState({loggedIn: false})
+        // } else {
+        //   this.setState({loggedIn: true})
+        // }
+      })
     })
   }
   _handleEmail(e) {

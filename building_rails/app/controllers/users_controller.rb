@@ -48,8 +48,12 @@ skip_before_action :authenticate_user!, only: [:create], raise: false
   #   #   render json: url_no
   #   # end
   # end
-
-  
+  def create
+    @user = User.find_by(email: params[:auth][:email])
+    @building = Building.find_by(id: @user[:building_id])
+    user_info = {user: @user, building: @building}
+    render json: user_info
+  end
 
   def new
   end
