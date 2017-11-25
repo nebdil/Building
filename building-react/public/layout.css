@@ -509,6 +509,6 @@ h2, h3 {
   z-index: 1000;
 }
 .all-posts {
-  top: 73px;
+  margin-top: 73px;
 }
 /* end of NAVTOP POSITIONING*/
