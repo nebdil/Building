@@ -507,8 +507,12 @@ h2, h3 {
   right: 0;
   left: 0;
   z-index: 1000;
+  background: linear-gradient(to bottom, rgba(255,255,255, 1), rgba(255,255,255, 0.85));
 }
 .all-posts {
   margin-top: 73px;
+}
+.address{
+  width: 250px;
 }
 /* end of NAVTOP POSITIONING*/
