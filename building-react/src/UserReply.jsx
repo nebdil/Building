@@ -35,23 +35,35 @@ export default class UserReply extends Component {
     const time = this.props.currentUserReplies.created_at;
     const replySize = this.props.currentUserReplies.reply.length;
     const likeSize = this.props.currentUserReplies.like.length;
+    const like = this.props.currentUserReplies.like;
     const head = (
       <Row>
-        <Col md={8}>{user}</Col>
+        <Col className="user-name" md={8}>{user}</Col>
         <Col md={4}>{moment(time).startOf('second').fromNow()}</Col>
       </Row>
     );
     const foot = (
       <Row>
-        <Col md={4}>
-          {this.props.currentUserReplies.tags.map((a) => {
-            return a.name})}
-          </Col>
-        <Col md={4}>{replySize}</Col>
+        <Col md={4} id="tag-div">
+          <div className="tag-div">
+            {this.props.currentUserReplies.tags.map((a) =>
+                      {return a.name})}
+          </div>
+        </Col>
+        <Col md={4}></Col>
         <Col md={4}>
           <Row>
-            <Col md={6}><Like postId={postId} propS={this.props.propS} handleLikes={this.props.handleLikes}/></Col>
-            <Col md={6}>{likeSize}</Col>
+            <Col className="reply" md={6}>
+              <div className="reply-div">
+                <Link to={`#`}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
+                <p>{replySize}</p>
+              </div>
+            </Col>
+            <Col className="peace" md={6}>
+              <div className="peace-group">
+                <Like postId={postId} likes={like} likeLength={likeSize} propS={this.props} handleLikes={this.props.handleLikes}/>
+              </div>
+            </Col>
           </Row>
         </Col>
       </Row>

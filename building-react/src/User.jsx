@@ -55,9 +55,8 @@ export default class User extends Component {
         {/* <Link to={`/buildings/${this.props.match.params.building_id}/posts`}>Go back</Link> */}
         <Grid>
           <Row>
-            <p>Your posts</p>
-          </Row>
-          <Row>
+            <Col md={6}>
+              <h3>Your posts</h3>
               {this.state.posts.map((e) => {
                 if (!(e.hasOwnProperty('posts_user_replied_to'))) {
                   return (
@@ -65,11 +64,9 @@ export default class User extends Component {
                   )
                 }
               })}
-          </Row>
-          <Row>
-            <p>Posts you've commented</p>
-          </Row>
-          <Row>
+            </Col>
+            <Col md={6}>
+              <h3>Posts You've Commented on</h3>
               {this.state.posts.map((e) => {
                 if (e.hasOwnProperty('posts_user_replied_to')) {
                   return (
@@ -84,6 +81,7 @@ export default class User extends Component {
                   )
                 }
               })}
+            </Col>
           </Row>
         </Grid>
       </div>
