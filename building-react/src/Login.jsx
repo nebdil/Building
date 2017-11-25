@@ -59,7 +59,7 @@ export default class Login extends Component {
                     <input type="text" name="email" placeholder="email" onChange={this._handleEmail} />
                     <label htmlFor="password">
                     </label>
-                    <input type="text" name="password" placeholder="password" onChange={this._handlePassword} />
+                    <input type="password" name="password" placeholder="password" onChange={this._handlePassword} />
                     <button>Login</button>
                     <hr/>
                     <Link to={'/register'}>Register</Link>

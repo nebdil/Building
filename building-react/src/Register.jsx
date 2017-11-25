@@ -71,7 +71,7 @@ export default class Register extends Component {
 
                     <label htmlFor="password">
                     </label>
-                    <input type="text" name="password" placeholder="password" onChange={this._handlePassword} />
+                    <input type="password" name="password" placeholder="password" onChange={this._handlePassword} />
 
                     <label htmlFor="password_confirmation">
                     </label>

@@ -500,7 +500,7 @@ h2, h3 {
 }
 /* end of BUILDING RIGHT COLUMN POSITIONING*/
 
-/* start of NAVTOP POSITIONING*/
+/* start of NAVTOP POSITIONING & transparency*/
 #navbar {
   position: fixed;
   top: 0;
@@ -515,4 +515,11 @@ h2, h3 {
 .address{
   width: 250px;
 }
-/* end of NAVTOP POSITIONING*/
+/* end of NAVTOP POSITIONING & transparency*/
+
+
+/* start of BACKGROUND*/
+
+/*.main {
+  background-image:url("http://www.publicdomainpictures.net/pictures/30000/velka/cork-board.jpg");
+}*/

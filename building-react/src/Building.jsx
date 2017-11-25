@@ -64,7 +64,7 @@ export default class Building extends Component {
       )
     } else {
       return (
-        <div>
+        <div className="main">
           <Navtop propS={this.props}/>
           <Grid>
             <Row>
