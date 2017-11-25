@@ -6,34 +6,31 @@
   height: 50px
 }
 
-#navbar #left-most-nav {
-  position: absolute;
-  left: 80px;
-}
-
 #navbar #logo {
-  position: absolute;
-  left: 40%;
+  color: coral;
 }
 
-#navbar #second-right-most-nav {
+#navbar #logo img {
   position: absolute;
-  right: 240px;
+  top: 10px;
+  left: 0px;
 }
 
-#navbar #right-most-nav {
-  position: absolute;
-  right: 80px;
+#navbar #logo p {
+  display: inline;
+  margin-left: 24px;
+  font-size: 24px;
+  color: #777;
+  text-decoration: none;
 }
 
 #navbar .menu-item:hover a, #navbar .menu-item:hover p {
-  color: orange;
+  color: coral;
   text-decoration: none;
 }
 
 #navbar a, #navbar p {
-  top: 9px;
-  font-size: 24px;
+  font-size: 16px;
   color: #777;
   text-decoration: none;
 }
@@ -51,7 +48,7 @@
   width: 100%;
   bottom: 3px;
   min-height: 3px;
-  background-color: orange;
+  background-color: coral;
 }
 
 /* Landing Page Animation */
