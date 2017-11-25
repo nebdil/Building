@@ -40,13 +40,12 @@ export default class Login extends Component {
                       👋
                     </span>
                     <span className="intro-text-2 start">
-                      Hi
+                      Hi,
                     </span>
                     <span className="intro-text-3 start">
-                      ,
+                      welcome back!
                     </span>
                     <span className="intro-text-4 start">
-                      welcome to Building!
                     </span>
                   </h1>
                 </div>

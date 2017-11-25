@@ -46,13 +46,13 @@ export default class Register extends Component {
                         👋
                       </span>
                       <span className="intro-text-2 start">
-                        Hi
+                        Hi,
                       </span>
                       <span className="intro-text-3 start">
-                        ,
+                        interact with your neighbors
                       </span>
                       <span className="intro-text-4 start">
-                        welcome to Building!
+                        by registering below...
                       </span>
                     </h1>
                   </div>
