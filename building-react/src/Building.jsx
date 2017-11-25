@@ -14,6 +14,7 @@ import {
   Link,
   Switch
 } from 'react-router-dom'
+import classNames from 'classnames'
 
 export default class Building extends Component {
   constructor(props) {
@@ -27,7 +28,8 @@ export default class Building extends Component {
       user_token: localStorage.getItem('user_token'),
       user_email: localStorage.getItem('user_email'),
       createContent: '',
-      createTag: ''
+      createTag: '',
+      selected: ''
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
@@ -37,8 +39,11 @@ export default class Building extends Component {
     this._handleLikes = this._handleLikes.bind(this)
     this._handleContent = this._handleContent.bind(this)
     this._handleTag = this._handleTag.bind(this)
+    // this.btnClass = this.btnClass.bind(this)
     // this._handleRoute = this._handleRoute.bind(this)
   }
+
+
   componentDidMount() {
     return (fetch(`http://localhost:3000/${this.props.match.url}`, {
       headers: {
@@ -58,6 +63,9 @@ export default class Building extends Component {
     )
   }
   render() {
+    var btnClass = classNames({
+      'selected': this.state.selected
+    })
     if (this.state.user_token === 'null') {
       return (
         <Login />
@@ -132,7 +140,7 @@ export default class Building extends Component {
                 <h3>Send a Message</h3>
                 <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
                 <h3>Filter Posts by Tags</h3>
-                <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} />
+                <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} isActive={this.isActive} btnClass={btnClass}/>
               </Col>
             </Row>
           </Grid>
@@ -147,6 +155,8 @@ export default class Building extends Component {
     console.log('in handle likes')
     this.setState({posts: e, originalPosts: e})
   }
+
+
   _handlePostsByTags(e) {
     e.preventDefault();
     let newPosts = [];
@@ -158,14 +168,14 @@ export default class Building extends Component {
       })
     })
     if (this.state.posts === this.state.originalPosts) {
-      this.setState({posts: newPosts})
+      this.setState({posts: newPosts, selected: true})
     } else {
       let a = this.state.posts[0]
       let b = newPosts[0]
       if (a.id === b.id) {
-        this.setState({posts: this.state.originalPosts})
+        this.setState({posts: this.state.originalPosts, selected: false})
       } else {
-        this.setState({posts: newPosts})
+        this.setState({posts: newPosts, selected: true})
       }
     }
   }
@@ -212,4 +222,5 @@ export default class Building extends Component {
   _handlePostChange(e) {
     console.log('in handle change' + e.target.value)
   }
+
 }

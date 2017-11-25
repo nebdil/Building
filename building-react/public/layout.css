@@ -516,10 +516,8 @@ h2, h3 {
   width: 250px;
 }
 /* end of NAVTOP POSITIONING & transparency*/
-
-
-/* start of BACKGROUND*/
-
-/*.main {
-  background-image:url("http://www.publicdomainpictures.net/pictures/30000/velka/cork-board.jpg");
-}*/
+/* start of tag*/
+.selected {
+  background-color: coral;
+  color: white !important;
+}
