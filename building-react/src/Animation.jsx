@@ -6,7 +6,6 @@ import About from './About.jsx';
 export default class Animation extends Component {
   componentDidMount() {
 
-
     (function () {
     var element = $('.Buildings');
 
@@ -501,7 +500,7 @@ export default class Animation extends Component {
       </g>
     </g>
   </svg>
-  <About/>
+  <About propS={this.props}/>
 </div>
     )
   }

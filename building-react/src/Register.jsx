@@ -23,9 +23,11 @@ export default class Register extends Component {
     this._handlePasswordConfirmation = this._handlePasswordConfirmation.bind(this)
     this._handleAnimation = this._handleAnimation.bind(this)
     this.initAutocomplete = this.initAutocomplete.bind(this)
+    this.forceUpdate = this.forceUpdate.bind(this)
   }
 
   componentDidMount() {
+    console.log('in omponent did mount')
     window.addEventListener('load', this._handleAnimation);
   }
 

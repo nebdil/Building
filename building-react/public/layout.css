@@ -543,8 +543,15 @@ h2, h3 {
   padding-top: 25px;
   background-color: #FCBC57;
   margin-bottom: 0;
+  color: #2C4B56;
 }
  .login-btn {
    background-color: #2E7EAA;
+   margin-right: 10px;
+   margin-left: 10px;
+ }
+ .header {
+   font-size: 40px;
+   padding-bottom: 10px;
  }
  /* end of about page */
