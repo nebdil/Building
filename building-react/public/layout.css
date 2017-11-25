@@ -499,3 +499,12 @@ h2, h3 {
   top: 73px;
 }
 /* end of BUILDING RIGHT COLUMN POSITIONING*/
+
+/* start of NAVTOP POSITIONING*/
+#navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+/* end of NAVTOP POSITIONING*/
