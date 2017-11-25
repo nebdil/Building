@@ -37,7 +37,7 @@ export default class Main extends Component {
     } else {
       return (
         <div>
-          <Navtop propS={this.props}/>
+          {/* <Navtop propS={this.props}/> */}
             <Switch>
               <Route path='/buildings/:building_id/users/:id' component={User}/>
               <Route path='/buildings/:building_id/posts' component={Building}/>

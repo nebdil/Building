@@ -12,7 +12,6 @@ export default class Register extends Component {
       email: '',
       password: '',
       password_confirmation: '',
-      url: '',
       address: ''
     }
     this._handleChange = this._handleChange.bind(this)
@@ -118,7 +117,16 @@ export default class Register extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson)
-      this.setState({url: responseJson.url})
+      // this.setState({url: responseJson.url})
+      localStorage.setItem('user_id', responseJson.id)
+      localStorage.setItem('building_id', responseJson.building_id)
+      localStorage.setItem('user_username', responseJson.username)
+      localStorage.setItem('user_email', responseJson.email)
+      localStorage.setItem('building_address', this.state.address)
+      // console.log(localStorage.getItem('user_id'))
+      // console.log(localStorage.getItem('building_id'))
+      // console.log(localStorage.getItem('user_username'))
+      // console.log(localStorage.getItem('user_email'))
     })
     .then(() => {
       fetch('/user_token', {
@@ -132,11 +140,8 @@ export default class Register extends Component {
       .then((responseJson) => {
         console.log(responseJson)
         localStorage.setItem('user_token', responseJson.jwt);
-        localStorage.setItem('user_email', obj1.auth.email);
-        localStorage.setItem('user_username', obj1.auth.username);
-        console.log(localStorage.getItem('user_username'))
-        console.log(this.state.url)
-        this.props.history.push(this.state.url)
+        // console.log(this.state.url)
+        this.props.history.push(`/buildings/${localStorage.getItem('building_id')}/posts`)
       })
     })
   }

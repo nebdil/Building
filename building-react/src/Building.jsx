@@ -6,6 +6,7 @@ import Tag from './Tag.jsx';
 import CreatePost from './CreatePost.jsx'
 import SendReply from './SendReply.jsx'
 import Login from './Login.jsx'
+import Navtop from './Navtop.jsx';
 import { Panel, Row, Col, Grid } from 'react-bootstrap'
 import moment from 'moment'
 import {
@@ -63,6 +64,7 @@ export default class Building extends Component {
     } else {
       return (
         <div>
+          <Navtop propS={this.props}/>
           <Grid>
             <Row>
               <Col md={8}>

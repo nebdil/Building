@@ -14,13 +14,13 @@ class BuildingsController < ApplicationController
     if @building.save
       url_ok = {url: "/buildings/#{@building[:id]}/posts"}
       puts 'in if'
-      @building.users.create!({
-          username: params[:username],
-          email: params[:email],
-          password: params[:password],
-          password_confirmation: params[:password_confirmation]
-        })
-      render json: url_ok
+      @user = @building.users.create!({
+                username: params[:username],
+                email: params[:email],
+                password: params[:password],
+                password_confirmation: params[:password_confirmation]
+              })
+      render json: @user
     else
       url_no = {url: '/register'}
       puts 'in else'

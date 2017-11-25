@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserPost from './UserPost.jsx';
 import UserReply from './UserReply.jsx';
 import Login from './Login.jsx';
+import Navtop from './Navtop.jsx';
 import { Link } from 'react-router-dom'
 
 export default class User extends Component {
@@ -43,6 +44,7 @@ export default class User extends Component {
     } else {
     return (
       <div>
+        <Navtop propS={this.props}/>
         <Link to={`/buildings/${this.props.match.params.building_id}/posts`}>Go back</Link>
         <p>Your posts</p>
         {this.state.posts.map((e) => {

@@ -49,6 +49,8 @@ skip_before_action :authenticate_user!, only: [:create], raise: false
   #   # end
   # end
 
+  
+
   def new
   end
   def edit

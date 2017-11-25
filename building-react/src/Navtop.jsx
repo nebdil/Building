@@ -15,7 +15,7 @@ export default class Navtop extends Component {
       <Navbar id="navbar">
         <Nav>
           <div class="menu-item" id="left-most-nav">
-            <NavItem><Link to={`/buildings/1/users/1`}>My Profile</Link></NavItem>
+            <NavItem><Link to={`/buildings/${this.props.propS.match.params.building_id}/users/${localStorage.getItem('user_id')}`}>My Profile</Link></NavItem>
             <div class="color-div"></div>
           </div>
         </Nav>
@@ -26,7 +26,7 @@ export default class Navtop extends Component {
         </Navbar.Brand>
         <Nav>
           <div class="menu-item" id="second-right-most-nav">
-            <NavItem><p>Signed in as {localStorage.getItem('user_email')} - in 3601</p></NavItem>
+            <NavItem><p>Signed in as {localStorage.getItem('user_username')} - in {localStorage.getItem('building_address')}</p></NavItem>
             <div class="color-div"></div>
           </div>
         </Nav>
@@ -58,6 +58,8 @@ export default class Navtop extends Component {
     localStorage.setItem('user_token', null)
     localStorage.setItem('user_email', null)
     localStorage.setItem('user_username', null)
+    localStorage.setItem('user_id', null)
+    localStorage.setItem('building_id', null)
     // console.log(localStorage.getItem('user_token'))
     this.props.propS.history.push('/login')
   }
