@@ -137,7 +137,7 @@ export default class Building extends Component {
                 </Switch>
               </Col>
               <Col className="fixed" md={4}>
-                <h3>Send a Message</h3>
+                <h3>Create a Post</h3>
                 <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
                 <h3>Filter Posts by Tags</h3>
                 <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} isActive={this.isActive} btnClass={btnClass}/>
