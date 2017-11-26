@@ -33,6 +33,8 @@ export default class Login extends Component {
           </Col>
           <Col md={4}>
             <div className="login-div">
+              <h1 id="logo-header">BUILDING</h1>
+              <hr />
               <div className="intro-text-wrapper">
                 <div className="intro-text-container">
                   <h1>
@@ -40,12 +42,13 @@ export default class Login extends Component {
                       👋
                     </span>
                     <span className="intro-text-2 start">
-                      Hi,
+                      Hi
                     </span>
                     <span className="intro-text-3 start">
-                      welcome back!
+                      ,
                     </span>
                     <span className="intro-text-4 start">
+                      welcome back!
                     </span>
                   </h1>
                 </div>

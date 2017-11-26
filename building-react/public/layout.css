@@ -1,4 +1,4 @@
-h2, h3 {
+  h1, h2, h3 {
   font-family: 'Advent Pro', sans-serif;
   font-weight: bold;
 }
@@ -70,13 +70,18 @@ body {
 
 /* Landing Page Animation */
 
+#logo-header {
+  text-align: center;
+}
+
 .intro-text-wrapper {
+  width: 300px;
+  text-align: center;
   align-items:center;
-  min-height: 100px;
 }
 
 .intro-text-container h1 {
-  font-family: Helvetica;
+  font-weight: lighter;
   letter-spacing: -0.025em;
   margin: 0 auto;
   display: block;
@@ -85,6 +90,7 @@ body {
 }
 
 .intro-text-container {
+  margin-top: 8px;
   padding-left: 24px;
 }
 
@@ -109,7 +115,7 @@ body {
 .intro-text-1 {
   animation-name: waveHand;
   animation-iteration-count: infinite;
-  animation-duration: 1.3s;
+  animation-duration: 1.0s;
   animation-timing-function: ease;
   transform-origin: 90% 80%;
   opacity:  1;
@@ -121,7 +127,7 @@ body {
 .intro-text-2 {
   width: auto;
   opacity: 1;
-  transition-delay: 1.5s;
+  transition-delay: 0.5s;
   margin-left: 12px;
   max-width: 60px;
 }
@@ -134,7 +140,7 @@ body {
 
 .intro-text-3 {
   opacity: 1;
-  transition-delay: 3.25s;
+  transition-delay: 1.25s;
 }
 
 .intro-text-3.start {
@@ -144,8 +150,8 @@ body {
 .intro-text-4 {
   max-width: 150px;
   opacity: 1;
-  transition: ease 2s;
-  transition-delay: 3.5s;
+  transition: ease 1s;
+  transition-delay: 1.5s;
   white-space:nowrap;
   transform: translateX(0px);
   margin-left: 8px;
@@ -167,7 +173,7 @@ body {
 /* For the log-in and register page */
 
 .background-image {
-  background: url("logo.svg");
+  background: url("new-logo.png");
   background-size: contain;
   background-repeat: no-repeat;
   height: 100vh;
@@ -178,12 +184,8 @@ body {
   margin-top: 150px;
 }
 
-.intro-text-container {
-  margin-top: 150px;
-}
-
 #screen input, #screen button {
-  background: rgba(50,50,50,0.25);
+  background: #fff7f0;
   -webkit-backdrop-filter: blur(6px);
   padding: 12px 12px;
   font-size: 20px;
@@ -201,9 +203,14 @@ body {
 }
 
 #screen button {
-  background: rgba(0,0,0,0.55);
+  background: white;
+  color: coral;
+  border: 1px solid coral;
+  border-radius: 10px;
   width: 300px;
-  height: 60px;
+  height: 40px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 #screen {
@@ -222,10 +229,13 @@ body {
   display: block;
   text-align: center;
   font-size: 16px;
+  color: coral;
 }
 
 .register-form, .login-form {
   width: 300px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 /* End of the log-in and register page */
