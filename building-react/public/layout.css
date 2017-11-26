@@ -1,5 +1,16 @@
+h2, h3 {
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 #navbar {
   background-color: white;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
 }
 
 #navbar .menu-item {
@@ -513,7 +524,7 @@ h2, h3 {
   margin-top: 73px;
 }
 .address{
-  width: 250px;
+  width: 205px;
 }
 /* end of NAVTOP POSITIONING & transparency*/
 
@@ -539,20 +550,46 @@ h2, h3 {
 
 /* start of about page */
 .jumbotron {
-  height: 250px;
+  height: auto;
   padding-top: 25px;
-  background-color: #FCBC57;
+  background-color: white;
   margin-bottom: 0;
-  color: #2C4B56;
+  color: black;
 }
+
+.jumbotron h1, .jumbotron h2 {
+  font-family: 'Advent Pro', sans-serif;
+}
+
+.jumbotron h2 {
+  margin-top: 12px;
+}
+
  .login-btn {
-   background-color: #2E7EAA;
+   background-color: white;
+   color: coral;
+   border: 1px solid coral;
    margin-right: 10px;
    margin-left: 10px;
+   font-family: 'Open Sans', sans-serif;
  }
+
+ .login-btn:hover {
+   background-color: coral;
+   color: white;
+   border: 1px solid white;
+   margin-right: 10px;
+   margin-left: 10px;
+   font-family: 'Open Sans', sans-serif;
+ }
+
  .header {
    font-size: 40px;
    padding-bottom: 10px;
+ }
+
+ #login-btn {
+   width: 76px;
  }
  /* end of about page */
 
@@ -628,3 +665,5 @@ h2, h3 {
   font-weight: normal;
   margin-bottom: 32px;
 }
+
+/* END OF MODAL STYLING */
