@@ -13,7 +13,8 @@ export default class About extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      proPS: ''
+      proPS: '',
+      showModal: false
     }
     this._handleLogin = this._handleLogin.bind(this)
     this._handleRegister = this._handleRegister.bind(this)
@@ -49,7 +50,8 @@ export default class About extends Component {
       </Col>
       <Col md={3}></Col>
       <Switch>
-        <Route path={`/login`} component={Login}/>
+        <Route path={`/login`} render={(props) => {return(
+          <Login {...props} show={this.state.showModal}/>
         <Route path={`/register`} render={(props) =>
           {return(
             <Register {...props}/>
@@ -67,5 +69,12 @@ export default class About extends Component {
   }
   _handleRegister(e) {
     this.props.propS.history.push('/register')
+  }
+  close(){
+    this.setState({ showModal: false });
+  },
+
+  open(){
+    this.setState({ showModal: true });
   }
 }

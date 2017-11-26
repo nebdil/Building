@@ -25,6 +25,8 @@ export default class Login extends Component {
 
   render() {
     return(
+      <Dialog show={this.props.showModal}>
+
       <Grid>
         <Row className="show-grid">
           <Col md={8}>
@@ -69,6 +71,7 @@ export default class Login extends Component {
           </Col>
         </Row>
       </Grid>
+    </Dialog>
 
     )
   }

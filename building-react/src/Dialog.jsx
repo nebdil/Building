@@ -1,5 +1,6 @@
 import React from 'react';
 import {Modal, Panel, Row, Col, Grid, Button, ButtonToolbar } from 'react-bootstrap'
+import Login from './Login.jsx'
 
 const Dialog = (props) => (
   <Modal
