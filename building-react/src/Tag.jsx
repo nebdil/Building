@@ -28,7 +28,7 @@ export default class Tag extends Component {
 
     let func = this.props.handlePostsByTags
     // let unique = this.props.unique_tags
-
+    let selected = this.props.selectedTag
     let btnClass = this.props.btnClass
 
 
@@ -36,7 +36,11 @@ export default class Tag extends Component {
       <div className="tag-list">
         <ul>
           {unique.map(function(e){
-            return <button onClick={func} className={btnClass} value={e}>{e}</button>
+            if(selected == e) {
+              return <button onClick={func} className={btnClass} value={e}>{e}</button>
+            } else {
+              return <button onClick={func} value={e}>{e}</button>
+            }
           })}
         </ul>
       </div>

@@ -29,7 +29,8 @@ export default class Building extends Component {
       user_email: localStorage.getItem('user_email'),
       createContent: '',
       createTag: '',
-      selected: ''
+      selected: '',
+      selected_tag: ''
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
@@ -140,7 +141,7 @@ export default class Building extends Component {
                 <h3>Create a Post</h3>
                 <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
                 <h3>Filter Posts by Tags</h3>
-                <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} isActive={this.isActive} btnClass={btnClass}/>
+                <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} isActive={this.isActive} btnClass={btnClass} selectedTag={this.state.selected_tag}/>
               </Col>
             </Row>
           </Grid>
@@ -156,7 +157,6 @@ export default class Building extends Component {
     this.setState({posts: e, originalPosts: e})
   }
 
-
   _handlePostsByTags(e) {
     e.preventDefault();
     let newPosts = [];
@@ -168,14 +168,14 @@ export default class Building extends Component {
       })
     })
     if (this.state.posts === this.state.originalPosts) {
-      this.setState({posts: newPosts, selected: true})
+      this.setState({posts: newPosts, selected: true, selected_tag: e.target.value})
     } else {
       let a = this.state.posts[0]
       let b = newPosts[0]
       if (a.id === b.id) {
-        this.setState({posts: this.state.originalPosts, selected: false})
+        this.setState({posts: this.state.originalPosts, selected: false, selected_tag: e.target.value})
       } else {
-        this.setState({posts: newPosts, selected: true})
+        this.setState({posts: newPosts, selected: true, selected_tag: e.target.value})
       }
     }
   }
