@@ -64,8 +64,10 @@ export default class About extends Component {
     console.log('in handle login')
     console.log(this.state.proPS)
     this.props.propS.history.push('/login')
+    window.location.reload()
   }
   _handleRegister(e) {
     this.props.propS.history.push('/register')
+    window.location.reload()
   }
 }
