@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { ButtonToolbar, Button } from 'react-bootstrap'
+import classNames from 'classnames'
+
 
 export default class Like extends Component {
   constructor(props) {
@@ -8,18 +10,32 @@ export default class Like extends Component {
       like: false,
       likeId: '',
       postId: '',
-      user_id: ''
+      user_id: '',
+      liked: false
     }
     this._handleLike = this._handleLike.bind(this)
   }
+  componentWillMount() {
+    this.props.likes.map((a) => {
+      if (a.user_id == localStorage.getItem('user_id')) {
+        this.setState({liked: true})
+      } else {
+        this.setState({liked: false})
+      }
+    })
+  }
   render() {
+    var btnClass = classNames({
+      'fa fa-heart': this.state.liked,
+      'fa fa-heart-o': !this.state.liked
+    })
     // console.log('in like: ')
     // console.log(this.props.propS.match)
     return(
       <div>
         {/* <button onClick={this._handleLike}>LIKE BUTTON</button> */}
         <ButtonToolbar>
-          <Button id="peace-div" bsSize="xsmall" type="submit" onClick={this._handleLike}><i class="fa fa-hand-peace-o" aria-hidden="true"></i></Button>
+          <Button id="peace-div" bsSize="xsmall" type="submit" onClick={this._handleLike}><i class={btnClass} aria-hidden="true"></i></Button>
           <p>{this.props.likeLength}</p>
         </ButtonToolbar>
       </div>
@@ -29,6 +45,7 @@ export default class Like extends Component {
     console.log('in handle like')
     console.log(this.props.propS)
     console.log(this.props.propS.path)
+    this.setState({liked: !this.state.liked})
 
     if (this.props.propS.path ==
 "/buildings/:building_id/users/:id") {
