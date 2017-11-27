@@ -191,6 +191,8 @@ export default class Building extends Component {
   }
   _handleNewPost(e) {
     e.preventDefault();
+    e.target.reset()
+
     console.log('e.target: ' + e.target)
     // const content = {form: new FormData(e.target), user_email: localStorage.getItem('user_email')};
     const content = {
