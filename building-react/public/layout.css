@@ -46,6 +46,11 @@ body {
   text-decoration: none;
 }
 
+#navbar .page-selected a, #navbar .page-selected p {
+  color: coral;
+  text-decoration: none;
+}
+
 #navbar a, #navbar p {
   font-size: 16px;
   color: #777;
@@ -61,6 +66,14 @@ body {
 }
 
 #navbar .menu-item:hover .color-div {
+  position: absolute;
+  width: 100%;
+  bottom: 3px;
+  min-height: 3px;
+  background-color: coral;
+}
+
+#navbar .page-selected .color-div {
   position: absolute;
   width: 100%;
   bottom: 3px;
