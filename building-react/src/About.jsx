@@ -39,7 +39,7 @@ export default class About extends Component {
               Login
             </Button>
             <Button bsStyle="primary" className="login-btn" onClick={this._handleRegister} >
-              Sign Up
+              Register
             </Button>
           </Col>
           <Col md={4}></Col>
