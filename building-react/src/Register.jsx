@@ -79,7 +79,7 @@ export default class Register extends Component {
 
                     <label htmlFor="password_confirmation">
                     </label>
-                    <input type="text" name="password_confirmation" placeholder="confirm password" onChange={this._handlePasswordConfirmation} />
+                    <input type="password" name="password_confirmation" placeholder="confirm password" onChange={this._handlePasswordConfirmation} />
                     <BuildingRegister initAutocomplete={this.initAutocomplete}/>
                     <button>Register</button>
                     <hr />

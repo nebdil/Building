@@ -255,10 +255,10 @@ body {
   font-weight: 300;
 }
 
-/*.pac-item {
+.pac-item {
   color: coral;
   background-color: #fff7f0;
-}*/
+}
 
 #infowindow-content .title {
   font-weight: bold;
