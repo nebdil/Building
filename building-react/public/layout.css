@@ -639,6 +639,10 @@ h2, h3 {
   width: 100px;
 }
 
+.modal-body .replier-name {
+  font-weight: bold;
+}
+
 #mdl-header .tag-div {
   font-weight: normal;
   font-size: 12px;

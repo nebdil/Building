@@ -107,7 +107,7 @@ export default class Post extends Component {
                 <ListGroup fill>
                   <ListGroupItem>
                     <Row>
-                      <Col md={8}><p>{e.username}</p></Col>
+                      <Col md={8}><p className="replier-name">{e.username}</p></Col>
                       <Col md={4}><p id="comment-time">{moment(e.created_at).startOf('second').fromNow()}</p></Col>
                     </Row>
                     <p>{e.content}</p>
