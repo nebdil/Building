@@ -1,5 +1,16 @@
+  h1, h2, h3 {
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 #navbar {
   background-color: white;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: bold;
 }
 
 #navbar .menu-item {
@@ -59,13 +70,18 @@
 
 /* Landing Page Animation */
 
+#logo-header {
+  text-align: center;
+}
+
 .intro-text-wrapper {
+  width: 300px;
+  text-align: center;
   align-items:center;
-  min-height: 100px;
 }
 
 .intro-text-container h1 {
-  font-family: Helvetica;
+  font-weight: lighter;
   letter-spacing: -0.025em;
   margin: 0 auto;
   display: block;
@@ -74,6 +90,7 @@
 }
 
 .intro-text-container {
+  margin-top: 8px;
   padding-left: 24px;
 }
 
@@ -98,7 +115,7 @@
 .intro-text-1 {
   animation-name: waveHand;
   animation-iteration-count: infinite;
-  animation-duration: 1.3s;
+  animation-duration: 1.0s;
   animation-timing-function: ease;
   transform-origin: 90% 80%;
   opacity:  1;
@@ -110,7 +127,7 @@
 .intro-text-2 {
   width: auto;
   opacity: 1;
-  transition-delay: 1.5s;
+  transition-delay: 0.5s;
   margin-left: 12px;
   max-width: 60px;
 }
@@ -123,7 +140,7 @@
 
 .intro-text-3 {
   opacity: 1;
-  transition-delay: 3.25s;
+  transition-delay: 1.25s;
 }
 
 .intro-text-3.start {
@@ -133,8 +150,8 @@
 .intro-text-4 {
   max-width: 150px;
   opacity: 1;
-  transition: ease 2s;
-  transition-delay: 3.5s;
+  transition: ease 1s;
+  transition-delay: 1.5s;
   white-space:nowrap;
   transform: translateX(0px);
   margin-left: 8px;
@@ -156,23 +173,23 @@
 /* For the log-in and register page */
 
 .background-image {
-  background: url("logo.svg");
+  background: url("new-logo.png");
   background-size: contain;
   background-repeat: no-repeat;
   height: 100vh;
   margin-top: 100px;
 }
 
-.login-div, .register-div {
+.login-div {
   margin-top: 150px;
 }
 
-.intro-text-container {
-  margin-top: 150px;
+.register-div {
+  margin-top: 80px;
 }
 
 #screen input, #screen button {
-  background: rgba(50,50,50,0.25);
+  background: #fff7f0;
   -webkit-backdrop-filter: blur(6px);
   padding: 12px 12px;
   font-size: 20px;
@@ -182,7 +199,7 @@
   height: 40px;
   width: 300px;
   border-radius: 6px;
-  color: #f9f9f9;
+  color: coral;
   -webkit-transition: 0.6s ease;
   border: none;
   outline: none;
@@ -190,9 +207,14 @@
 }
 
 #screen button {
-  background: rgba(0,0,0,0.55);
+  background: white;
+  color: coral;
+  border: 1px solid coral;
+  border-radius: 10px;
   width: 300px;
-  height: 60px;
+  height: 40px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 #screen {
@@ -211,10 +233,13 @@
   display: block;
   text-align: center;
   font-size: 16px;
+  color: coral;
 }
 
 .register-form, .login-form {
   width: 300px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 /* End of the log-in and register page */
@@ -228,6 +253,11 @@
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
+}
+
+.pac-item {
+  color: coral;
+  background-color: #fff7f0;
 }
 
 #infowindow-content .title {
@@ -513,7 +543,7 @@ h2, h3 {
   margin-top: 73px;
 }
 .address{
-  width: 250px;
+  width: 205px;
 }
 /* end of NAVTOP POSITIONING & transparency*/
 
@@ -539,20 +569,46 @@ h2, h3 {
 
 /* start of about page */
 .jumbotron {
-  height: 250px;
+  height: auto;
   padding-top: 25px;
-  background-color: #FCBC57;
+  background-color: white;
   margin-bottom: 0;
-  color: #2C4B56;
+  color: black;
 }
+
+.jumbotron h1, .jumbotron h2 {
+  font-family: 'Advent Pro', sans-serif;
+}
+
+.jumbotron h2 {
+  margin-top: 12px;
+}
+
  .login-btn {
-   background-color: #2E7EAA;
+   background-color: white;
+   color: coral;
+   border: 1px solid coral;
    margin-right: 10px;
    margin-left: 10px;
+   font-family: 'Open Sans', sans-serif;
  }
+
+ .login-btn:hover {
+   background-color: coral;
+   color: white;
+   border: 1px solid white;
+   margin-right: 10px;
+   margin-left: 10px;
+   font-family: 'Open Sans', sans-serif;
+ }
+
  .header {
    font-size: 40px;
    padding-bottom: 10px;
+ }
+
+ #login-btn {
+   width: 76px;
  }
  /* end of about page */
 
@@ -628,3 +684,5 @@ h2, h3 {
   font-weight: normal;
   margin-bottom: 32px;
 }
+
+/* END OF MODAL STYLING */
