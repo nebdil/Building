@@ -41,6 +41,8 @@ export default class Register extends Component {
             </Col>
             <Col md={4}>
               <div className="register-div">
+                <h1 id="logo-header">BUILDING</h1>
+                <hr />
                 <div className="intro-text-wrapper">
                   <div className="intro-text-container">
                     <h1>

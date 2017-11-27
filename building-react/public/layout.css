@@ -180,8 +180,12 @@ body {
   margin-top: 100px;
 }
 
-.login-div, .register-div {
+.login-div {
   margin-top: 150px;
+}
+
+.register-div {
+  margin-top: 80px;
 }
 
 #screen input, #screen button {
@@ -195,7 +199,7 @@ body {
   height: 40px;
   width: 300px;
   border-radius: 6px;
-  color: #f9f9f9;
+  color: coral;
   -webkit-transition: 0.6s ease;
   border: none;
   outline: none;
@@ -250,6 +254,11 @@ body {
   font-size: 15px;
   font-weight: 300;
 }
+
+/*.pac-item {
+  color: coral;
+  background-color: #fff7f0;
+}*/
 
 #infowindow-content .title {
   font-weight: bold;
