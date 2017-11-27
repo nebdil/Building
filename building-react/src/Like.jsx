@@ -11,7 +11,7 @@ export default class Like extends Component {
       likeId: '',
       postId: '',
       user_id: '',
-      liked: false
+      liked: ''
     }
     this._handleLike = this._handleLike.bind(this)
   }
@@ -19,8 +19,10 @@ export default class Like extends Component {
     this.props.likes.map((a) => {
       if (a.user_id == localStorage.getItem('user_id')) {
         this.setState({liked: true})
+        console.log('LIKED TRUEEEEE')
       } else {
         this.setState({liked: false})
+        console.log('LIKED FALSSEEEEE')
       }
     })
   }
