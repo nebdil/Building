@@ -192,6 +192,14 @@ body {
 
 /* For the log-in and register page */
 
+.email {
+  color: coral;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
 .background-image {
   background: url("new-logo.png");
   background-size: contain;

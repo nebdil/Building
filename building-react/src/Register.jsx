@@ -81,6 +81,7 @@ export default class Register extends Component {
                     </label>
                     <input type="password" name="password_confirmation" placeholder="confirm password" onChange={this._handlePasswordConfirmation} />
                     <BuildingRegister initAutocomplete={this.initAutocomplete}/>
+                    <p className="email">You will receive an email once you register!</p>
                     <button>Register</button>
                     <hr />
                     <Link to={'/login'}>Login</Link>
