@@ -109,12 +109,12 @@ body {
 }
 
 
-.intro-text-1, .intro-text-2, .intro-text-3 {
+.intro-text-1, .intro-text-2, .intro-text-3, .intro-text-4 {
   transition: 1.5s ease;
   display: inline-block;
 }
 
-.intro-text-4 {
+#below {
   transition: 1.5s ease;
   display: block;
   padding-left: 40px;

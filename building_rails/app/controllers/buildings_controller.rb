@@ -20,6 +20,8 @@ class BuildingsController < ApplicationController
                 password: params[:password],
                 password_confirmation: params[:password_confirmation]
               })
+      ###
+      @user.save!
       # if @user.save
       #   ApplicationMailer.register_email(@user).deliver!
       #

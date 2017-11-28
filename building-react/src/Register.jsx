@@ -55,7 +55,7 @@ export default class Register extends Component {
                       <span className="intro-text-3 start">
                         interact with your neighbors
                       </span>
-                      <span className="intro-text-4 start">
+                      <span className="intro-text-4 start" id="below">
                         by registering below...
                       </span>
                     </h1>
@@ -105,8 +105,7 @@ export default class Register extends Component {
     const obj1 = {
       auth: {
         email: this.state.email,
-        password: this.state.password,
-        username: this.state.username
+        password: this.state.password
       }
     }
     e.preventDefault()
@@ -143,6 +142,7 @@ export default class Register extends Component {
       })
       .then((response) => response.json())
       .then((responseJson) => {
+        console.log('in fetch user token')
         console.log(responseJson)
         localStorage.setItem('user_token', responseJson.jwt);
         // console.log(this.state.url)
