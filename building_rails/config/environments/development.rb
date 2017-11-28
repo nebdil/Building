@@ -48,7 +48,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
     Mailgun.configure do |config|
-      config.api_key = ENV['PRIVATE_API_KEY_MAILGUN']
+      config.api_key = ""
     end
   # config.action_mailer.delivery_method = :mailgun
   #   config.action_mailer.mailgun_settings = {

@@ -14,12 +14,22 @@ class BuildingsController < ApplicationController
     if @building.save
       url_ok = {url: "/buildings/#{@building[:id]}/posts"}
       puts 'in if'
-      @user = @building.users.create!({
+      @user = @building.users.new({
                 username: params[:username],
                 email: params[:email],
                 password: params[:password],
                 password_confirmation: params[:password_confirmation]
               })
+      # if @user.save
+      #   ApplicationMailer.register_email(@user).deliver!
+      #
+      #   mg_client = Mailgun::Client.new ""
+      #   message_params = {:from    => "",
+      #                     :to      => @user.email,
+      #                     :subject => 'Hello from your Building!',
+      #                     :text    => 'Thank you for registering to your Building! Now you can connect with your neighbors!'}
+      #   mg_client.send_message "", message_params
+      # end
       render json: @user
     else
       url_no = {url: '/register'}
