@@ -395,8 +395,12 @@ body {
   resize: none;
 }
 
+.send-post .post-container:focus, .send-post .tag-container:focus {
+  outline: 0;
+}
+
 .send-post .tag-container {
-  border-radius: 30px;
+  border-radius: 8px;
   border: 2px solid coral;
   text-align: center;
   color: coral;
@@ -412,11 +416,17 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-  border-width: 1px;
-  border-radius: 30px;
+  border-width: 2px;
+  border-radius: 5px;
   border-color: coral;
   background-color: coral;
   color: white;
+}
+
+.send-post button:active {
+  border-color: white;
+  background-color: #fff7f0;
+  color: coral;
 }
 
 /* End of Send post and send tag buttons */
@@ -479,6 +489,14 @@ h2, h3 {
   background-color: transparent;
   margin-right: 0px;
   float: none;
+}
+
+#peace-div:focus {
+  outline: 0;
+}
+
+#peace-div:active {
+  background-color: #fff7f0;
 }
 
 #peace-div > i {
@@ -628,7 +646,19 @@ h2, h3 {
  }
 
  #login-btn {
-   width: 76px;
+   width: 66px;
+ }
+
+ #register-btn {
+   width: 66px;
+   padding-left: 6px;
+ }
+
+ #login-btn:focus, #register-btn:focus {
+   background-color: coral;
+   color: white;
+   border: 1px solid white;
+   outline: 0;
  }
  /* end of about page */
 

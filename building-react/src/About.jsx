@@ -38,7 +38,7 @@ export default class About extends Component {
             <Button bsStyle="primary" id="login-btn" className="login-btn" onClick={this._handleLogin}>
               Login
             </Button>
-            <Button bsStyle="primary" className="login-btn" onClick={this._handleRegister} >
+            <Button bsStyle="primary" id="register-btn" className="login-btn" onClick={this._handleRegister} >
               Register
             </Button>
           </Col>
