@@ -95,5 +95,7 @@ export default class Navtop extends Component {
     localStorage.setItem('building_address', null)
     // console.log(localStorage.getItem('user_token'))
     this.props.propS.history.push('/login')
+    window.location.reload()
+
   }
 }
