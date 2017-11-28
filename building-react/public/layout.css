@@ -231,6 +231,12 @@ body {
   padding-bottom: 0px;
 }
 
+#screen button:focus {
+  background: coral;
+  color: white;
+  border-color: white;
+}
+
 #screen {
   position: relative;
   display: block;
