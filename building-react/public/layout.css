@@ -677,6 +677,10 @@ h2, h3 {
  /* end of about page */
 
 /*beginning of MODAL STYLING*/
+#send-reply-btn:focus {
+  outline: 0;
+}
+
 .modal-time {
   width: 28%;
 }

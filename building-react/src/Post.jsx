@@ -136,6 +136,7 @@ export default class Post extends Component {
   }
   _handleReplySubmit(e) {
     e.preventDefault();
+    e.target.reset()
     // console.log(e.currentTarget)
     // const content = new FormData(e.currentTarget);
     const obj = {

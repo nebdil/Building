@@ -17,7 +17,7 @@ export default class SendReply extends Component {
           </Col>
           <Col>
             <ButtonToolbar>
-              <Button bsSize="xsmall" type="submit">Reply</Button>
+              <Button bsSize="xsmall" type="submit" id="send-reply-btn">Reply</Button>
             </ButtonToolbar>
           </Col>
         </Row>
