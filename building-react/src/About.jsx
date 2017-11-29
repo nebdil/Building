@@ -30,7 +30,7 @@ export default class About extends Component {
     <Jumbotron>
       <Col md={3}></Col>
       <Col md={6}>
-        <Row><h1>BUILDING</h1></Row>
+        <Row><h1 id="project-name">BUILDING</h1></Row>
         <Row><h2>We connect you with your neighbors.</h2></Row>
         <Row>
           <Col md={4}></Col>

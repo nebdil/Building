@@ -620,6 +620,10 @@ h2, h3 {
 /* end of animation */
 
 /* start of about page */
+#project-name {
+  margin-top: 0px;
+}
+
 .jumbotron {
   height: auto;
   padding-top: 25px;
