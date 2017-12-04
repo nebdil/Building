@@ -21,17 +21,17 @@ class BuildingsController < ApplicationController
                 password_confirmation: params[:password_confirmation]
               })
       ###
-      @user.save!
-      # if @user.save
-      #   ApplicationMailer.register_email(@user).deliver!
-      #
-      #   mg_client = Mailgun::Client.new ""
-      #   message_params = {:from    => "",
-      #                     :to      => @user.email,
-      #                     :subject => 'Hello from your Building!',
-      #                     :text    => 'Thank you for registering to your Building! Now you can connect with your neighbors!'}
-      #   mg_client.send_message "", message_params
-      # end
+      # @user.save!
+      if @user.save
+        ApplicationMailer.register_email(@user).deliver!
+
+        mg_client = Mailgun::Client.new "key-a2cf31de4910b2743d7a19585c3f4c85"
+        message_params = {:from    => "dilannebioglu@gmail.com",
+                          :to      => @user.email,
+                          :subject => 'Hello from your Building!',
+                          :text    => 'Thank you for registering to your Building! Now you can connect with your neighbors!'}
+        mg_client.send_message "sandboxcc6313cdfcfd4c37a39123dd094ce1ab.mailgun.org", message_params
+      end
       render json: @user
     else
       url_no = {url: '/register'}
