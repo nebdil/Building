@@ -7,16 +7,18 @@ class LikesController < ApplicationController
   def create
     puts 'LIKES/CREATE/DESTROY CONTROLLER IN'
     @user = User.find_by_email(params[:email])
-    puts '@user.inspect'
-    puts @user.inspect
-
-    puts 'params[:post_id]'
-    puts params[:post_id]
-    puts '@user[:id]'
-    puts @user[:id]
+    # puts '@user.inspect'
+    # puts @user.inspect
+    #
+    # puts 'params[:post_id]'
+    # puts params[:post_id]
+    # puts '@user[:id]'
+    # puts @user[:id]
+    puts 'CURRENT USER'
+    puts current_user.username
 
     like = Like.where(post_id: params[:post_id]).where(user_id: @user[:id]).first
-    puts like
+    # puts like
 
     if like
       puts 'IN IF'

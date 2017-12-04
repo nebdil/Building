@@ -53,5 +53,7 @@ class BuildingsController < ApplicationController
       result
     end
     render json: post_arr
+    # puts 'CURRENT USER'
+    # puts current_user
   end
 end
