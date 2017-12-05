@@ -27,6 +27,8 @@ build1 = Building.create!({
 
 # User.destroy_all
 
+puts "creating user"
+
 user1 = build1.users.create!({
           id: 1,
           username: 'dilanimo',
@@ -62,6 +64,8 @@ user5 = build1.users.create!({
           password: '123',
           password_confirmation: '123'
           })
+
+puts "created user"
 
 # POSTS
 
