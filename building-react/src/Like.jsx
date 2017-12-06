@@ -31,11 +31,8 @@ export default class Like extends Component {
       'fa fa-heart': this.state.liked,
       'fa fa-heart-o': !this.state.liked
     })
-    // console.log('in like: ')
-    // console.log(this.props.propS.match)
     return(
       <div>
-        {/* <button onClick={this._handleLike}>LIKE BUTTON</button> */}
         <ButtonToolbar>
           <Button id="peace-div" bsSize="xsmall" type="submit" onClick={this._handleLike}><i class={btnClass} aria-hidden="true"></i></Button>
           <p>{this.props.likeLength}</p>
@@ -66,14 +63,12 @@ export default class Like extends Component {
       .then((responseJson) => {
         console.log('FINALLY RECEIVING')
         console.log(responseJson);
-        // console.log(this.props.propS.handleLikes)
         responseJson.map((e) => {
           console.log(e.id)
           console.log(this.props.propS.params.id)
           if (e.id == this.props.propS.params.id) {
             console.log('in new map')
             console.log(e)
-            // this.props.handleLikeChange(e)
           }
         })
         this.props.handleLikes(responseJson)
@@ -95,7 +90,6 @@ export default class Like extends Component {
       .then((responseJson) => {
         console.log('FINALLY RECEIVING')
         console.log(responseJson);
-        // console.log(this.props.propS.handleLikes)
         responseJson.map((e) => {
           console.log(e.id)
           console.log(this.props.propS.match.params.id)
@@ -122,8 +116,7 @@ export default class Like extends Component {
         }
       })
       .then((response) => response.json())
-      .then((responseJson) => {
-        // console.log(responseJson);
+      .then((responseJson) => {        
         this.props.handleLikes(responseJson)
       })
     }
