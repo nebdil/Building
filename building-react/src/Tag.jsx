@@ -1,38 +1,25 @@
 import React, { Component } from 'react';
 
-export default class Tag extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: ''
-    }
-  }
-  render() {
-    let newArr = []
-    this.props.posts.map(function(e){
-      e.tags.forEach(function(a) {
-        newArr.push(a.name)
-      })
+function Tag(props) {
+  let newArr = [];
+  props.posts.forEach((e) => {
+    e.tags.forEach((a) => {
+      newArr.push(a.name)
     })
-    let unique = [...new Set(newArr)];
-
-    let func = this.props.handlePostsByTags
-    let selected = this.props.selectedTag
-    let btnClass = this.props.btnClass
-
-
-    return (
-      <div className="tag-list">
-        <ul>
-          {unique.map(function(e){
-            if(selected == e) {
-              return <button onClick={func} className={btnClass} value={e}>{e}</button>
-            } else {
-              return <button onClick={func} value={e}>{e}</button>
-            }
-          })}
-        </ul>
-      </div>
-    )
-  }
+  })
+  let unique = [...new Set(newArr)];
+  return (
+    <div className="tag-list">
+      <ul>
+        {unique.map(function(e){
+          if(props.selectedTag === e) {
+            return <button onClick={props.handlePostsByTags} className={props.btnClass} value={e}>{e}</button>
+          } else {
+            return <button onClick={props.handlePostsByTags} value={e}>{e}</button>
+          }
+        })}
+      </ul>
+    </div>
+  )
 }
+export default Tag;
