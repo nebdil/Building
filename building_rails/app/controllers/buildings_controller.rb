@@ -2,7 +2,6 @@ class BuildingsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create], raise: false
 
   require 'pp'
-  # before_action :authenticate_user
   def index
     @buildings = Building.all
     render json: @buildings
