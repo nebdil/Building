@@ -21,15 +21,14 @@ export default class Main extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({ posts: responseJson })
-        // console.log(responseJson)
+        this.setState({ posts: responseJson })        
       })
       .catch((error) => {
         console.error(error);
       })
     )
   }
-  render() {    
+  render() {
     if (this.state.user_token === 'null') {
       return (
         <Login />

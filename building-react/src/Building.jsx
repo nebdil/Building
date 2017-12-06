@@ -83,6 +83,7 @@ export default class Building extends Component {
                 <table>
                   <tbody>
                     {this.state.posts.map((e) => {
+                      console.log(e)
                       const head = (
                         <Row>
                           <Col className="user-name" md={8}>{e.username}</Col>
@@ -195,13 +196,11 @@ export default class Building extends Component {
     e.target.reset()
 
     console.log('e.target: ' + e.target)
-    // const content = {form: new FormData(e.target), user_email: localStorage.getItem('user_email')};
     const content = {
       content: this.state.createContent,
       tag: this.state.createTag,
       user_email: localStorage.getItem('user_email')
     }
-    console.log(content)
     fetch(`${this.props.match.url}/`, {
       method: 'POST',
       body: JSON.stringify(content),
