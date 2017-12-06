@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user!, except: [:index]
 
   def index
     puts "post#index in"
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
       result[:tags] = po.tags
       result[:building] = params[:id]
       result
-    end    
+    end
     puts "post#index out"
     render json: post_arr
   end
