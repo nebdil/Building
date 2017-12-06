@@ -43,5 +43,6 @@ class BuildingsController < ApplicationController
   def show
     puts 'buildings#show in'
     puts 'buildings#show out'
+    head :ok
   end
 end
