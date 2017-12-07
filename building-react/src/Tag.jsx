@@ -12,15 +12,9 @@ function Tag(props) {
     <div className="tag-list">
       <ul>
         {unique.map(function(e){
-          console.log('props.selectedTag[0]')
-          console.log(props.selectedTag[0])
-          console.log('e')
-          console.log(e)
           if(props.selectedTag[0] === e) {
-            console.log('in if')
             return <button onClick={props.handlePostsByTags} className={props.btnClass} value={e}>{e}</button>
           } else {
-            console.log('in else')
             return <button onClick={props.handlePostsByTags} value={e}>{e}</button>
           }
         })}
