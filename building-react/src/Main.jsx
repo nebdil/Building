@@ -10,19 +10,18 @@ export default class Main extends Component {
     super(props);
     this.state = {
       user_token: localStorage.getItem('user_token'),
-      buildings: []
+      posts: []
     }
   }
   componentDidMount() {
-    return (fetch(`http://localhost:3000/buildings/`, {
+    return (fetch(`http://localhost:3000${this.props.match.url}`, {
       headers: {
         'Authorization': `bearer ${localStorage.getItem('user_token')}`
       }
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({ buildings: responseJson })
-        // console.log(responseJson)
+        this.setState({ posts: responseJson })        
       })
       .catch((error) => {
         console.error(error);
@@ -37,7 +36,6 @@ export default class Main extends Component {
     } else {
       return (
         <div>
-          {/* <Navtop propS={this.props}/> */}
             <Switch>
               <Route path='/buildings/:building_id/users/:id' component={User}/>
               <Route path='/buildings/:building_id/posts' component={Building}/>

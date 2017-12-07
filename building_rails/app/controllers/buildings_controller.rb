@@ -2,7 +2,6 @@ class BuildingsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create], raise: false
 
   require 'pp'
-  # before_action :authenticate_user
   def index
     @buildings = Building.all
     render json: @buildings
@@ -41,16 +40,8 @@ class BuildingsController < ApplicationController
   def new
   end
   def show
-    @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:id]}).order('posts.id DESC')
-    post_arr = @posts.map do |po|
-      result = po.attributes
-      result[:username] = po.user.username
-      result[:reply] = po.replies
-      result[:like] = po.likes
-      result[:tags] = po.tags
-      result[:building] = params[:id]
-      result
-    end
-    render json: post_arr
+    puts 'buildings#show in'
+    puts 'buildings#show out'
+    head :ok
   end
 end

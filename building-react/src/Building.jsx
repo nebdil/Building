@@ -42,7 +42,8 @@ export default class Building extends Component {
     this._handleTag = this._handleTag.bind(this)
   }
   componentDidMount() {
-    return (fetch(`http://localhost:3000/${this.props.match.url}`, {
+    console.log(`http://localhost:3000${this.props.match.url}`)
+    return (fetch(`http://localhost:3000${this.props.match.url}`, {
       headers: {
         'Authorization': `bearer ${localStorage.getItem('user_token')}`
       }

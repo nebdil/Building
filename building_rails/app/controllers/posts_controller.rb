@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user!, except: [:index, :create]
 
   def index
+    puts "post#index in"
     @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:building_id]}).order('posts.id DESC')
     post_arr = @posts.map do |po|
       result = po.attributes
@@ -9,8 +10,10 @@ class PostsController < ApplicationController
       result[:reply] = po.replies
       result[:like] = po.likes
       result[:tags] = po.tags
-      result
+      result[:building] = params[:building_id].to_i
+      result      
     end
+    puts "post#index out"
     render json: post_arr
   end
   def create
