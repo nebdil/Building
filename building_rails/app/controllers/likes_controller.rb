@@ -1,11 +1,10 @@
 class LikesController < ApplicationController
   before_action :authenticate_user
 
-  def index
-  end
-
   def create
     puts 'LIKES/CREATE/DESTROY CONTROLLER IN'
+    puts 'current_user'
+    puts current_user
     @user = User.find_by_email(params[:email])
     puts '@user.inspect'
     puts @user.inspect
@@ -40,5 +39,8 @@ class LikesController < ApplicationController
     end
     render json: post_arr
     puts 'LIKES/CREATE/DESTROY CONTROLLER OUT'
+  end
+
+  def destroy
   end
 end

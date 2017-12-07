@@ -21,7 +21,6 @@ export default class Building extends Component {
     super(props);
     this.state = {
       posts: [],
-      originalPosts: [],
       unique_tags: [],
       showReply: false,
       currentPost: '',
@@ -56,7 +55,7 @@ export default class Building extends Component {
             tags.push(t.name)
           })
         })
-        this.setState({ posts: responseJson, originalPosts: responseJson, selected_tag: tags })
+        this.setState({ posts: responseJson, selected_tag: tags })
         console.log("responseJson: " + responseJson)
         console.log(this.props.match)
         console.log(this.props.match.url)
@@ -154,7 +153,7 @@ export default class Building extends Component {
                 <h3>Create a Post</h3>
                 <CreatePost currentPosts = {this.state.posts} handleNewPost = {this._handleNewPost} handlePostChange = {this._handlePostChange} handleContent={this._handleContent} handleTag={this._handleTag}/>
                 <h3>Filter Posts by Tags</h3>
-                <Tag posts={this.state.originalPosts} handlePostsByTags={this._handlePostsByTags} btnClass={btnClass} selectedTag={this.state.selected_tag}/>
+                <Tag posts={this.state.posts} handlePostsByTags={this._handlePostsByTags} btnClass={btnClass} selectedTag={this.state.selected_tag}/>
               </Col>
             </Row>
           </Grid>
@@ -163,7 +162,8 @@ export default class Building extends Component {
     }
   }
   _handleLikes(e) {
-    this.setState({posts: e, originalPosts: e})
+    this.setState({posts: e})
+    console.log('in handle like')
   }
   _handlePostsByTags(e) {
     e.preventDefault();
@@ -201,7 +201,7 @@ export default class Building extends Component {
     .then((newPost) => {
       const newPostArr = [newPost]
       const posts = newPostArr.concat(this.state.posts)
-      this.setState({posts: posts, originalPosts: posts})
+      this.setState({posts: posts})
     })
   }
   _handlePostChange(e) {
