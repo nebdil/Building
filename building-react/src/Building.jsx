@@ -29,7 +29,7 @@ export default class Building extends Component {
       user_email: localStorage.getItem('user_email'),
       createContent: '',
       createTag: '',
-      selected: true,
+      selected: false,
       selected_tag: []
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
@@ -40,8 +40,6 @@ export default class Building extends Component {
     this._handleLikes = this._handleLikes.bind(this)
     this._handleContent = this._handleContent.bind(this)
     this._handleTag = this._handleTag.bind(this)
-    // this.btnClass = this.btnClass.bind(this)
-    // this._handleRoute = this._handleRoute.bind(this)
   }
   componentDidMount() {
     return (fetch(`http://localhost:3000/${this.props.match.url}`, {
@@ -78,9 +76,12 @@ export default class Building extends Component {
     } else {
       let shownPosts = [];
       if (this.state.selected_tag.length > 1) {
+        //if nothing was selected before
         shownPosts = this.state.posts
       } else {
+        //if something was selected before
         if (this.state.selected) {
+          //if clicked on a totally different thing
           this.state.posts.forEach((p) => {
             p.tags.map((t) => {
               if (t.name === this.state.selected_tag[0]) {
@@ -89,9 +90,9 @@ export default class Building extends Component {
             })
           })
         } else {
+          //if what was selected was the same thing as clicked
           shownPosts = this.state.posts
         }
-
       }
       return (
         <div className="main">
@@ -114,10 +115,6 @@ export default class Building extends Component {
                         <Row>
                           <Col md={4} id="tag-div"><div className="tag-div">{e.tags.map((a) => {return a.name})}</div></Col>
                           <Col md={4}>
-                            {/* <div className="reply-div">
-                              <Link to={`/buildings/1/posts/${e.id}`} posts={e}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
-                              {e.reply.length}
-                            </div> */}
                           </Col>
                           <Col md={4}>
                             <Row>
@@ -133,16 +130,12 @@ export default class Building extends Component {
                                 </div>
                               </Col>
                             </Row>
-                              {/* {e.like.length} */}
                           </Col>
                         </Row>
                       );
                       return(
                         <Panel header={head} footer={foot}>
-                          {/* <a href=`${this.props.match.url}/${e}`>{e.content}</a> */}
-
                           <Link to={`${this.props.match.url}/${e.id}`} posts={e}>{e.content}</Link>
-                          {/* <td><SendReply postId = {e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} postId={e.id} /></td> */}
                         </Panel>
                       )
                     })}
@@ -154,9 +147,6 @@ export default class Building extends Component {
                       <Post {...props} handleLikes={this._handleLikes}/>
                     )}}
                   />
-                  {/* <Post handleLikes={this._handleLikes}/> */}
-
-                  {/* <Route path={`/buildings/:building_id/posts/:id`} handleLikes={this._handleLikes} component={Post} /> */}
                 </Switch>
               </Col>
               <Col className="fixed" md={4}>
@@ -172,7 +162,6 @@ export default class Building extends Component {
     }
   }
   _handleLikes(e) {
-    console.log('in handle likes')
     this.setState({posts: e, originalPosts: e})
   }
   _handlePostsByTags(e) {
@@ -186,25 +175,19 @@ export default class Building extends Component {
   _handleContent(e) {
     e.preventDefault();
     this.setState({createContent: e.target.value})
-    console.log(this.state.createContent)
   }
   _handleTag(e) {
     e.preventDefault();
     this.setState({createTag: e.target.value})
-    console.log(this.state.createTag)
   }
   _handleNewPost(e) {
     e.preventDefault();
     e.target.reset()
-
-    console.log('e.target: ' + e.target)
-    // const content = {form: new FormData(e.target), user_email: localStorage.getItem('user_email')};
     const content = {
       content: this.state.createContent,
       tag: this.state.createTag,
       user_email: localStorage.getItem('user_email')
     }
-    console.log(content)
     fetch(`${this.props.match.url}/`, {
       method: 'POST',
       body: JSON.stringify(content),
@@ -215,18 +198,12 @@ export default class Building extends Component {
     })
     .then((response) => response.json())
     .then((newPost) => {
-      console.log(newPost)
       const newPostArr = [newPost]
       const posts = newPostArr.concat(this.state.posts)
-      // const originalPosts = this.state.originalPosts.concat(newPost)
-      console.log(posts)
-      console.log('setting the state for post')
       this.setState({posts: posts, originalPosts: posts})
-      console.log('just set the state')
     })
   }
   _handlePostChange(e) {
     console.log('in handle change' + e.target.value)
   }
-
 }
