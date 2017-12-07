@@ -11,8 +11,7 @@ class PostsController < ApplicationController
       result[:like] = po.likes
       result[:tags] = po.tags
       result[:building] = params[:building_id].to_i
-      result
-      p result
+      result      
     end
     puts "post#index out"
     render json: post_arr
