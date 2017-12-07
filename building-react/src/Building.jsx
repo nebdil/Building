@@ -29,8 +29,8 @@ export default class Building extends Component {
       user_email: localStorage.getItem('user_email'),
       createContent: '',
       createTag: '',
-      selected: '',
-      selected_tag: ''
+      selected: true,
+      selected_tag: []
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
@@ -43,8 +43,6 @@ export default class Building extends Component {
     // this.btnClass = this.btnClass.bind(this)
     // this._handleRoute = this._handleRoute.bind(this)
   }
-
-
   componentDidMount() {
     return (fetch(`http://localhost:3000/${this.props.match.url}`, {
       headers: {
@@ -53,7 +51,13 @@ export default class Building extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({ posts: responseJson, originalPosts: responseJson })
+        let tags = [];
+        responseJson.forEach((e) => {
+          e.tags.map((t) => {
+            tags.push(t.name)
+          })
+        })
+        this.setState({ posts: responseJson, originalPosts: responseJson, selected_tag: tags })
         console.log("responseJson: " + responseJson)
         console.log(this.props.match)
         console.log(this.props.match.url)
@@ -72,6 +76,23 @@ export default class Building extends Component {
         <Login />
       )
     } else {
+      let shownPosts = [];
+      if (this.state.selected_tag.length > 1) {
+        shownPosts = this.state.posts
+      } else {
+        if (this.state.selected) {
+          this.state.posts.forEach((p) => {
+            p.tags.map((t) => {
+              if (t.name === this.state.selected_tag[0]) {
+                shownPosts.push(p)
+              }
+            })
+          })
+        } else {
+          shownPosts = this.state.posts
+        }
+
+      }
       return (
         <div className="main">
           <Navtop propS={this.props}/>
@@ -81,7 +102,8 @@ export default class Building extends Component {
                 <h2>Posts in Your Building</h2>
                 <table>
                   <tbody>
-                    {this.state.posts.map((e) => {
+                    {
+                      shownPosts.map((e) => {
                       const head = (
                         <Row>
                           <Col className="user-name" md={8}>{e.username}</Col>
@@ -153,27 +175,12 @@ export default class Building extends Component {
     console.log('in handle likes')
     this.setState({posts: e, originalPosts: e})
   }
-
   _handlePostsByTags(e) {
     e.preventDefault();
-    let newPosts = [];
-    this.state.originalPosts.map(function(a){
-      a.tags.map(function(i) {
-        if (i.name === e.target.value) {
-          newPosts.push(a)
-        }
-      })
-    })
-    if (this.state.posts === this.state.originalPosts) {
-      this.setState({posts: newPosts, selected: true, selected_tag: e.target.value})
+    if (this.state.selected_tag.length === 1 && this.state.selected_tag[0] === e.target.value) {
+      this.setState({selected: false, selected_tag: [e.target.value]})
     } else {
-      let a = this.state.posts[0]
-      let b = newPosts[0]
-      if (a.id === b.id) {
-        this.setState({posts: this.state.originalPosts, selected: false, selected_tag: e.target.value})
-      } else {
-        this.setState({posts: newPosts, selected: true, selected_tag: e.target.value})
-      }
+      this.setState({selected: true, selected_tag: [e.target.value]})
     }
   }
   _handleContent(e) {

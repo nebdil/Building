@@ -8,10 +8,10 @@ export default class Navtop extends Component {
     this._handleLogout = this._handleLogout.bind(this)
   }
   render() {
-    console.log('in navbar: ')
-    console.log(this.props.propS.match.params)
+    // console.log('in navbar: ')
+    // console.log(this.props.propS.match.params)
     if (this.props.propS.match.path == "/buildings/:building_id/posts") {
-      console.log('in if')
+      // console.log('in if')
       var building = classNames({
         'page-selected': true
       })
@@ -19,7 +19,7 @@ export default class Navtop extends Component {
         'page-selected': false
       })
     } else if (this.props.propS.match.path == "/buildings/:building_id/users/:id") {
-      console.log('in else if')
+      // console.log('in else if')
       var building = classNames({
         'page-selected': false
       })
@@ -73,8 +73,8 @@ export default class Navtop extends Component {
   }
   _handleLogout(e) {
     e.preventDefault()
-    console.log('LOGOUT LOGOUT LOGOUT')
-    console.log(e.target)
+    // console.log('LOGOUT LOGOUT LOGOUT')
+    // console.log(e.target)
     // fetch('http://localhost:3000/logout')
     //   .then((response) => response.json())
     //   .then((responseJson) => {
