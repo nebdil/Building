@@ -3,14 +3,14 @@ class PostsController < ApplicationController
 
   def index
     puts "post#index in"
-    @posts = Post.joins(:user).includes(:user).where(users: {building_id: 1}).order('posts.id DESC')
+    @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:building_id]}).order('posts.id DESC')
     post_arr = @posts.map do |po|
       result = po.attributes
       result[:username] = po.user.username
       result[:reply] = po.replies
       result[:like] = po.likes
       result[:tags] = po.tags
-      result[:building] = 1
+      result[:building] = params[:building_id].to_i
       result
       p result
     end
