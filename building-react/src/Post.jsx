@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
 import Dialog from './Dialog'
 import SendReply from './SendReply.jsx'
 import Reply from './Reply.jsx'
@@ -8,6 +7,7 @@ import { Panel, Row, Col, ListGroup, ListGroupItem, ButtonToolbar, Button, Grid}
 import moment from 'moment'
 
 function Post(props) {
+
   let postId = props.match.params.id || null;
   let show = true;
   let redirect = '';
@@ -17,9 +17,8 @@ function Post(props) {
   let _hide = () => {
     show = false;
     redirect = `/buildings/${props.match.params.building_id}/posts`;
+    props.history.push(redirect)
   }
-
-  if (redirect) return <Redirect to={redirect} />
 
   const title = (
     <div id="mdl-header">
@@ -50,6 +49,7 @@ function Post(props) {
       </Row>
     </div>
     );
+
   const foot = (
     <Row>
       <Col id="send-reply" md={12}>
@@ -59,24 +59,19 @@ function Post(props) {
   );
 
   return (
-//     // <div>
-//     //   {
-//     //     this.state.postId && this.state.post.reply &&
-        <Dialog
-          show={show}
-          onHide={_hide}
-          title={title}
-          footer={foot}>
-          {post.reply.map((e) => {return (
-            <ListGroup fill>
-              <ListGroupItem>
-                <Reply reply={e}/>
-              </ListGroupItem>
-            </ListGroup>
-          )})}
-        </Dialog>
-//     //   }
-//     // </div>
+    <Dialog
+      show={show}
+      onHide={_hide}
+      title={title}
+      footer={foot}>
+      {post.reply.map((e) => {return (
+        <ListGroup fill>
+          <ListGroupItem>
+            <Reply reply={e}/>
+          </ListGroupItem>
+        </ListGroup>
+      )})}
+    </Dialog>
   )
 
 }

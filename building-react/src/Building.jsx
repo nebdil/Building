@@ -30,6 +30,8 @@ export default class Building extends Component {
       createTag: '',
       selected: false,
       selected_tag: []
+      // redirect: '',
+      // show: true
     };
     this._handlePostsByTags = this._handlePostsByTags.bind(this)
     this.state.posts.map = this.state.posts.map.bind(this)
@@ -41,6 +43,7 @@ export default class Building extends Component {
     this._handleTag = this._handleTag.bind(this)
     this._handleReplySubmit = this._handleReplySubmit.bind(this)
     this._handleReplyChange = this._handleReplyChange.bind(this)
+    // this._hide = this._hide.bind(this)
   }
   componentDidMount() {
     return (fetch(`http://localhost:3000${this.props.match.url}`, {
@@ -145,7 +148,7 @@ export default class Building extends Component {
                 <Switch>
                   <Route path={`/buildings/:building_id/posts/:id`} render={(props) =>
                     {return(
-                      <Post {...props} allPosts={this.state.posts} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit}/>
+                      <Post {...props} allPosts={this.state.posts} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit} />
                     )}}
                   />
                 </Switch>
@@ -238,6 +241,12 @@ export default class Building extends Component {
     })
   }
   //ABOUT MODAL
+  // _hide = () => {
+  //   console.log('in hide')
+  //   this.setState({
+  //     redirect: `${this.props.match.url}`
+  //   })
+  // }
   //ABOUT REPLY
   _handleReplyChange(e) {
     console.log('in handleReplyChange:', e.target.value);
