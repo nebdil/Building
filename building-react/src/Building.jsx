@@ -162,9 +162,7 @@ export default class Building extends Component {
     }
   }
   _handleLikes(e) {
-    console.log('in handle like')
     if (e.target.className === 'fa fa-heart-o') {
-      console.log(e.target.className)
       fetch(`/buildings/${this.props.match.params.building_id}/posts/${e.target.dataset.post}/likes`, {
         method: 'POST',
         headers: {
@@ -174,11 +172,26 @@ export default class Building extends Component {
       })
       .then((res) => res.json())
       .then((resJson) => {
-        console.log('RECEIVING')
         this.setState({posts: resJson})
       })
     } else {
-      console.log(e.target.className)
+      this.state.posts.forEach((p) => {
+        p.like.forEach((l) => {
+          if (l.post_id == e.target.dataset.post && l.user_id == localStorage.getItem('user_id')) {
+            fetch(`/buildings/${this.props.match.params.building_id}/posts/${e.target.dataset.post}/likes/${l.id}`, {
+              method: 'DELETE',
+              headers: {
+                'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+                'Content-Type': 'application/json'
+              }
+            })
+            .then((res) => res.json())
+            .then((resJson) => {
+              this.setState({posts: resJson})
+            })
+          }
+        })
+      })
     }
   }
   _handlePostsByTags(e) {
