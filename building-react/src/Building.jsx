@@ -43,7 +43,6 @@ export default class Building extends Component {
     this._handleReplyChange = this._handleReplyChange.bind(this)
   }
   componentDidMount() {
-    console.log(`http://localhost:3000${this.props.match.url}`)
     return (fetch(`http://localhost:3000${this.props.match.url}`, {
       headers: {
         'Authorization': `bearer ${localStorage.getItem('user_token')}`
@@ -137,7 +136,7 @@ export default class Building extends Component {
                       );
                       return(
                         <Panel header={head} footer={foot}>
-                          <Link to={`${this.props.match.url}/${e.id}`} posts={e}>{e.content}</Link>
+                          <Link to={`${this.props.match.url}/${e.id}`}>{e.content}</Link>
                         </Panel>
                       )
                     })}
@@ -146,7 +145,7 @@ export default class Building extends Component {
                 <Switch>
                   <Route path={`/buildings/:building_id/posts/:id`} render={(props) =>
                     {return(
-                      <Post {...props} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit}/>
+                      <Post {...props} allPosts={this.state.posts} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit}/>
                     )}}
                   />
                 </Switch>
