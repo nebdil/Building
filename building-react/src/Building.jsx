@@ -39,6 +39,8 @@ export default class Building extends Component {
     this._handleLikes = this._handleLikes.bind(this)
     this._handleContent = this._handleContent.bind(this)
     this._handleTag = this._handleTag.bind(this)
+    this._handleReplySubmit = this._handleReplySubmit.bind(this)
+    this._handleReplyChange = this._handleReplyChange.bind(this)
   }
   componentDidMount() {
     console.log(`http://localhost:3000${this.props.match.url}`)
@@ -144,7 +146,7 @@ export default class Building extends Component {
                 <Switch>
                   <Route path={`/buildings/:building_id/posts/:id`} render={(props) =>
                     {return(
-                      <Post {...props} handleLikes={this._handleLikes}/>
+                      <Post {...props} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit}/>
                     )}}
                   />
                 </Switch>
@@ -238,6 +240,33 @@ export default class Building extends Component {
   }
   //ABOUT MODAL
   //ABOUT REPLY
+  _handleReplyChange(e) {
+    console.log('in handleReplyChange:', e.target.value);
+    this.setState({reply: e.target.value})
+  }
+  _handleReplySubmit(e) {
+    e.preventDefault();
+    e.target.reset()
+
+    const obj = {
+      reply: this.state.reply
+    }
+
+    const repliesPostId = e.currentTarget.getAttribute('data-post-id')
+
+    fetch(`${this.props.match.url}/${repliesPostId}/replies`, {
+      method: 'POST',
+      body: JSON.stringify(obj),
+      headers: {
+        'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({posts: responseJson})
+    })
+  }
 
 
 

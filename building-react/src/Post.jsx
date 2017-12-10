@@ -16,8 +16,6 @@ export default class Post extends Component {
       redirect: '',
       reply: ''
     }
-    this._handleReplySubmit = this._handleReplySubmit.bind(this)
-    this._handleReplyChange = this._handleReplyChange.bind(this)
     this._handleUsername = this._handleUsername.bind(this)
     // this._handleLikeChange = this._handleLikeChange.bind(this)
   }
@@ -48,7 +46,6 @@ export default class Post extends Component {
       // if(this.props.match.path == "/buildings/:building_id/posts/:id") {
       //   console.log('in if')
         this.setState({show: false, redirect: `/buildings/${this.props.match.params.building_id}/posts`})
-        window.location.reload()
       // }
     //   else {
     //       this.setState({show: false, redirect: `/buildings/${this.props.propS.params.building_id}/users/${this.props.propS.params.id}`})
@@ -92,7 +89,7 @@ export default class Post extends Component {
       const foot = (
         <Row>
           <Col id="send-reply" md={12}>
-            <SendReply postId = {this.state.postId} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} handleUsername={this._handleUsername} postId={this.state.postId} />
+            <SendReply postId = {this.state.postId} handleReplyChange = {this.props.handleReplyChange} handleReplySubmit = {this.props.handleReplySubmit} handleUsername={this._handleUsername} postId={this.state.postId} />
           </Col>
         </Row>
       );
@@ -125,40 +122,7 @@ export default class Post extends Component {
   // _handleLikeChange(e) {
   //   this.setState({post: e})
   // }
-  _handleReplyChange(e) {
-    console.log('in handleReplyChange:', e.target.value);
-    this.setState({reply: e.target.value})
-  }
   _handleUsername(e) {
     alert('in _handleUsername: ', e)
-  }
-  _handleReplySubmit(e) {
-    e.preventDefault();
-    e.target.reset()
-    // console.log(e.currentTarget)
-    // const content = new FormData(e.currentTarget);
-    const obj = {
-      reply: this.state.reply,
-      user_email: localStorage.getItem('user_email')
-    }
-    const repliesPostId = e.currentTarget.getAttribute('data-post-id')
-    // console.log(repliesPostId);
-      if (this.state.postId == repliesPostId) {
-        // console.log('we got a match, post:', this.state.postId);
-        fetch(`http://localhost:3000${this.props.match.url}/replies`, {
-          method: 'POST',
-          body: JSON.stringify(obj),
-          headers: {
-            'Authorization': `bearer ${localStorage.getItem('user_token')}`,
-            'Content-Type': 'application/json'
-          }
-        })
-        .then((response) => response.json())
-        .then((responseJson) => {
-          // console.log(responseJson)
-          const replies = this.state.post.reply.push(responseJson.reply)
-          this.setState({post: this.state.post})
-        })
-      }
   }
 }
