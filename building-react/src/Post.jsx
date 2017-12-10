@@ -24,9 +24,10 @@ export default class Post extends Component {
   componentDidMount() {
     console.log('in post: ')
     console.log(this.props.match)
-    return(fetch(`http://localhost:3000${this.props.match.url}`, {
+    return(fetch(`${this.props.match.url}`, {
       headers: {
-        'Authorization': `bearer ${localStorage.getItem('user_token')}`
+        'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+        'Content-Type': 'application/json'
       }
     })
     .then((response) => response.json())
