@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post.jsx';
-import Reply from './Reply.jsx';
+// import Reply from './Reply.jsx';
 import Like from './Like.jsx';
 import Tag from './Tag.jsx';
 import CreatePost from './CreatePost.jsx'
@@ -161,6 +161,8 @@ export default class Building extends Component {
       )
     }
   }
+
+  //ABOUT LIKES
   _handleLikes(e) {
     console.log('in handle likes')
     if (e.target.className === 'fa fa-heart-o') {
@@ -197,6 +199,7 @@ export default class Building extends Component {
       })
     }
   }
+  //ABOUT TAGS
   _handlePostsByTags(e) {
     e.preventDefault();
     if (this.state.selected_tag.length === 1 && this.state.selected_tag[0] === e.target.value) {
@@ -205,14 +208,11 @@ export default class Building extends Component {
       this.setState({selected: true, selected_tag: [e.target.value]})
     }
   }
-  _handleContent(e) {
-    e.preventDefault();
-    this.setState({createContent: e.target.value})
-  }
   _handleTag(e) {
     e.preventDefault();
     this.setState({createTag: e.target.value})
   }
+  //ABOUT NEW POST
   _handleNewPost(e) {
     e.preventDefault();
     e.target.reset()
@@ -235,6 +235,15 @@ export default class Building extends Component {
       const posts = newPostArr.concat(this.state.posts)
       this.setState({posts: posts})
     })
+  }
+  //ABOUT MODAL
+  //ABOUT REPLY
+
+
+
+  _handleContent(e) {
+    e.preventDefault();
+    this.setState({createContent: e.target.value})
   }
   _handlePostChange(e) {
     console.log('in handle change' + e.target.value)

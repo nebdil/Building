@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom'
 import Dialog from './Dialog'
 import SendReply from './SendReply.jsx'
+import Reply from './Reply.jsx'
 import Like from './Like.jsx'
 import { Panel, Row, Col, ListGroup, ListGroupItem, ButtonToolbar, Button, Grid} from 'react-bootstrap'
 import moment from 'moment'
@@ -18,7 +19,7 @@ export default class Post extends Component {
     this._handleReplySubmit = this._handleReplySubmit.bind(this)
     this._handleReplyChange = this._handleReplyChange.bind(this)
     this._handleUsername = this._handleUsername.bind(this)
-    this._handleLikeChange = this._handleLikeChange.bind(this)
+    // this._handleLikeChange = this._handleLikeChange.bind(this)
   }
 
   componentDidMount() {
@@ -107,11 +108,7 @@ export default class Post extends Component {
               {this.state.post.reply.map((e) => {return (
                 <ListGroup fill>
                   <ListGroupItem>
-                    <Row>
-                      <Col md={8}><p className="replier-name">{e.username}</p></Col>
-                      <Col md={4}><p id="comment-time">{moment(e.created_at).startOf('second').fromNow()}</p></Col>
-                    </Row>
-                    <p>{e.content}</p>
+                    <Reply reply={e}/>
                   </ListGroupItem>
                 </ListGroup>
               )})}
@@ -125,9 +122,9 @@ export default class Post extends Component {
       )
     }
   }
-  _handleLikeChange(e) {
-    this.setState({post: e})
-  }
+  // _handleLikeChange(e) {
+  //   this.setState({post: e})
+  // }
   _handleReplyChange(e) {
     console.log('in handleReplyChange:', e.target.value);
     this.setState({reply: e.target.value})
