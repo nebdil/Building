@@ -162,7 +162,9 @@ export default class Building extends Component {
     }
   }
   _handleLikes(e) {
+    console.log('in handle likes')
     if (e.target.className === 'fa fa-heart-o') {
+      console.log('in if')
       fetch(`/buildings/${this.props.match.params.building_id}/posts/${e.target.dataset.post}/likes`, {
         method: 'POST',
         headers: {
@@ -175,6 +177,7 @@ export default class Building extends Component {
         this.setState({posts: resJson})
       })
     } else {
+      console.log('in else')
       this.state.posts.forEach((p) => {
         p.like.forEach((l) => {
           if (l.post_id == e.target.dataset.post && l.user_id == localStorage.getItem('user_id')) {
