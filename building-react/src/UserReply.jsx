@@ -25,8 +25,8 @@ export default class UserReply extends Component {
 
   render() {
 
-    console.log('inside UserReply')
-    console.log(this.props.propS)
+    // console.log('inside UserReply')
+    // console.log(this.props.propS)
     const handleReplyChange = this.props.handleReplyChange;
     const handleReplySubmit = this.props.handleReplySubmit;
     const post = this.props.currentUserReplies.content;

@@ -1,108 +1,65 @@
 class UsersController < ApplicationController
 skip_before_action :authenticate_user!, only: [:create], raise: false
   require 'pp'
-  def index
-  end
-  # def create
-  #   # url_ok = {url: "/buildings/1/posts"}
-  #   puts 'params'
-  #   # @user = User.new(
-  #   #   # user_params
-  #   #   {
-  #   #   username: params[:username],
-  #   #   email: params[:email],
-  #   #   password: params[:password],
-  #   #   password_confirmation: params[:password_confirmation],
-  #   #   building_id: params[:building_id]
-  #   #   }
-  #   # )
-  #   puts params
-  #   puts @user.inspect
-  #
-  #   # if @user.save
-  #   #   session[:user_id] = @user.id
-  #   #   # redirect_to '/buildings/1/posts'
-  #   #   puts @user.email
-  #   #   ApplicationMailer.register_email(@user).deliver!
-  #   #
-  #   #   # mg_client = Mailgun::Client.new ENV["PRIVATE_API_KEY_MAILGUN"]
-  #   #   # message_params = {:from    => ENV["FROM_EMAIL"],
-  #   #   #                   :to      => @user.email,
-  #   #   #                   :subject => 'Hello from your Building!',
-  #   #   #                   :text    => 'Thank you for registering to your Building! Now you can connect with your neighbors!'}
-  #   #   # mg_client.send_message ENV["DOMAIN"], message_params
-  #   #
-  #   #
-  #   #   render json: url_ok
-  #   # elsif User.find_by(email: params[:email])
-  #   #   url_no = {url: '/register'}
-  #   #   # flash[:notice] = "Email is taken!"
-  #   #   # redirect_to '/register'
-  #   #   puts 'in elsif'
-  #   #   render json: url_no
-  #   # else
-  #   #   url_no = {url: '/register'}
-  #   #   # flash[:notice] = "Something went wrong while signing up"
-  #   #   # redirect_to '/register'
-  #   #   puts 'in else'
-  #   #   render json: url_no
-  #   # end
-  # end
-  def create
-    @user = User.find_by(email: params[:auth][:email])
-    @building = Building.find_by(id: @user[:building_id])
-    user_info = {user: @user, building: @building}
-    render json: user_info
-  end
 
-  def new
-  end
-  def edit
-  end
+  # def create
+  #   @user = User.find_by(email: params[:auth][:email])
+  #   @building = Building.find_by(id: @user[:building_id])
+  #   user_info = {user: @user, building: @building}
+  #   render json: user_info
+  # end
+
   def show
-    @building = Building.find_by(id: params[:building_id])
-    @user = @building.users.find_by(id: params[:id])
-    @posts = @user.posts.all.order('posts.id DESC')
+    puts "user#show in"
+    @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:building_id]}).order('posts.id DESC')
     post_arr = @posts.map do |po|
       result = po.attributes
       result[:username] = po.user.username
       result[:reply] = po.replies
       result[:like] = po.likes
       result[:tags] = po.tags
+      result[:building] = params[:building_id].to_i
       result
     end
-
-    @rreplies = Reply.where(user_id: params[:id])
-    pp "rreplies=========>#{@rreplies}"
-    @rposts = @rreplies.to_a.map do |reply|
-      reply.post
-      pp reply.post
-    end
-
-    pp "rposts=========>#{@rposts}"
-
-    r_post_arr = @rposts.map do |pos|
-      result = pos.attributes
-      result[:username] = pos.user.username
-      result[:reply] = pos.replies
-      result[:like] = pos.likes
-      result[:tags] = pos.tags
-      result
-    end
-
-    pp "r_post_arr=========>#{r_post_arr}"
-    uniq_post_arr = r_post_arr.uniq {|i| i["id"]}
-    pp "uniq_post_arr=========>#{uniq_post_arr}"
-
-
-    post_arr.push({posts_user_replied_to: uniq_post_arr})
+    puts "user#show out"
     render json: post_arr
-  end
-  def update
+    # @building = Building.find_by(id: params[:building_id])
+    # @user = @building.users.find_by(id: params[:id])
+    # @posts = @user.posts.all.order('posts.id DESC')
+    # post_arr = @posts.map do |po|
+    #   result = po.attributes
+    #   result[:username] = po.user.username
+    #   result[:reply] = po.replies
+    #   result[:like] = po.likes
+    #   result[:tags] = po.tags
+    #   result
+    # end
+    #
+    # @rreplies = Reply.where(user_id: params[:id])
+    # pp "rreplies=========>#{@rreplies}"
+    # @rposts = @rreplies.to_a.map do |reply|
+    #   reply.post
+    #   pp reply.post
+    # end
+    #
+    # pp "rposts=========>#{@rposts}"
+    #
+    # r_post_arr = @rposts.map do |pos|
+    #   result = pos.attributes
+    #   result[:username] = pos.user.username
+    #   result[:reply] = pos.replies
+    #   result[:like] = pos.likes
+    #   result[:tags] = pos.tags
+    #   result
+    # end
+    #
+    # pp "r_post_arr=========>#{r_post_arr}"
+    # uniq_post_arr = r_post_arr.uniq {|i| i["id"]}
+    # pp "uniq_post_arr=========>#{uniq_post_arr}"
+    #
+    #
+    # post_arr.push({posts_user_replied_to: uniq_post_arr})
+    # render json: post_arr
   end
 
-  # private
-  # def user_params
-  #   params.permit(:username, :email, :password, :password_confirmation)
-  # end
 end
