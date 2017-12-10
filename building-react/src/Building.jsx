@@ -162,8 +162,24 @@ export default class Building extends Component {
     }
   }
   _handleLikes(e) {
-    this.setState({posts: e})
     console.log('in handle like')
+    if (e.target.className === 'fa fa-heart-o') {
+      console.log(e.target.className)
+      fetch(`/buildings/${this.props.match.params.building_id}/posts/${e.target.dataset.post}/likes`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `bearer ${localStorage.getItem('user_token')}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((res) => res.json())
+      .then((resJson) => {
+        console.log('RECEIVING')
+        this.setState({posts: resJson})
+      })
+    } else {
+      console.log(e.target.className)
+    }
   }
   _handlePostsByTags(e) {
     e.preventDefault();

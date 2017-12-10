@@ -18,8 +18,8 @@ function Like(props) {
   })
   return(
     <ButtonToolbar>
-      <Button id="peace-div" bsSize="xsmall" type="submit">
-        <i className={btnClass} aria-hidden="true"></i>
+      <Button id="peace-div" bsSize="xsmall" type="submit" onClick={props.handleLikes}>
+        <i className={btnClass} aria-hidden="true" data-post={props.postId}></i>
       </Button>
       <LikeLength likeLength={props.likeLength}/>
     </ButtonToolbar>
