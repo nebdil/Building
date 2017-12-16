@@ -20,12 +20,12 @@ export default class About extends Component {
   }
 
   componentDidMount() {
-    this.setState({proPS: this.props.propS})
+    this.setState({proPS: this.props.animationProps})
   }
   render(){
     console.log('in about')
     console.log(this.state.proPS)
-    console.log(this.props.propS.history)
+    console.log(this.props.animationProps.history)
     return(
     <Jumbotron>
       <Col md={3}></Col>
@@ -61,11 +61,11 @@ export default class About extends Component {
   _handleLogin(e) {
     console.log('in handle login')
     console.log(this.state.proPS)
-    this.props.propS.history.push('/login')
+    this.props.animationProps.history.push('/login')
     window.location.reload()
   }
   _handleRegister(e) {
-    this.props.propS.history.push('/register')
+    this.props.animationProps.history.push('/register')
     window.location.reload()
   }
 }
