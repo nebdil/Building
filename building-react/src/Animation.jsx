@@ -6,6 +6,13 @@ import About from './About.jsx';
 export default class Animation extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      aboutProps: ''
+    }
+
+    this._handleLogin = this._handleLogin.bind(this)
+    this._handleRegister = this._handleRegister.bind(this)
+    this._handleAbout = this._handleAbout.bind(this)
   }
 
   componentDidMount() {
@@ -191,6 +198,7 @@ export default class Animation extends Component {
   }
 
   render() {
+    console.log('animation props: ', this.props)
     return(
       <div className="Hero">
         {/* The svg structure for the Building Animation */}
@@ -507,9 +515,22 @@ export default class Animation extends Component {
             </g>
           </g>
         </svg>
-        <About animationProps={this.props}/>
+        <About aboutProps={this.state.aboutProps} _handleAbout={this._handleAbout} _handleLogin={this._handleLogin} _handleRegister={this._handleRegister}/>
       </div>
     )
   }
 
+  //Functions to be called in About.jsx
+
+  _handleAbout() {
+    this.setState({aboutProps: this.props})
+  }
+  _handleLogin(e) {
+    this.props.history.push('/login')
+    window.location.reload()
+  }
+  _handleRegister(e) {
+    this.props.history.push('/register')
+    window.location.reload()
+  }
 }

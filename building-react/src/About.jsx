@@ -10,22 +10,13 @@ import Login from './Login.jsx'
 import Register from './Register.jsx'
 
 export default class About extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      proPS: ''
-    }
-    this._handleLogin = this._handleLogin.bind(this)
-    this._handleRegister = this._handleRegister.bind(this)
-  }
 
   componentDidMount() {
-    this.setState({proPS: this.props.animationProps})
+    this.props._handleAbout
   }
+
   render(){
-    console.log('in about')
-    console.log(this.state.proPS)
-    console.log(this.props.animationProps.history)
+    console.log('in about', 'the props are: ', this.props)
     return(
     <Jumbotron>
       <Col md={3}></Col>
@@ -35,10 +26,10 @@ export default class About extends Component {
         <Row>
           <Col md={4}></Col>
           <Col md={4}>
-            <Button bsStyle="primary" id="login-btn" className="login-btn" onClick={this._handleLogin}>
+            <Button bsStyle="primary" id="login-btn" className="login-btn" onClick={this.props._handleLogin}> {/* redirects to Login */}
               Login
             </Button>
-            <Button bsStyle="primary" id="register-btn" className="login-btn" onClick={this._handleRegister} >
+            <Button bsStyle="primary" id="register-btn" className="login-btn" onClick={this.props._handleRegister} > {/* redirects to History */}
               Register
             </Button>
           </Col>
@@ -55,17 +46,7 @@ export default class About extends Component {
         />
       </Switch>
     </Jumbotron>
-  )
+    )
+  }
 
-  }
-  _handleLogin(e) {
-    console.log('in handle login')
-    console.log(this.state.proPS)
-    this.props.animationProps.history.push('/login')
-    window.location.reload()
-  }
-  _handleRegister(e) {
-    this.props.animationProps.history.push('/register')
-    window.location.reload()
-  }
 }
