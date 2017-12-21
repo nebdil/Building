@@ -70,7 +70,7 @@ export default class User extends Component {
                   this.state.posts.map((e) => {
                     if (localStorage.getItem('user_id') == e.user_id) {
                       return (
-                        <UserPost post={e} key={e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} propS={this.props.match} handleLikes={this._handleLikes} />
+                        <UserPost allPosts={this.state.posts} post={e} key={e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} propS={this.props.match} handleLikes={this._handleLikes} />
                       )
                     }
                   })

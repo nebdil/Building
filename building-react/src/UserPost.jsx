@@ -11,6 +11,7 @@ import {
 } from 'react-router-dom'
 
 function UserPost(props) {
+  const allPosts = props.allPosts
   const head = (
       <Row>
         <Col className="user-name" md={8}>
@@ -48,7 +49,6 @@ function UserPost(props) {
       </Col>
     </Row>
   );
-
   return (
     <div>
       <table>
@@ -60,13 +60,13 @@ function UserPost(props) {
           </Panel>
         </tbody>
       </table>
-      <Switch>
+      {/* <Switch> */}
         <Route path={`/buildings/${props.propS.params.building_id}/posts/${props.post.id}`} render={(props) => {
           return(
-            <Post {...props}/>
+            <Post {...props} allPosts={allPosts}/>
           )
         }}/>
-      </Switch>
+      {/* </Switch> */}
     </div>
   )
 }

@@ -7,10 +7,12 @@ import { Panel, Row, Col, ListGroup, ListGroupItem, ButtonToolbar, Button, Grid}
 import moment from 'moment'
 
 function Post(props) {
-
+  console.log(props.match)
   let postId = props.match.params.id || null;
   let show = true;
   let redirect = '';
+  console.log(props)
+  console.log('allpost: ', props.allPosts)
   let post = props.allPosts.filter((e) => e.id == postId)[0]
   let tags = post.tags.map((e) => e.name);
 
