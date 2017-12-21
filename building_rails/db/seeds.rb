@@ -27,6 +27,8 @@ build1 = Building.create!({
 
 # User.destroy_all
 
+puts "creating user"
+
 user1 = build1.users.create!({
           id: 1,
           username: 'dilanimo',
@@ -34,80 +36,106 @@ user1 = build1.users.create!({
           password: '123',
           password_confirmation: '123'
           })
+user2 = build1.users.create!({
+          id: 2,
+          username: 'emmi',
+          email: 'dilan1@example.com',
+          password: '123',
+          password_confirmation: '123'
+          })
+user3 = build1.users.create!({
+          id: 3,
+          username: 'juan',
+          email: 'dilan2@example.com',
+          password: '123',
+          password_confirmation: '123'
+          })
+user4 = build1.users.create!({
+          id: 4,
+          username: 'ferdinand',
+          email: 'dilan3@example.com',
+          password: '123',
+          password_confirmation: '123'
+          })
+user5 = build1.users.create!({
+          id: 5,
+          username: 'Building Manager',
+          email: 'dilan4@example.com',
+          password: '123',
+          password_confirmation: '123'
+          })
 
-10.times do
-  build1.users.create!({
-    username: Faker::Internet.user_name,
-    email: Faker::Internet.email,
-    password: '123',
-    password_confirmation: '123'
-    })
-end
+puts "created user"
 
 # POSTS
 
 # Post.destroy_all
 
-5.times do |po|
-  Post.create!({
-    content: Faker::Hipster.sentence,
-    user_id: user1[:id]
-    })
-end
-
-users_id_arr = User.select("id").to_a.map{ |user| user.id}
-
-20.times do |po|
-  Post.create!({
-    content: Faker::Hipster.sentence,
-    user_id: users_id_arr.sample
-    })
-end
+# 5.times do |po|
+#   Post.create!({
+#     content: Faker::Hipster.sentence,
+#     user_id: user1[:id]
+#     })
+# end
+#
+# users_id_arr = User.select("id").to_a.map{ |user| user.id}
+#
+# 20.times do |po|
+#   Post.create!({
+#     content: Faker::Hipster.sentence,
+#     user_id: users_id_arr.sample
+#     })
+# end
 
 # TAGS
 
 # Tag.destroy_all
 
-tags_arr = ['gaming', 'petsitting', 'chores', 'food', 'education']
+Tag.create!(name: 'gaming')
+Tag.create!(name: 'education')
+Tag.create!(name: 'management')
 
-tags_arr.each do |t|
-  Tag.create!({
-    name: t
-    })
-end
+
+# tags_arr = ['gaming', 'management', 'education']
+#
+# tags_arr.each do |t|
+#   Tag.create!({
+#     name: t
+#     })
+# end
 
 # POSTSTAGS
 
 # Poststag.destroy_all
 
-tag_ids_arr = Tag.select("id").to_a.map{ |tag| tag.id}
-
-Post.all.each do |po|
-  po.poststags.create!({
-    tag_id: tag_ids_arr.sample
-    })
-end
+# tag_ids_arr = Tag.select("id").to_a.map{ |tag| tag.id}
+#
+# Post.all.each do |po|
+#   po.poststags.create!({
+#     tag_id: tag_ids_arr.sample
+#     })
+# end
 
 # LIKES
 
 # Like.destroy_all
 
-post_ids_arr = Post.select("id").to_a.map{ |post| post.id}
-
-User.all.each do |u|
-  u.likes.create!({
-    post_id: post_ids_arr.sample
-    })
-end
+# post_ids_arr = Post.select("id").to_a.map{ |post| post.id}
+#
+# User.all.each do |u|
+#   u.likes.create!({
+#     post_id: post_ids_arr.sample
+#     })
+# end
 
 # REPLIES
 
 # Reply.destroy_all
 
-User.all.each do |u|
-  u.replies.create!({
-    post_id: post_ids_arr.sample,
-    content: Faker::Hipster.sentence,
-    username: 'deneme'
-    })
-end
+# User.all.each do |u|
+#   u.replies.create!({
+#     post_id: post_ids_arr.sample,
+#     content: Faker::Hipster.sentence,
+#     username: 'deneme'
+#     })
+# end

@@ -2,7 +2,6 @@ class BuildingsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create], raise: false
 
   require 'pp'
-  # before_action :authenticate_user
   def index
     @buildings = Building.all
     render json: @buildings
@@ -12,7 +11,6 @@ class BuildingsController < ApplicationController
     @building = Building.find_or_initialize_by(address: params[:address])
     puts @building.inspect
     if @building.save
-      url_ok = {url: "/buildings/#{@building[:id]}/posts"}
       puts 'in if'
       @user = @building.users.new({
                 username: params[:username],
@@ -26,7 +24,7 @@ class BuildingsController < ApplicationController
       #   ApplicationMailer.register_email(@user).deliver!
       #
       #   mg_client = Mailgun::Client.new ""
-      #   message_params = {:from    => "",
+      #   message_params = {:from    => "dilannebioglu@gmail.com",
       #                     :to      => @user.email,
       #                     :subject => 'Hello from your Building!',
       #                     :text    => 'Thank you for registering to your Building! Now you can connect with your neighbors!'}
@@ -42,18 +40,8 @@ class BuildingsController < ApplicationController
   def new
   end
   def show
-    @posts = Post.joins(:user).includes(:user).where(users: {building_id: params[:id]}).order('posts.id DESC')
-    post_arr = @posts.map do |po|
-      result = po.attributes
-      result[:username] = po.user.username
-      result[:reply] = po.replies
-      result[:like] = po.likes
-      result[:tags] = po.tags
-      result[:building] = params[:id]
-      result
-    end
-    render json: post_arr
-    # puts 'CURRENT USER'
-    # puts current_user
+    puts 'buildings#show in'
+    puts 'buildings#show out'
+    head :ok
   end
 end

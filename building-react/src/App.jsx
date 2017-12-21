@@ -8,13 +8,7 @@ import BuildingRegister from './BuildingRegister.jsx';
 import Animation from './Animation.jsx';
 
 export default class App extends Component {
-  constructor({ props, history }) {
-    super(props);
-    this.state = {
-      // currentUserId: 1,
-      // posts: []
-    };
-  }
+
   render() {
     return(
       <div>
