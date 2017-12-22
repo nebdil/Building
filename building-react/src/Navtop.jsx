@@ -53,7 +53,11 @@ export default class Navtop extends Component {
             <Col md={3}>
               <Nav>
                 <div className={`menu-item ${user}`}>
-                  <NavItem><Link to={`/buildings/${this.props.propS.match.params.building_id}/users/${localStorage.getItem('user_id')}`}>{localStorage.getItem('user_username').toUpperCase()}'s Personal Posts</Link></NavItem>
+                  <NavItem>
+                    <Link to={`/buildings/${this.props.propS.match.params.building_id}/users/${localStorage.getItem('user_id')}`}>
+                      {localStorage.getItem('user_username').toUpperCase()}'s Personal Posts
+                    </Link>
+                  </NavItem>
                   <div class="color-div"></div>
                 </div>
               </Nav>

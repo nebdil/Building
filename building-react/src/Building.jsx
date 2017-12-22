@@ -70,6 +70,7 @@ export default class Building extends Component {
     )
   }
   render() {
+    var allPosts = this.state.posts
     var btnClass = classNames({
       'selected': this.state.selected
     })
@@ -145,13 +146,13 @@ export default class Building extends Component {
                     })}
                   </tbody>
                 </table>
-                <Switch>
+                {/* <Switch> */}
                   <Route path={`/buildings/:building_id/posts/:id`} render={(props) =>
                     {return(
-                      <Post {...props} allPosts={this.state.posts} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit} />
+                      <Post {...props} allPosts={allPosts} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit} />
                     )}}
                   />
-                </Switch>
+                {/* </Switch> */}
               </Col>
               <Col className="fixed" md={4}>
                 <h3>Create a Post</h3>

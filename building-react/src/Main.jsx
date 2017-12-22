@@ -10,10 +10,11 @@ export default class Main extends Component {
     super(props);
     this.state = {
       user_token: localStorage.getItem('user_token'),
-      posts: []
+      buildings: []
     }
   }
   componentDidMount() {
+    // buildings controller index
     return (fetch(`http://localhost:3000${this.props.match.url}`, {
       headers: {
         'Authorization': `bearer ${localStorage.getItem('user_token')}`
@@ -21,7 +22,8 @@ export default class Main extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({ posts: responseJson })        
+        console.log('responseJson from main: ', responseJson)
+        this.setState({ buildings: responseJson })
       })
       .catch((error) => {
         console.error(error);
