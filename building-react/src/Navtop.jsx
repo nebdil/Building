@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 import {Navbar, Nav, NavItem, Grid, Row, Col} from 'react-bootstrap'
 import classNames from 'classnames'
 
+//THESE PROPS ONLY WORK IN BUILDING, NOT USER
+
 function Navtop(props) {
   console.log('AA IN THE NEW NAVTOP')
   console.log('innav:', props)
@@ -36,11 +38,10 @@ function Navtop(props) {
          </Col>
          <Col md={3}>
            <Nav>
-             {/* URL NO GOOD */}
              {/* <div className={`menu-item ${user}`}> */}
                <NavItem>
-                 <Link to={`/buildings/${props.b_id}/users/${localStorage.getItem('user_id')}`}>
-                   {localStorage.getItem('user_username').toUpperCase()}'s Personal Posts
+                 <Link to={`/buildings/${props.b_id}/users/${props.current_user.id}`}>
+                   {props.current_user.username}'s Personal Posts
                  </Link>
                </NavItem>
                <div class="color-div"></div>
