@@ -60,9 +60,9 @@ export default class Building extends Component {
           })
         })
         this.setState({ posts: responseJson, selected_tag: tags })
-        console.log("responseJson: " + responseJson)
-        console.log(this.props.match)
-        console.log(this.props.match.url)
+        // console.log("responseJson: " + responseJson)
+        // console.log(this.props.match)
+        // console.log(this.props.match.url)
       })
       .catch((error) => {
         console.error(error);
@@ -101,7 +101,7 @@ export default class Building extends Component {
       }
       return (
         <div className="main">
-          <Navtop propS={this.props}/>
+          {/* <Navtop propS={this.props}/> */}
           <Grid>
             <Row>
               <Col md={8} className="all-posts">
