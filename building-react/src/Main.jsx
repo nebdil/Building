@@ -13,7 +13,8 @@ export default class Main extends Component {
       buildings: [],
       b_address: '',
       b_id: '',
-      current_user: {}
+      current_user: '',
+      current_building: ''
     }
     this._handleLogout = this._handleLogout.bind(this)
   }
@@ -30,28 +31,28 @@ export default class Main extends Component {
         // to hold the address temporarily, cannot set state in an if/forEach - gets in a loop
         let address = '';
         let id = '';
-        let user = {};
-        let buildings = [];
+        let user = '';
+        let building = '';
+        let buildings = '';
+
         responseJson.forEach((res) => {
           // response that comes from rails is an array
-          for (let key in res) {
+          if (res.current_user) {
+            //assign the current user
+            user = res.current_user
             // assign the building we get from rails
-            if (key === "buildings") {
-              buildings = res.buildings
-              buildings.forEach((b) => {
-                // buildings is an array, now we have to access the current building
-                for (let key in b) {
-                  // each building is an obj, so have to access the id because cannot get building id from params, since there is no params in main.jsx
-                  if(`/buildings/${b[key]}/posts` === this.props.location.pathname) {
-                    address = b.address;
-                    id = b.id;
-                  }
-                }
-              })
-            } else if (key === "current_user") {
-              //assign the current user, put both of them in the state below
-              user = res.current_user
-            }
+          } else if (res.buildings) {
+            buildings = res.buildings
+          }
+        })
+
+        buildings.forEach((b) => {
+          // buildings is an array, now we have to access the current building
+          // current building id is already in the current user
+          if (b.id === user.building_id) {
+            id = b.id;
+            address = b.address;
+            building = b
           }
         })
         // set the state with the info that we're going to send to the NAVTOP
@@ -59,7 +60,8 @@ export default class Main extends Component {
           buildings: buildings,
           b_address: address,
           b_id: id,
-          current_user: user
+          current_user: user,
+          current_building: building
         })
       })
       .catch((error) => {
@@ -75,7 +77,7 @@ export default class Main extends Component {
     } else {
       return (
         <div>
-          <Navtop url={this.props.location.pathname} b_address={this.state.b_address} b_id={this.state.b_id} handleLogout={this._handleLogout} current_user={this.state.current_user}/>
+          <Navtop current_building={this.state.current_building} handleLogout={this._handleLogout} current_user={this.state.current_user}/>
             <Switch>
               <Route path='/buildings/:building_id/users/:id' component={User}/>
               <Route path='/buildings/:building_id/posts' component={Building}/>
