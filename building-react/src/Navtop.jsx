@@ -4,9 +4,6 @@ import {Navbar, Nav, NavItem, Grid, Row, Col} from 'react-bootstrap'
 import classNames from 'classnames'
 
 function Navtop(props) {
-  console.log('AA IN THE NEW NAVTOP')
-  console.log('innav:', props)
-
 // navbar css, when clicked, link should be underlined
   if (props.url == `/buildings/${props.current_building.id}/posts`) {
       var building = classNames({

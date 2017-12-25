@@ -17,7 +17,6 @@ export default class Register extends Component {
     }
     this._handleChange = this._handleChange.bind(this)
     this._handleRegister = this._handleRegister.bind(this)
-    // this.setState = this.setState.bind(this)
     this._handleEmail = this._handleEmail.bind(this)
     this._handleUsername = this._handleUsername.bind(this)
     this._handlePassword = this._handlePassword.bind(this)
@@ -121,12 +120,6 @@ export default class Register extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      // console.log(responseJson)
-      // localStorage.setItem('user_id', responseJson.id)
-      // localStorage.setItem('building_id', responseJson.building_id)
-      // localStorage.setItem('user_username', responseJson.username)
-      // localStorage.setItem('user_email', responseJson.email)
-      // localStorage.setItem('building_address', this.state.address)
       // gets the newly created / signed in building id and stores it in the state
       this.setState({building_id: responseJson.building_id})
     })
@@ -144,7 +137,6 @@ export default class Register extends Component {
         console.log(responseJson)
         // get the authorization user token and store it in the local storage
         localStorage.setItem('user_token', responseJson.jwt);
-        // this.props.history.push(`/buildings/${localStorage.getItem('building_id')}/posts`)
 
         // get the building id to redirect to the building's page
         this.props.history.push(`/buildings/${this.state.building_id}/posts`)

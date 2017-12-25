@@ -95,12 +95,6 @@ export default class Login extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      // localStorage.setItem('user_username', responseJson.user.username);
-      // localStorage.setItem('user_email', responseJson.user.email);
-      // localStorage.setItem('building_id', responseJson.building.id);
-      // localStorage.setItem('building_address', responseJson.building.address);
-      // localStorage.setItem('user_id', responseJson.user.id);
-
       // gets the signed in building id and stores it in the state
       this.setState({building_id: responseJson.building.id})
     })
@@ -116,9 +110,7 @@ export default class Login extends Component {
       .then((responseJson) => {
         console.log('responseJson in login posting to user token: ' + responseJson)
         localStorage.setItem('user_token', responseJson.jwt);
-
-        // this.props.history.push(`/buildings/${localStorage.getItem('building_id')}/posts`)
-
+        
         // get the building id to redirect to the building's page
         this.props.history.push(`/buildings/${this.state.building_id}/posts`)
       })
