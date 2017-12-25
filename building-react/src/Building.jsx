@@ -149,7 +149,7 @@ export default class Building extends Component {
                 {/* <Switch> */}
                   <Route path={`/buildings/:building_id/posts/:id`} render={(props) =>
                     {return(
-                      <Post {...props} allPosts={allPosts} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit} />
+                      <Post {...props} allPosts={allPosts} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit} current_user={this.props.current_user} />
                     )}}
                   />
                 {/* </Switch> */}

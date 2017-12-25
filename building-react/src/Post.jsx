@@ -44,7 +44,7 @@ function Post(props) {
           <Col md={6}></Col>
           <Col className="peace" md={6}>
             <div className="peace-group">
-              <Like postId={postId} likes={post.like} handleLikes={props.handleLikes} likeLength={post.like.length} />
+              <Like postId={postId} likes={post.like} handleLikes={props.handleLikes} likeLength={post.like.length} current_user={props.current_user}/>
             </div>
           </Col>
         </Col>
