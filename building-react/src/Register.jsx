@@ -12,11 +12,11 @@ export default class Register extends Component {
       email: '',
       password: '',
       password_confirmation: '',
-      address: ''
+      address: '',
+      building_id: ''
     }
     this._handleChange = this._handleChange.bind(this)
     this._handleRegister = this._handleRegister.bind(this)
-    // this.setState = this.setState.bind(this)
     this._handleEmail = this._handleEmail.bind(this)
     this._handleUsername = this._handleUsername.bind(this)
     this._handlePassword = this._handlePassword.bind(this)
@@ -120,17 +120,8 @@ export default class Register extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
-      // this.setState({url: responseJson.url})
-      localStorage.setItem('user_id', responseJson.id)
-      localStorage.setItem('building_id', responseJson.building_id)
-      localStorage.setItem('user_username', responseJson.username)
-      localStorage.setItem('user_email', responseJson.email)
-      localStorage.setItem('building_address', this.state.address)
-      // console.log(localStorage.getItem('user_id'))
-      // console.log(localStorage.getItem('building_id'))
-      // console.log(localStorage.getItem('user_username'))
-      // console.log(localStorage.getItem('user_email'))
+      // gets the newly created / signed in building id and stores it in the state
+      this.setState({building_id: responseJson.building_id})
     })
     .then(() => {
       fetch('/user_token', {
@@ -144,14 +135,16 @@ export default class Register extends Component {
       .then((responseJson) => {
         console.log('in fetch user token')
         console.log(responseJson)
+        // get the authorization user token and store it in the local storage
         localStorage.setItem('user_token', responseJson.jwt);
-        // console.log(this.state.url)
-        this.props.history.push(`/buildings/${localStorage.getItem('building_id')}/posts`)
+
+        // get the building id to redirect to the building's page
+        this.props.history.push(`/buildings/${this.state.building_id}/posts`)
       })
     })
   }
   _handleChange(e) {
-    console.log('in hangle change' + e.target.value)
+    console.log('in hangle change')
   }
   _handleEmail(e) {
     console.log(e.target.value)

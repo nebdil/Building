@@ -10,7 +10,7 @@ function Like(props) {
   });
   //if likes exist && liked by current_user
   props.likes.map((l) => {
-    if (l.user_id == localStorage.getItem('user_id')) {
+    if (l.user_id === props.current_user.id) {
       btnClass = classNames({
         'fa fa-heart': true
       })
