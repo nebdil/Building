@@ -6,6 +6,25 @@ import classNames from 'classnames'
 function Navtop(props) {
   console.log('AA IN THE NEW NAVTOP')
   console.log('innav:', props)
+
+// navbar css, when clicked, link should be underlined
+  if (props.url == `/buildings/${props.current_building.id}/posts`) {
+      var building = classNames({
+        'page-selected': true
+      })
+      var user = classNames({
+        'page-selected': false
+      })
+  } else if (props.url == `/buildings/${props.current_building.id}/users/${props.current_user.id}`) {
+    var building = classNames({
+      'page-selected': false
+    })
+    var user = classNames({
+      'page-selected': true
+    })
+  }
+
+
   // if the states have been set in Main.jsx, load the navbar
   if (props.current_user) {
     return(
@@ -26,26 +45,26 @@ function Navtop(props) {
            </Col>
            <Col md={3}>
              <Nav>
-               {/* <div className={`menu-item ${building}`}> */}
+               <div className={`menu-item ${building}`}>
                  <NavItem className="address">
                    <Link to={`/buildings/${props.current_building.id}/posts`}>
                      <p>{props.current_building.address.split(',').slice(0, 2).join(',')}</p>
                    </Link>
                  </NavItem>
                  <div class="color-div"></div>
-               {/* </div> */}
+               </div>
              </Nav>
            </Col>
            <Col md={3}>
              <Nav>
-               {/* <div className={`menu-item ${user}`}> */}
+               <div className={`menu-item ${user}`}>
                  <NavItem>
                    <Link to={`/buildings/${props.current_building.id}/users/${props.current_user.id}`}>
                      {props.current_user.username}'s Personal Posts
                    </Link>
                  </NavItem>
                  <div class="color-div"></div>
-               {/* </div> */}
+               </div>
              </Nav>
            </Col>
              <Col md={3}>

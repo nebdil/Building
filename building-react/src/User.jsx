@@ -51,7 +51,7 @@ export default class User extends Component {
     } else {
     return (
       <div>
-        <Navtop propS={this.props}/>
+        {/* <Navtop propS={this.props}/> */}
         {/* <Link to={`/buildings/${this.props.match.params.building_id}/posts`}>Go back</Link> */}
         <div className="all-posts">
           <Grid>

@@ -121,12 +121,12 @@ export default class Register extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson)
-      localStorage.setItem('user_id', responseJson.id)
-      localStorage.setItem('building_id', responseJson.building_id)
-      localStorage.setItem('user_username', responseJson.username)
-      localStorage.setItem('user_email', responseJson.email)
-      localStorage.setItem('building_address', this.state.address)
+      // console.log(responseJson)
+      // localStorage.setItem('user_id', responseJson.id)
+      // localStorage.setItem('building_id', responseJson.building_id)
+      // localStorage.setItem('user_username', responseJson.username)
+      // localStorage.setItem('user_email', responseJson.email)
+      // localStorage.setItem('building_address', this.state.address)
       // gets the newly created / signed in building id and stores it in the state
       this.setState({building_id: responseJson.building_id})
     })
