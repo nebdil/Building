@@ -79,7 +79,11 @@ export default class Main extends Component {
         <div>
           <Navtop url={this.props.location.pathname} current_building={this.state.current_building} handleLogout={this._handleLogout} current_user={this.state.current_user}/>
             <Switch>
-              <Route path='/buildings/:building_id/users/:id' component={User}/>
+              {/* <Route path='/buildings/:building_id/users/:id' component={User}/> */}
+              <Route path='/buildings/:building_id/users/:id' render={(props) =>
+                {return(
+                  <User {...props} current_user={this.state.current_user} />
+                )}} />
               {/* <Route path='/buildings/:building_id/posts' component={Building}/> */}
               <Route path={'/buildings/:building_id/posts'} render={(props) =>
                 {return(

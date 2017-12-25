@@ -42,7 +42,7 @@ function UserPost(props) {
           </Col>
           <Col className="peace" md={6}>
             <div className="peace-group">
-              <Like postId={props.post.id} likes={props.post.like} likeLength={props.post.like.length}/>
+              <Like postId={props.post.id} likes={props.post.like} likeLength={props.post.like.length} current_user={props.current_user}/>
             </div>
           </Col>
         </Row>
@@ -54,14 +54,14 @@ function UserPost(props) {
       <table>
         <tbody>
           <Panel header={head} footer={foot}>
-            <Link to={`/buildings/${props.propS.params.building_id}/posts/${props.post.id}`}>
+            <Link to={`/buildings/${props.current_user.building_id}/posts/${props.post.id}`}>
               {props.post.content}
             </Link>
           </Panel>
         </tbody>
       </table>
       {/* <Switch> */}
-        <Route path={`/buildings/${props.propS.params.building_id}/posts/${props.post.id}`} render={(props) => {
+        <Route path={`/buildings/${props.current_user.building_id}/posts/${props.post.id}`} render={(props) => {
           return(
             <Post {...props} allPosts={allPosts}/>
           )
