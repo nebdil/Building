@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import UserPost from './UserPost.jsx';
-import UserReply from './UserReply.jsx';
 import Login from './Login.jsx';
 import Navtop from './Navtop.jsx';
 import Like from './Like.jsx';
-import {
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 import { Panel, Row, Col, Grid } from 'react-bootstrap'
 import moment from 'moment'
 
@@ -57,6 +51,7 @@ export default class User extends Component {
           }
         })
       })
+      let unique = [];
       return (
         <div>
           <div className="all-posts">
@@ -65,6 +60,7 @@ export default class User extends Component {
                 <Col md={6}>
                   <h3>Your posts</h3>
                   {
+                    // filter the posts the user created
                     this.state.posts.map((p) => {
                       if (p.user_id === this.props.current_user.id) {
                         return (this._handlePanel(p))
@@ -75,28 +71,27 @@ export default class User extends Component {
                 <Col md={6}>
                   <h3>Posts You've Commented on</h3>
                   {
+                    // filter the posts user replied to
                     this.state.posts.map((p) => {
                       return (
                         p.reply.map((r) => {
+                          // go through the posts
                           console.log('reply user id:', r.user_id)
                           if (r.user_id === this.props.current_user.id) {
-                            console.log('got a match')
-                            return (this._handlePanel(p))
-                            // return (
-                            //   <div>Dilan</div>
-                            // )
+                            // if the user replied to this post
+                            console.log('p.id')
+                            console.log(p.id)
+                            console.log(unique)
+                            if (!unique.includes(p.id)) {
+                              console.log('got a match')
+                              unique.push(p.id)
+                              return (this._handlePanel(p))
+                            }
                           }
                         })
                       )
                     })
                   }
-                  {/* {
-                  arr.map((e) => {
-                    return (
-                      <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {e} key = {e.id} handleLikes={this._handleLikes} current_user={this.props.current_user}/>
-                    )
-                  })
-                  } */}
                 </Col>
               </Row>
             </Grid>
