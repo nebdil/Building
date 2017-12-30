@@ -36,7 +36,9 @@ function UserPost(props) {
         <Row>
           <Col className="reply" md={6}>
             <div className="reply-div">
-              <Link to={`#`}><i className="fa fa-comment-o" aria-hidden="true"></i></Link>
+              {/* <Link to={`#`}> */}
+                <i className="fa fa-comment-o" aria-hidden="true"></i>
+              {/* </Link> */}
               <p>{props.post.reply.length}</p>
             </div>
           </Col>
