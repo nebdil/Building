@@ -50,7 +50,7 @@ function Navtop(props) {
                      <p>{props.current_building.address.split(',').slice(0, 2).join(',')}</p>
                    </Link>
                  </NavItem>
-                 <div class="color-div"></div>
+                 <div className="color-div"></div>
                </div>
              </Nav>
            </Col>
@@ -62,19 +62,19 @@ function Navtop(props) {
                      {props.current_user.username}'s Personal Posts
                    </Link>
                  </NavItem>
-                 <div class="color-div"></div>
+                 <div className="color-div"></div>
                </div>
              </Nav>
            </Col>
              <Col md={3}>
                <Nav>
-                 <div class="menu-item" id="right-most-nav">
+                 <div className="menu-item" id="right-most-nav">
                    <NavItem onClick={props.handleLogout}>
                     <Link to={'/logout'}>
                       Log Out
                     </Link>
                    </NavItem>
-                   <div class="color-div"></div>
+                   <div className="color-div"></div>
                  </div>
                </Nav>
              </Col>

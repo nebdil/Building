@@ -130,7 +130,7 @@ export default class Building extends Component {
                               <Col className="reply" md={6}>
                                 <span className="reply-div">
                                   <Link to={`${this.props.match.url}/${e.id}`} posts={e}>
-                                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                    <i className="fa fa-comment-o" aria-hidden="true"></i>
                                   </Link>
                                   <p>{e.reply.length}</p>
                                 </span>
