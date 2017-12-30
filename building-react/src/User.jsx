@@ -3,6 +3,7 @@ import UserPost from './UserPost.jsx';
 import UserReply from './UserReply.jsx';
 import Login from './Login.jsx';
 import Navtop from './Navtop.jsx';
+import Like from './Like.jsx';
 import {
   Route,
   Link,
@@ -16,8 +17,9 @@ export default class User extends Component {
     super(props);
     this.state = {
       posts: [],
-      user_token: localStorage.getItem('user_token')
+      building_id: this.props.current_user.building_id
     };
+    this._handlePanel = this._handlePanel.bind(this)
     // this._handleReplySubmit = this._handleReplySubmit.bind(this)
     // this._handleReplyChange = this._handleReplyChange.bind(this)
     // this._handleLikes = this._handleLikes.bind(this)
@@ -34,6 +36,7 @@ export default class User extends Component {
       .then((responseJson) => {
         console.log('responseJson: ', responseJson)
         this.setState({ posts: responseJson })
+        console.log(this.state.posts)
       })
       .catch((error) => {
         console.error(error);
@@ -41,50 +44,36 @@ export default class User extends Component {
   }
 
   render() {
-    let arr = [];
-    this.state.posts.forEach((e) => {
-      e.reply.forEach((r) => {
-        if (localStorage.getItem('user_id') == r.user_id) {
-          arr.push(e)
-          arr = [...new Set(arr)];
-        }
-      })
-    })
-
-
-    if (this.state.user_token === 'null') {
+    console.log('in render')
+    console.log(this.state.posts)
+    if (localStorage.getItem('user_token') === 'null') {
       return (
         <Login />
       )
-    } else {
+    } else if (this.state.posts) {
     return (
       <div>
-        {/* <Navtop propS={this.props}/> */}
-        {/* <Link to={`/buildings/${this.props.match.params.building_id}/posts`}>Go back</Link> */}
         <div className="all-posts">
           <Grid>
             <Row>
               <Col md={6}>
                 <h3>Your posts</h3>
                 {
-                  this.state.posts.map((e) => {
-                    if (localStorage.getItem('user_id') == e.user_id) {
-                      return (
-                        <UserPost allPosts={this.state.posts} post={e} key={e.id} handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} handleLikes={this._handleLikes} current_user={this.props.current_user}/>
-                      )
-                    }
-                  })
+                  this._handlePanel(this.state.posts)
                 }
               </Col>
+
+
+
               <Col md={6}>
                 <h3>Posts You've Commented on</h3>
-                {
+                {/* {
                 arr.map((e) => {
                   return (
-                    <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {e} key = {e.id} propS={this.props.match} handleLikes={this._handleLikes} current_user={this.props.current_user}/>
+                    <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {e} key = {e.id} handleLikes={this._handleLikes} current_user={this.props.current_user}/>
                   )
                 })
-                }
+                } */}
               </Col>
             </Row>
           </Grid>
@@ -93,6 +82,54 @@ export default class User extends Component {
     )
   }}
 
+  _handlePanel(e) {
+    console.log('in handle Panel')
+    console.log(e)
+    const head = (
+        <Row>
+          <Col className="user-name" md={8}>
+            {e.post.username}
+          </Col>
+          <Col md={4}>
+            {moment(e.post.created_at).startOf('second').fromNow()}
+          </Col>
+        </Row>
+    );
+    const foot = (
+      <Row>
+        <Col md={4} id="tag-div">
+          <div className="tag-div">
+            {e.post.tags.map((t) =>
+                      {return t.name})}
+          </div>
+        </Col>
+        <Col md={4}></Col>
+        <Col md={4}>
+          <Row>
+            <Col className="reply" md={6}>
+              <div className="reply-div">
+                <Link to={`#`}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
+                <p>{e.post.reply.length}</p>
+              </div>
+            </Col>
+            <Col className="peace" md={6}>
+              <div className="peace-group">
+                <Like postId={e.post.id} likes={e.post.like} likeLength={e.post.like.length} current_user={e.current_user}/>
+              </div>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    );
+    return (
+      <Panel header={head} footer={foot}>
+        <Link to={`/buildings/${this.state.building_id}/posts/${e.post.id}`}>
+          {e.post.content}
+          {/* Dilan */}
+        </Link>
+      </Panel>
+    )
+  }
   // _handleLikes(e) {
   //   console.log('in user handle likes')
   //   this.setState({posts:e})

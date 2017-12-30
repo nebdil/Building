@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FormGroup, FormControl, ButtonToolbar, Button, Row, Col } from 'react-bootstrap'
 
 function SendReply(props) {

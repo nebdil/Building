@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ButtonToolbar, Button } from 'react-bootstrap'
 import classNames from 'classnames'
 import LikeLength from './LikeLength.jsx';
@@ -12,8 +12,12 @@ function Like(props) {
   //if likes exist && liked by current_user
   props.likes.map((l) => {
     if (l.user_id === props.current_user.id) {
-      btnClass = classNames({
+      return btnClass = classNames({
         'fa fa-heart': true
+      })
+    } else {
+      return btnClass = classNames({
+        'fa fa-heart-o': true
       })
     }
   })

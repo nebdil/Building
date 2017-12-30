@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, Panel, Row, Col, Grid, Button, ButtonToolbar } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 
 const Dialog = (props) => (
   <Modal

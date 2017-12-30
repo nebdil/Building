@@ -73,12 +73,15 @@ export default class UserReply extends Component {
             </Panel>
           </tbody>
         </table>
-        <Switch>
-          <Route path={`/buildings/${this.props.current_user.building_id}/posts/${postId}`} render={(props) => {return(<Post {...props}/>)}}/>
-        </Switch>
         {this.state.showReply && this.props.currentUserReplies.reply.map(function(e) {
           return <UserReplyReply currentUserReplyReplies = {e} key = {e.id}/>
         })}
+        {/* <Switch> */}
+          <Route path={`/buildings/${this.props.current_user.building_id}/posts/${postId}`} render={(props) =>
+            {return(
+              <Post {...props}/>
+            )}}/>
+        {/* </Switch> */}
       </div>
     )
   }

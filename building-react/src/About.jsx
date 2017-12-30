@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Jumbotron, Button, Row , Col, PageHeader} from 'react-bootstrap'
+import { Jumbotron, Button, Row , Col} from 'react-bootstrap'
 import {
-  Link,
-  Redirect,
   Switch,
   Route
 } from 'react-router-dom'
