@@ -5,8 +5,9 @@ class SessionsController < ApplicationController
 
   def create
     puts 'in create'
+    # finds the user trying to log in
     if user = User.authenticate_with_credentials(params[:session][:auth][:email], params[:session][:auth][:password])
-      puts 'found user'
+      # returns the building they belongs to
       @building_id = user.building_id
       render json: @building_id
     # url_ok = {url: "/buildings/#{user[:building_id]}/posts"}
@@ -16,6 +17,8 @@ class SessionsController < ApplicationController
     #   puts session.inspect
     #
     #   render json: url_ok
+
+    # if there is no such user
     else
       puts 'no user'
     #   url_no = {url: '/login'}

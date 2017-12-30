@@ -86,6 +86,7 @@ export default class Login extends Component {
       }
     }
     fetch('/login', {
+      // to rails: sends the user information to get back the building they belong to
       method: 'POST',
       body: JSON.stringify(obj),
       headers: {
@@ -99,6 +100,7 @@ export default class Login extends Component {
       this.setState({building_id: responseJson})
     })
     .then(() => {
+      // generates their token
       fetch('/user_token', {
         method: 'POST',
         body: JSON.stringify(obj),
