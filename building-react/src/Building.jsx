@@ -118,21 +118,27 @@ export default class Building extends Component {
                       );
                       const foot = (
                         <Row>
-                          <Col md={4} id="tag-div"><div className="tag-div">{e.tags.map((a) => {return a.name})}</div></Col>
+                          <Col md={4} id="tag-div">
+                            <span className="tag-div">
+                              {e.tags.map((a) => {return a.name})}
+                            </span>
+                          </Col>
                           <Col md={4}>
                           </Col>
                           <Col md={4}>
                             <Row>
                               <Col className="reply" md={6}>
-                                <div className="reply-div">
-                                  <Link to={`${this.props.match.url}/${e.id}`} posts={e}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
+                                <span className="reply-div">
+                                  <Link to={`${this.props.match.url}/${e.id}`} posts={e}>
+                                    <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                  </Link>
                                   <p>{e.reply.length}</p>
-                                </div>
+                                </span>
                               </Col>
                               <Col className="peace" md={6}>
-                                <div className="peace-group">
+                                <span className="peace-group">
                                   <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes} likeLength={e.like.length} current_user={this.props.current_user}/>
-                                </div>
+                                </span>
                               </Col>
                             </Row>
                           </Col>
