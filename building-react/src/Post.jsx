@@ -7,7 +7,8 @@ import { Panel, Row, Col, ListGroup, ListGroupItem, ButtonToolbar, Button, Grid}
 import moment from 'moment'
 
 function Post(props) {
-  console.log(props.match)
+  console.log('IN POSTS')
+  console.log(props)
   let postId = props.match.params.id || null;
   let show = true;
   let redirect = '';

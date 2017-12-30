@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import LikeLength from './LikeLength.jsx';
 
 function Like(props) {
-  console.log('LIKE PROPS:', props)
+  // console.log('LIKE PROPS:', props)
   //if no likes && if current_user didnt like it
   let btnClass = classNames({
     'fa fa-heart-o': true

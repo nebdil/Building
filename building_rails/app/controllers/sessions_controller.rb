@@ -5,19 +5,23 @@ class SessionsController < ApplicationController
 
   def create
     puts 'in create'
-    if user = User.authenticate_with_credentials(params[:email], params[:password])
-    url_ok = {url: "/buildings/#{user[:building_id]}/posts"}
-    puts url_ok
-      session[:user_id] = user.id
-      puts 'in if'
-      puts session.inspect
-
-      render json: url_ok
+    if user = User.authenticate_with_credentials(params[:session][:auth][:email], params[:session][:auth][:password])
+      puts 'found user'
+      @building_id = user.building_id
+      render json: @building_id
+    # url_ok = {url: "/buildings/#{user[:building_id]}/posts"}
+    # puts url_ok
+    #   session[:user_id] = user.id
+    #   puts 'in if'
+    #   puts session.inspect
+    #
+    #   render json: url_ok
     else
-      url_no = {url: '/login'}
-      puts 'in else'
-
-      render json: url_no
+      puts 'no user'
+    #   url_no = {url: '/login'}
+    #   puts 'in else'
+    #
+    #   render json: url_no
     end
   end
 

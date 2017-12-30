@@ -85,7 +85,6 @@ export default class Login extends Component {
         password: this.state.password
       }
     }
-    console.log(obj.auth.email)
     fetch('/login', {
       method: 'POST',
       body: JSON.stringify(obj),
@@ -95,8 +94,9 @@ export default class Login extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
+      console.log('in login:', responseJson)
       // gets the signed in building id and stores it in the state
-      this.setState({building_id: responseJson.building.id})
+      this.setState({building_id: responseJson})
     })
     .then(() => {
       fetch('/user_token', {
@@ -108,9 +108,9 @@ export default class Login extends Component {
       })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log('responseJson in login posting to user token: ' + responseJson)
+        console.log(responseJson)
         localStorage.setItem('user_token', responseJson.jwt);
-        
+
         // get the building id to redirect to the building's page
         this.props.history.push(`/buildings/${this.state.building_id}/posts`)
       })
