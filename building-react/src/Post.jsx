@@ -25,8 +25,13 @@ function Post(props) {
 
   let _hide = () => {
     show = false;
-    redirect = `/buildings/${props.match.params.building_id}/posts`;
-    props.history.push(redirect)
+    if (props.location.state) {
+      props.history.push(`/buildings/${props.match.params.building_id}/users/${props.current_user.id}`)
+    } else {
+      props.history.push(`/buildings/${props.match.params.building_id}/posts`)
+    }
+    // redirect = `/buildings/${props.match.params.building_id}/posts`;
+    // props.history.push(redirect)
   }
 
   const title = (
