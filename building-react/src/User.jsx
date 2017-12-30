@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login.jsx';
 import Navtop from './Navtop.jsx';
 import Like from './Like.jsx';
+import Post from './Post.jsx';
 import { Route, Link, Switch } from 'react-router-dom'
 import { Panel, Row, Col, Grid } from 'react-bootstrap'
 import moment from 'moment'
@@ -36,21 +37,11 @@ export default class User extends Component {
   }
 
   render() {
-    console.log('in render')
     if (localStorage.getItem('user_token') === 'null') {
       return (
         <Login />
       )
     } else if (this.state.posts) {
-      console.log(this.state.posts)
-      this.state.posts.forEach((p) => {
-        p.reply.forEach((r) => {
-          console.log('reply user id:', r.user_id)
-          if (r.user_id === this.props.current_user.id) {
-            console.log('got a match')
-          }
-        })
-      })
       let unique = [];
       return (
         <div>
@@ -76,14 +67,9 @@ export default class User extends Component {
                       return (
                         p.reply.map((r) => {
                           // go through the posts
-                          console.log('reply user id:', r.user_id)
                           if (r.user_id === this.props.current_user.id) {
                             // if the user replied to this post
-                            console.log('p.id')
-                            console.log(p.id)
-                            console.log(unique)
                             if (!unique.includes(p.id)) {
-                              console.log('got a match')
                               unique.push(p.id)
                               return (this._handlePanel(p))
                             }
@@ -103,7 +89,9 @@ export default class User extends Component {
 
   _handlePanel(e) {
     console.log('in handle Panel')
-    console.log(e)
+    console.log(this.state.posts)
+    // console.log(e)
+
     const head = (
         <Row>
           <Col className="user-name" md={8}>
@@ -142,13 +130,17 @@ export default class User extends Component {
     );
     return (
       <Panel header={head} footer={foot}>
-        <Link to={`/buildings/${this.state.building_id}/posts/${e.id}`}>
+        <Link to={{
+          pathname: `/buildings/${this.props.current_user.building_id}/posts/${e.id}`,
+          state: {
+            allPosts: this.state.posts
+          }
+        }}>
           {e.content}
         </Link>
       </Panel>
     )
   }
-
 
 
   // _handleLikes(e) {

@@ -12,9 +12,15 @@ function Post(props) {
   let postId = props.match.params.id || null;
   let show = true;
   let redirect = '';
-  console.log(props)
-  console.log('allpost: ', props.allPosts)
-  let post = props.allPosts.filter((e) => e.id == postId)[0]
+  // console.log('allpost: ', props.allPosts)
+  // console.log('allposts from user: ', props.location.state.allPosts)
+  let post;
+  if (props.location.state) {
+    post = props.location.state.allPosts.filter((e) => e.id == postId)[0]
+  } else {
+    post = props.allPosts.filter((e) => e.id == postId)[0]
+  }
+  // let post = props.allPosts.filter((e) => e.id == postId)[0]
   let tags = post.tags.map((e) => e.name);
 
   let _hide = () => {
