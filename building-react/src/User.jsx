@@ -34,9 +34,7 @@ export default class User extends Component {
   })
       .then((response) => response.json())
       .then((responseJson) => {
-        console.log('responseJson: ', responseJson)
         this.setState({ posts: responseJson })
-        console.log(this.state.posts)
       })
       .catch((error) => {
         console.error(error);
@@ -45,42 +43,68 @@ export default class User extends Component {
 
   render() {
     console.log('in render')
-    console.log(this.state.posts)
     if (localStorage.getItem('user_token') === 'null') {
       return (
         <Login />
       )
     } else if (this.state.posts) {
-    return (
-      <div>
-        <div className="all-posts">
-          <Grid>
-            <Row>
-              <Col md={6}>
-                <h3>Your posts</h3>
-                {
-                  this._handlePanel(this.state.posts)
-                }
-              </Col>
-
-
-
-              <Col md={6}>
-                <h3>Posts You've Commented on</h3>
-                {/* {
-                arr.map((e) => {
-                  return (
-                    <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {e} key = {e.id} handleLikes={this._handleLikes} current_user={this.props.current_user}/>
-                  )
-                })
-                } */}
-              </Col>
-            </Row>
-          </Grid>
+      console.log(this.state.posts)
+      this.state.posts.forEach((p) => {
+        p.reply.forEach((r) => {
+          console.log('reply user id:', r.user_id)
+          if (r.user_id === this.props.current_user.id) {
+            console.log('got a match')
+          }
+        })
+      })
+      return (
+        <div>
+          <div className="all-posts">
+            <Grid>
+              <Row>
+                <Col md={6}>
+                  <h3>Your posts</h3>
+                  {
+                    this.state.posts.map((p) => {
+                      if (p.user_id === this.props.current_user.id) {
+                        return (this._handlePanel(p))
+                      }
+                    })
+                  }
+                </Col>
+                <Col md={6}>
+                  <h3>Posts You've Commented on</h3>
+                  {
+                    this.state.posts.map((p) => {
+                      return (
+                        p.reply.map((r) => {
+                          console.log('reply user id:', r.user_id)
+                          if (r.user_id === this.props.current_user.id) {
+                            console.log('got a match')
+                            return (this._handlePanel(p))
+                            // return (
+                            //   <div>Dilan</div>
+                            // )
+                          }
+                        })
+                      )
+                    })
+                  }
+                  {/* {
+                  arr.map((e) => {
+                    return (
+                      <UserReply handleReplyChange = {this._handleReplyChange} handleReplySubmit = {this._handleReplySubmit} currentUserReplies = {e} key = {e.id} handleLikes={this._handleLikes} current_user={this.props.current_user}/>
+                    )
+                  })
+                  } */}
+                </Col>
+              </Row>
+            </Grid>
+          </div>
         </div>
-      </div>
-    )
-  }}
+      )
+    }
+  }
 
   _handlePanel(e) {
     console.log('in handle Panel')
@@ -88,10 +112,10 @@ export default class User extends Component {
     const head = (
         <Row>
           <Col className="user-name" md={8}>
-            {e.post.username}
+            {e.username}
           </Col>
           <Col md={4}>
-            {moment(e.post.created_at).startOf('second').fromNow()}
+            {moment(e.created_at).startOf('second').fromNow()}
           </Col>
         </Row>
     );
@@ -99,7 +123,7 @@ export default class User extends Component {
       <Row>
         <Col md={4} id="tag-div">
           <div className="tag-div">
-            {e.post.tags.map((t) =>
+            {e.tags.map((t) =>
                       {return t.name})}
           </div>
         </Col>
@@ -109,12 +133,12 @@ export default class User extends Component {
             <Col className="reply" md={6}>
               <div className="reply-div">
                 <Link to={`#`}><i class="fa fa-comment-o" aria-hidden="true"></i></Link>
-                <p>{e.post.reply.length}</p>
+                <p>{e.reply.length}</p>
               </div>
             </Col>
             <Col className="peace" md={6}>
               <div className="peace-group">
-                <Like postId={e.post.id} likes={e.post.like} likeLength={e.post.like.length} current_user={e.current_user}/>
+                <Like postId={e.id} likes={e.like} likeLength={e.like.length} current_user={this.props.current_user.id}/>
               </div>
             </Col>
           </Row>
@@ -123,13 +147,15 @@ export default class User extends Component {
     );
     return (
       <Panel header={head} footer={foot}>
-        <Link to={`/buildings/${this.state.building_id}/posts/${e.post.id}`}>
-          {e.post.content}
-          {/* Dilan */}
+        <Link to={`/buildings/${this.state.building_id}/posts/${e.id}`}>
+          {e.content}
         </Link>
       </Panel>
     )
   }
+
+
+
   // _handleLikes(e) {
   //   console.log('in user handle likes')
   //   this.setState({posts:e})
