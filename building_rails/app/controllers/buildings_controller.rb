@@ -4,7 +4,12 @@ class BuildingsController < ApplicationController
   require 'pp'
   def index
     @buildings = Building.all
-    render json: @buildings
+    puts 'CURRENT USER'
+    puts current_user.inspect
+    arr = [
+      {buildings: @buildings}, {current_user: current_user}
+    ]
+    render json: arr
   end
   def create
     puts params

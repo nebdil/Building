@@ -25,7 +25,7 @@ export default class Building extends Component {
       showReply: false,
       currentPost: '',
       user_token: localStorage.getItem('user_token'),
-      user_email: localStorage.getItem('user_email'),
+      user_email: this.props.current_user.email,
       createContent: '',
       createTag: '',
       selected: false,
@@ -60,9 +60,9 @@ export default class Building extends Component {
           })
         })
         this.setState({ posts: responseJson, selected_tag: tags })
-        console.log("responseJson: " + responseJson)
-        console.log(this.props.match)
-        console.log(this.props.match.url)
+        // console.log("responseJson: " + responseJson)
+        // console.log(this.props.match)
+        // console.log(this.props.match.url)
       })
       .catch((error) => {
         console.error(error);
@@ -70,6 +70,7 @@ export default class Building extends Component {
     )
   }
   render() {
+    var allPosts = this.state.posts
     var btnClass = classNames({
       'selected': this.state.selected
     })
@@ -100,7 +101,7 @@ export default class Building extends Component {
       }
       return (
         <div className="main">
-          <Navtop propS={this.props}/>
+          {/* <Navtop propS={this.props}/> */}
           <Grid>
             <Row>
               <Col md={8} className="all-posts">
@@ -130,7 +131,7 @@ export default class Building extends Component {
                               </Col>
                               <Col className="peace" md={6}>
                                 <div className="peace-group">
-                                  <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes} likeLength={e.like.length} propS={this.props}/>
+                                  <Like postId={e.id} likes={e.like} handleLikes={this._handleLikes} likeLength={e.like.length} current_user={this.props.current_user}/>
                                 </div>
                               </Col>
                             </Row>
@@ -145,13 +146,13 @@ export default class Building extends Component {
                     })}
                   </tbody>
                 </table>
-                <Switch>
+                {/* <Switch> */}
                   <Route path={`/buildings/:building_id/posts/:id`} render={(props) =>
                     {return(
-                      <Post {...props} allPosts={this.state.posts} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit} />
+                      <Post {...props} allPosts={allPosts} handleLikes={this._handleLikes} handleReplyChange={this._handleReplyChange} handleReplySubmit={this._handleReplySubmit} />
                     )}}
                   />
-                </Switch>
+                {/* </Switch> */}
               </Col>
               <Col className="fixed" md={4}>
                 <h3>Create a Post</h3>
@@ -186,7 +187,7 @@ export default class Building extends Component {
       console.log('in else')
       this.state.posts.forEach((p) => {
         p.like.forEach((l) => {
-          if (l.post_id == e.target.dataset.post && l.user_id == localStorage.getItem('user_id')) {
+          if (l.post_id == e.target.dataset.post && l.user_id == this.props.current_user.id) {
             fetch(`/buildings/${this.props.match.params.building_id}/posts/${e.target.dataset.post}/likes/${l.id}`, {
               method: 'DELETE',
               headers: {
@@ -223,7 +224,7 @@ export default class Building extends Component {
     const content = {
       content: this.state.createContent,
       tag: this.state.createTag,
-      user_email: localStorage.getItem('user_email')
+      user_email: this.props.current_user.email
     }
     fetch(`${this.props.match.url}/`, {
       method: 'POST',
