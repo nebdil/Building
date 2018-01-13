@@ -241,13 +241,6 @@ export default class Building extends Component {
       this.setState({posts: posts})
     })
   }
-  //ABOUT MODAL
-  // _hide = () => {
-  //   console.log('in hide')
-  //   this.setState({
-  //     redirect: `${this.props.match.url}`
-  //   })
-  // }
   //ABOUT REPLY
   _handleReplyChange(e) {
     console.log('in handleReplyChange:', e.target.value);
