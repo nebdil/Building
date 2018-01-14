@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   post '/login' => 'users#create'
   get '/logout' => 'sessions#destroy'
 
+  # REACT-ROUTER HEROKU
 
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 
 end
